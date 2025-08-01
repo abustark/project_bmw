@@ -1,0 +1,19 @@
+{
+  "name": "shopping-cart",
+  "version": "1.0.0",
+  "description": "A Vue.js shopping cart application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.0.0",
+    "vue": "^3.2.45"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  }
+}
