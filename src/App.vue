@@ -1,24 +1,27 @@
 <template>
   <div id="app">
-    <header>
-      <h1>My Shopping Cart</h1>
-    </header>
-    <main>
+    <SiteHeader :cart-item-count="cart.length" />
+    <main class="container">
       <ProductList @add-to-cart="addToCart" />
       <ShoppingCart :cart="cart" @remove-from-cart="removeFromCart" />
     </main>
+    <SiteFooter />
   </div>
 </template>
 
 <script>
+import SiteHeader from './components/Header.vue';
+import SiteFooter from './components/Footer.vue';
 import ProductList from './components/ProductList.vue';
 import ShoppingCart from './components/ShoppingCart.vue';
 
 export default {
   name: 'App',
   components: {
+    SiteHeader,
     ProductList,
     ShoppingCart,
+    SiteFooter,
   },
   data() {
     return {
@@ -37,20 +40,28 @@ export default {
 </script>
 
 <style>
-main {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+/* Global styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #495057;
 }
-</style>
 
-<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
 }
 </style>

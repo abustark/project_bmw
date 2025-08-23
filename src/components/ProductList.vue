@@ -13,17 +13,13 @@
 </template>
 
 <script>
+import products from '../products.json';
+
 export default {
   name: 'ProductList',
   data() {
     return {
-      products: [
-        { id: 1, name: 'Cool Shoe', price: 50, image: 'static/1010138_P_PDP.jpg' },
-        { id: 2, name: 'Awesome Sneaker', price: 60, image: 'static/1017679_P_PDP.jpg' },
-        { id: 3, name: 'Stylish Boot', price: 70, image: 'static/1018589_P_PDP.jpg' },
-        { id: 4, name: 'Running Shoe', price: 80, image: 'static/1022308_P_PDP.jpg' },
-        { id: 5, name: 'Casual Loafer', price: 90, image: 'static/1022332_P_PDP.jpg' },
-      ],
+      products: products,
     };
   },
 };
@@ -31,22 +27,70 @@ export default {
 
 <style scoped>
 .product-list {
-  width: 100%;
+  flex: 3;
 }
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
 .products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
 }
+
 .product-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
-  width: 200px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
 .product-card img {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin: 1rem 1rem 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.product-card p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #007bff;
+  margin: 0 1rem 1rem;
+}
+
+button {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0 1rem 1rem;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>

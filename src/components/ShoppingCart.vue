@@ -36,19 +36,60 @@ export default {
 
 <style scoped>
 .shopping-cart {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem;
+  flex: 1;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-self: flex-start; /* Aligns to the top */
 }
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #868e96;
+}
+
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eaeaea;
 }
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item span {
+  flex: 1;
+}
+
+.cart-item span:first-child {
+  flex: 2;
+  font-weight: 500;
+}
+
+.cart-item button {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
 .cart-total {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 </style>

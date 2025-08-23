@@ -3,12 +3,8 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   plugins: [vue()],
+  publicDir: 'static',
   build: {
-    lib: {
-      entry: 'src/main.js',
-      name: 'ShoppingCart',
-      fileName: (format) => `build.js`,
-    },
     outDir: 'dist',
   },
 });
