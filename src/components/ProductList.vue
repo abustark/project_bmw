@@ -18,11 +18,11 @@ export default {
   data() {
     return {
       products: [
-        { id: 1, name: 'Cool Shoe', price: 50, image: 'static/1010138_P_PDP.jpg' },
-        { id: 2, name: 'Awesome Sneaker', price: 60, image: 'static/1017679_P_PDP.jpg' },
-        { id: 3, name: 'Stylish Boot', price: 70, image: 'static/1018589_P_PDP.jpg' },
-        { id: 4, name: 'Running Shoe', price: 80, image: 'static/1022308_P_PDP.jpg' },
-        { id: 5, name: 'Casual Loafer', price: 90, image: 'static/1022332_P_PDP.jpg' },
+        { id: 1, name: 'Cool Shoe', price: 50, image: '/1010138_P_PDP.jpg' },
+        { id: 2, name: 'Awesome Sneaker', price: 60, image: '/1017679_P_PDP.jpg' },
+        { id: 3, name: 'Stylish Boot', price: 70, image: '/1018589_P_PDP.jpg' },
+        { id: 4, name: 'Running Shoe', price: 80, image: '/1022308_P_PDP.jpg' },
+        { id: 5, name: 'Casual Loafer', price: 90, image: '/1022332_P_PDP.jpg' },
       ],
     };
   },
