@@ -1,7 +1,12 @@
 # N-GELO — Digital Marketplace for Creators
 
 > **From BCA Major Project to production-grade portfolio piece.**  
-> Rebuilt with **Vue 3 • Vite 5 • Pinia • Vue Router • Tailwind CSS**
+> **Monorepo:** `Vue 3 • Vite 5 • shadcn-vue` **+** `Next.js 16 • shadcn/ui • Zustand` — same spec, two stacks.
+
+![Vue](https://img.shields.io/badge/Vue-3.5-42b883?logo=vue.js&logoColor=white)
+![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)
+![shadcn](https://img.shields.io/badge/shadcn/ui-HSL-000?logo=shadcnui)
 
 ![Vue 3](https://img.shields.io/badge/Vue-3.5-42b883?logo=vue.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-5.4-646cff?logo=vite&logoColor=white)
@@ -9,8 +14,8 @@
 ![License](https://img.shields.io/badge/License-MIT-zinc?labelColor=18181b&color=52525b)
 ![Deploy](https://img.shields.io/github/actions/workflow/status/abustark/project_bmw/deploy.yml?label=deploy&logo=github)
 
-**Live Demo:** `https://abustark.github.io/project_bmw/` *(after push to `main`)*  
-**Local:** `http://localhost:5173` — see [Quick Start](#quick-start)
+**Live Demo (Vue):** `https://abustark.github.io/project_bmw/` *(after push to `main`)*  
+**Local Vue:** `http://localhost:5173` • **Local React:** `http://localhost:3000` — see [Quick Start](#quick-start)
 
 ---
 
@@ -68,18 +73,25 @@ Add this to your site as:
 
 ---
 
-## 🧱 Stack
+## 🧱 Stack — Monorepo
 
-| Layer | Choice | Why |
-|-------|--------|-----|
-| **Framework** | **Vue 3.5** (Composition API + `<script setup>`) | Same stack you started with, modernized |
-| **Build** | **Vite 5.4** | Fast HMR, `allowedHosts: true` for Arena preview, `base` aware |
-| **Routing** | **Vue Router 4** (`createWebHistory(BASE_URL)`, lazy routes) | SPA, deep links |
-| **State** | **Pinia 2** + `localStorage` sync | Cart, wishlist, orders without backend |
-| **Styling** | **Tailwind CSS 3.4** + custom `components` layer | Design tokens, no CSS chaos |
-| **Fonts** | Google Fonts (Playfair Display, Poppins, JetBrains Mono) | Premium feel |
-| **Icons** | Inline SVG (no extra dep) | Zero bundle cost |
-| **Deploy** | **GitHub Actions → Pages** (`deploy.yml`) | Push to `main` = live |
+### Vue (root) — `shadcn-vue` upgrade (A)
+| Layer | Choice |
+|-------|--------|
+| Framework | **Vue 3.5** |
+| Build | **Vite 5.4** (`allowedHosts`, `base`) |
+| Routing | **Vue Router 4** (lazy) |
+| State | **Pinia 2** + `localStorage` |
+| UI | **shadcn-vue** (reka-ui, Button/Card/Badge/Input, `cn`) + Tailwind 3.4 |
+| Why | Same stack evolved — best *story* |
+
+### React (`/react`) — Next.js + shadcn (B)
+| Layer | Choice |
+|-------|--------|
+| Framework | **Next.js 16** (App Router, Turbopack) + **React 19** |
+| UI | **shadcn/ui** (Button/Card/Badge/Input, Tailwind 4) |
+| State | **Zustand 5** + persist (`localStorage`) |
+| Why | **Most jobs** (React 70% in India), 10k+ `npx shadcn add` templates, Vercel deploy. Best *hiring* filter. |
 
 *Original spec’s Node 14.9 + PostgreSQL 12.4 is documented in `docs/` — swap the Pinia stores for a real API when you’re ready (schema + endpoints outlined in `n-gelo.docx`).*
 
@@ -87,58 +99,46 @@ Add this to your site as:
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure — Monorepo
 
 ```
-project_bmw/
-├─ public/
-│  └─ static/            # Served as /static/* (Vite publicDir) — 5 shoe images + header
-├─ static/               # Legacy copy (kept for history)
-├─ src/
-│  ├─ data/products.js   # 14 products, categories, asset helper (BASE_URL aware)
-│  ├─ stores/            # Pinia: cart.js (qty, coupon, drawer) + wishlist.js
-│  ├─ router/index.js    # Lazy routes, BASE_URL, scroll reset
-│  ├─ components/
-│  │  ├─ Navbar.vue       # Search + wishlist/cart badges + mobile menu
-│  │  ├─ Footer.vue       # Newsletter + pay badges
-│  │  ├─ ProductCard.vue  # Badge, category, wishlist, sales, tags
-│  │  └─ CartDrawer.vue   # Teleported slide-over
-│  ├─ views/
-│  │  ├─ HomeView.vue     # Hero + categories + featured + footwear lab
-│  │  ├─ ShopView.vue     # Filters + search + grid
-│  │  ├─ ProductView.vue  # Gallery + pricing + tabs
-│  │  ├─ CartView.vue / CheckoutView.vue / WishlistView.vue
-│  │  ├─ AboutView.vue    # Story, stack, FAQ, timeline
-│  │  └─ DashboardView.vue# Buyer / Seller / Admin toggle
-│  ├─ App.vue + main.js + style.css (Tailwind)
-├─ index.html            # Vite entry, fonts, meta
-├─ vite.config.js        # allowedHosts, base (/ vs /project_bmw/), vue transformAssetUrls
-├─ tailwind.config.js / postcss.config.js
-└─ .github/workflows/deploy.yml  # Vite build → Pages
+project_bmw/                  # ← Vue at root (main)
+├─ public/static/            # /static/* for Vite + Next
+├─ static/                   # legacy copy
+├─ src/                      # Vue: data/products.js, stores, router, components, views, style.css
+│  ├─ components/ui/         # shadcn-vue: Button, Card, Badge, Input + lib/utils (cn)
+│  └─ ...                    # (A) upgraded ProductCard uses shadcn
+├─ react/                    # ← Next.js 16 (B) — separate app, share public/static
+│  ├─ src/app/               # page.tsx, shop/, product/[id]/, cart/, checkout/, wishlist/, about/, dashboard/
+│  ├─ src/components/ui/     # shadcn: Button, Card, Badge, Input
+│  ├─ src/data/products.ts   # same 14 products, asset('/static/...')
+│  ├─ src/lib/cart-store.ts  # Zustand + persist
+│  └─ public/static/         # shoes (no 5MB header → use Unsplash)
+├─ vite.config.js / tailwind.config.js / components.json / jsconfig.json
+└─ docs/deploy.yml.example   # move to .github/workflows/deploy.yml for Pages
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start — Both apps
 
 ```bash
-# 1. Clone
+# Vue (root) — http://localhost:5173
 git clone https://github.com/abustark/project_bmw.git
 cd project_bmw
-
-# 2. Install (Node 18+ recommended — you have 22)
 npm install
+npm run dev              # Arena preview https://5173-…e2b.app
+npm run build && npm run preview  # → 4173
 
-# 3. Dev (http://localhost:5173, preview at https://5173-…e2b.app in Arena)
-npm run dev
+# React (monorepo) — http://localhost:3000
+cd react
+npm install
+npm run dev -- --port 3000 --hostname 0.0.0.0  # Arena preview https://3000-…e2b.app
+npm run build            # static 10 routes (Turbopack)
 
-# 4. Build & preview
-npm run build
-npm run preview   # → http://localhost:4173
-
-# 5. Deploy — just push to main
-git push origin arena/01a0c0bd-project-bmw:main   # or merge PR
-# GitHub Actions will build with base /project_bmw/ and publish to Pages
+# Deploy
+# Vue → GitHub Pages: move docs/deploy.yml.example → .github/workflows/deploy.yml then push to main
+# React → Vercel: vercel --prod  (or `npm run build` inside react/)
 ```
 
 ### Coupons to try
