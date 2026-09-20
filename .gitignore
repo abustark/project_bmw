@@ -37,5 +37,13 @@ pnpm-debug.log*
 # Large legacy archives (uncomment to ignore)
 # shopping-cart -v2.rar
 
+# React (monorepo)
+react/node_modules
+react/.next
+react/out
+react/dist
+react/.vercel
+react/.turbo
+
 # OS
 Thumbs.db
