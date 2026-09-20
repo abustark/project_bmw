@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { @apply antialiased; }
+  body { @apply bg-[#fcfcf9] text-zinc-900 font-sans; }
+  h1,h2,h3 { @apply font-display tracking-tight; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-medium text-sm hover:bg-black transition-all hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 bg-white border border-zinc-200 px-6 py-3 rounded-full font-medium text-sm hover:border-zinc-300 hover:bg-zinc-50 transition;
+  }
+  .card {
+    @apply bg-white rounded-[20px] border border-zinc-100 shadow-soft;
+  }
+  .chip {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-900 text-white;
+  }
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }

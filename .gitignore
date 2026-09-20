@@ -1,5 +1,41 @@
 # Build output
 /dist
+/_site
+/.tmp
 
 # Dependencies
 /node_modules
+.pnp
+.pnp.js
+
+# Vite
+.vite
+dist-ssr
+
+# Env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Editor
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Large legacy archives (uncomment to ignore)
+# shopping-cart -v2.rar
+
+# OS
+Thumbs.db

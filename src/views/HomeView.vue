@@ -1,0 +1,178 @@
+<template>
+  <div>
+    <!-- hero -->
+    <section class="relative overflow-hidden">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            NEW — Hues 3D Vol II + Neo Fintech Kit
+            <span class="hidden sm:inline-flex ml-2 px-2 py-0.5 rounded-full bg-zinc-900 text-white text-[11px] tracking-widest">LIMITED</span>
+          </div>
+          <h1 class="mt-4 font-display font-extrabold text-[42px] sm:text-[56px] leading-[0.9] tracking-tight">
+            Digital products<br/>
+            <span class="font-light italic">that ship</span> faster.
+          </h1>
+          <p class="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">N-GELO is a curated marketplace for designers & developers. Sell courses, UI kits, templates, icons & 3D — or cop a physical lab drop. Built for the BCA major project, now production-grade.</p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <router-link to="/shop" class="btn-primary px-8 py-3.5 text-base">Shop the drop →</router-link>
+            <a href="#how" class="btn-ghost">How sellers earn</a>
+          </div>
+
+          <div class="mt-6 flex items-center gap-6 text-sm">
+            <div class="flex -space-x-2">
+              <img v-for="i in 4" :key="i" :src="`https://i.pravatar.cc/100?img=${10+i}`" class="w-8 h-8 rounded-full border-2 border-white" />
+            </div>
+            <div class="leading-tight">
+              <div class="font-semibold">Trusted by 4,500+ buyers</div>
+              <div class="text-zinc-500 text-xs">4.9/5 average rating • 12k+ sales</div>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 ml-4 pl-6 border-l border-zinc-200">
+              <span class="text-xs tracking-widest font-semibold">PAY WITH</span>
+              <span class="px-2 py-1 rounded bg-white border text-xs font-bold">Stripe</span>
+              <span class="px-2 py-1 rounded bg-white border text-xs font-bold">PayPal</span>
+            </div>
+          </div>
+
+          <div class="mt-8 grid grid-cols-3 gap-4 max-w-[520px]">
+            <div class="card p-4">
+              <div class="text-xs tracking-widest text-zinc-500">TOTAL SALES</div>
+              <div class="font-bold text-xl">€ 286k</div>
+              <div class="text-xs text-green-600">+18% this month</div>
+            </div>
+            <div class="card p-4">
+              <div class="text-xs tracking-widest text-zinc-500">SELLERS</div>
+              <div class="font-bold text-xl">312</div>
+              <div class="text-xs text-zinc-500">14th / 21st payouts</div>
+            </div>
+            <div class="card p-4">
+              <div class="text-xs tracking-widest text-zinc-500">AVG RATING</div>
+              <div class="font-bold text-xl">4.9 ★</div>
+              <div class="text-xs text-zinc-500">1.8k reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-[28px] overflow-hidden bg-zinc-900 p-3 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop" class="rounded-[20px] w-full aspect-[4/3] object-cover" />
+            <div class="absolute bottom-6 left-6 right-6 bg-white rounded-2xl p-4 flex items-center gap-3 shadow-soft">
+              <img src="https://i.pravatar.cc/100?img=12" class="w-10 h-10 rounded-full" />
+              <div class="flex-1">
+                <div class="text-sm font-semibold">Miranda bought NEO Kit</div>
+                <div class="text-xs text-zinc-500">2 minutes ago • verified</div>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            </div>
+            <div class="absolute top-6 right-6 bg-white rounded-full px-3 py-1.5 text-xs font-bold shadow">⚡ Instant download</div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-3">
+            <div class="rounded-2xl overflow-hidden border border-zinc-200">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80&auto=format&fit=crop" class="w-full h-32 object-cover" />
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-zinc-200 bg-white p-3 flex flex-col justify-center">
+              <div class="text-xs tracking-widest">FEATURED SELLER</div>
+              <div class="font-semibold">Studio Forma</div>
+              <div class="text-sm text-zinc-500">€47k earned this term</div>
+              <div class="mt-2 w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full w-[72%] bg-zinc-900"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- categories -->
+    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <h2 class="font-display text-2xl font-bold">Browse by craft</h2>
+        <router-link to="/shop" class="text-sm font-medium underline">View all</router-link>
+      </div>
+      <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <router-link v-for="c in categories" :key="c.id" :to="`/shop?cat=${c.id}`" class="group card p-4 hover:shadow-lift transition flex flex-col gap-2">
+          <div class="w-10 h-10 rounded-xl bg-zinc-900 text-white grid place-items-center text-sm">⧉</div>
+          <div class="font-semibold text-sm">{{ c.label }}</div>
+          <div class="text-xs text-zinc-500">{{ products.filter(p=> c.id==='all' || p.category===c.id).length }} products</div>
+        </router-link>
+      </div>
+    </section>
+
+    <!-- featured -->
+    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="font-display text-2xl font-bold leading-none">Featured drops <span class="text-zinc-400 font-normal text-base">— staff picks</span></h2>
+        <div class="hidden sm:flex gap-2">
+          <button @click="scrollFeatured(-1)" class="w-9 h-9 grid place-items-center rounded-full border border-zinc-200 bg-white">‹</button>
+          <button @click="scrollFeatured(1)" class="w-9 h-9 grid place-items-center rounded-full border border-zinc-200 bg-white">›</button>
+        </div>
+      </div>
+      <div ref="featuredRef" class="mt-4 grid md:grid-cols-3 gap-5">
+        <ProductCard v-for="p in featured" :key="p.id" :product="p" @add="cart.add($event)" />
+      </div>
+    </section>
+
+    <!-- how it works -->
+    <section id="how" class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <div class="rounded-[28px] bg-zinc-900 text-white p-6 sm:p-10 grid lg:grid-cols-3 gap-8">
+        <div>
+          <div class="text-xs tracking-[0.2em] text-zinc-400">HOW IT WORKS</div>
+          <h3 class="mt-2 font-display text-3xl font-bold leading-tight">Sellers upload.<br/>Buyers build faster.</h3>
+          <p class="mt-3 text-zinc-400 text-sm leading-relaxed">Admins review reports, answer FAQs, and process payouts on the 14th & 21st — exactly as specced in the original project.</p>
+          <router-link to="/shop" class="mt-6 inline-flex btn-primary !bg-white !text-zinc-900">Start selling today</router-link>
+        </div>
+        <div class="lg:col-span-2 grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-white text-zinc-900 p-5">
+            <div class="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">1</div>
+            <div class="mt-3 font-semibold">Buyer discovers</div>
+            <div class="text-sm text-zinc-600 mt-1">Search, filter by category / price / rating. No registration needed to browse.</div>
+          </div>
+          <div class="rounded-2xl bg-white text-zinc-900 p-5">
+            <div class="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">2</div>
+            <div class="mt-3 font-semibold">Instant checkout</div>
+            <div class="text-sm text-zinc-600 mt-1">Stripe / PayPal, auto-generated account via email, instant download.</div>
+          </div>
+          <div class="rounded-2xl bg-white text-zinc-900 p-5">
+            <div class="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">3</div>
+            <div class="mt-3 font-semibold">Seller payout</div>
+            <div class="text-sm text-zinc-600 mt-1">Dashboard analytics, edit/delete products, track traffic & sales.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- recent & footwear lab -->
+    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <h2 class="font-display text-2xl font-bold">Fresh in the lab</h2>
+      <div class="mt-4 grid md:grid-cols-4 gap-5">
+        <ProductCard v-for="p in recent" :key="p.id" :product="p" @add="cart.add($event)" />
+      </div>
+      <div class="mt-10 rounded-[24px] overflow-hidden border border-zinc-200 bg-white grid md:grid-cols-2">
+        <img :src="`${base}static/headershoe-bg.jpg`" class="w-full h-full object-cover min-h-[320px]" @error="e=> e.target.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop'" />
+        <div class="p-8 flex flex-col justify-center">
+          <div class="inline-flex self-start px-3 py-1 rounded-full bg-zinc-900 text-white text-xs tracking-widest font-bold">FOOTWEAR LAB — PHYSICAL</div>
+          <h3 class="mt-3 font-display text-3xl font-bold">From Figma to foam.</h3>
+          <p class="mt-2 text-zinc-600">We keep the original shoe assets alive — limited physical drops made in the same spirit as our digital ones: fast, crafted, limited.</p>
+          <div class="mt-4 flex gap-2">
+            <router-link to="/shop?cat=footwear" class="btn-primary">Shop Footwear</router-link>
+            <span class="text-xs text-zinc-500 self-center">Edition of 300 • Ships in 3–5 days</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script setup>
+import { computed, ref } from 'vue'
+import { products, categories } from '../data/products'
+import ProductCard from '../components/ProductCard.vue'
+import { useCartStore } from '../stores/cart'
+const base = import.meta.env.BASE_URL
+const cart = useCartStore()
+const featured = computed(()=> products.filter(p=>p.featured))
+const recent = computed(()=> [...products].sort((a,b)=> b.id - a.id).slice(0,4))
+const featuredRef = ref(null)
+function scrollFeatured(dir){
+  featuredRef.value?.scrollBy({ left: dir*320, behavior:'smooth' })
+}
+</script>
