@@ -3,6 +3,10 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { Product } from "@/data/products"
 
+// SECURITY NOTE: Frontend-only demo — price & coupon not validated server-side.
+// In production, Next.js server actions + PostgreSQL must verify price & coupon.
+// See docs/GATE_PASSES.md S1/S2 — do NOT trust localStorage.
+
 export type CartItem = Product & { qty: number }
 
 type CartState = {

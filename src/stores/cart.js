@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 
+// SECURITY NOTE: Frontend-only demo — price & coupon validated client-side only.
+// For production, server (Node + PostgreSQL + Stripe) MUST recalc total & verify coupon.
+// See docs/GATE_PASSES.md S1, S2.
+
 export const useCartStore = defineStore('cart', () => {
   const items = ref(JSON.parse(localStorage.getItem('ngelo-cart') || '[]'))
   const coupon = ref(localStorage.getItem('ngelo-coupon') || '')
