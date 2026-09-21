@@ -31,14 +31,22 @@
         </div>
       </div>
 
-      <!-- bottom row: sources + status -->
-      <div class="mt-8 pt-5 border-t border-[hsl(var(--hairline))] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-        <p class="text-[11px] text-[hsl(var(--ink-subtle))] font-mono">
+      <!-- sources row -->
+      <div class="mt-8 pt-5 border-t border-[hsl(var(--hairline))]">
+        <p class="text-[11px] text-[hsl(var(--ink-subtle))] font-mono leading-relaxed">
           <span v-for="(s, i) in sources" :key="s"><span translate="no">{{ s }}</span><span v-if="i < sources.length - 1" class="opacity-40"> · </span></span>
         </p>
-        <div class="flex items-center gap-4 text-[11px] text-[hsl(var(--ink-subtle))]">
-          <span>© {{ new Date().getFullYear() }} N-GELO</span>
-          <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]"></span> Reference demo · ₹0</span>
+      </div>
+
+      <!-- credit row -->
+      <div class="mt-4 flex flex-col sm:flex-row gap-3 sm:items-end justify-between text-[11px] text-[hsl(var(--ink-subtle))]">
+        <div class="leading-relaxed">
+          <p>© 2026 ABu. All rights reserved.</p>
+          <p>Created by <span class="font-medium text-[hsl(var(--ink))]">Basith Muthu Wasim</span>. Maintained by me.</p>
+        </div>
+        <div class="flex flex-col sm:items-end gap-1.5">
+          <p class="text-[hsl(var(--ink-muted))]">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
+          <span class="inline-flex items-center gap-1.5 self-start sm:self-end"><span class="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]"></span> Reference demo · ₹0</span>
         </div>
       </div>
     </div>

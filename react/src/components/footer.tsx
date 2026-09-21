@@ -37,9 +37,9 @@ export function Footer() {
           </div>
         </div>
 
-        {/* bottom row: sources + status */}
-        <div className="mt-8 pt-5 border-t border-[hsl(var(--hairline))] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-          <p className="text-[11px] text-[hsl(var(--ink-subtle))] font-mono">
+        {/* sources row */}
+        <div className="mt-8 pt-5 border-t border-[hsl(var(--hairline))]">
+          <p className="text-[11px] text-[hsl(var(--ink-subtle))] font-mono leading-relaxed">
             {SOURCES.map((s, i) => (
               <span key={s}>
                 <span translate="no">{s}</span>
@@ -47,9 +47,17 @@ export function Footer() {
               </span>
             ))}
           </p>
-          <div className="flex items-center gap-4 text-[11px] text-[hsl(var(--ink-subtle))]">
-            <span>© {new Date().getFullYear()} N-GELO</span>
-            <span className="inline-flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]" /> Reference demo · ₹0</span>
+        </div>
+
+        {/* credit row */}
+        <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:items-end justify-between text-[11px] text-[hsl(var(--ink-subtle))]">
+          <div className="leading-relaxed">
+            <p>© 2026 ABu. All rights reserved.</p>
+            <p>Created by <span className="font-medium text-[hsl(var(--ink))]">Basith Muthu Wasim</span>. Maintained by me.</p>
+          </div>
+          <div className="flex flex-col sm:items-end gap-1.5">
+            <p className="text-[hsl(var(--ink-muted))]">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
+            <span className="inline-flex items-center gap-1.5 self-start sm:self-end"><span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]" /> Reference demo · ₹0</span>
           </div>
         </div>
       </div>
