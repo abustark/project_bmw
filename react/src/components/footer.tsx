@@ -13,6 +13,7 @@ export function Footer() {
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-[8px] bg-[#5e6ad2] text-white grid place-items-center font-semibold text-[13px]">N</div>
               <div className="font-brand font-semibold text-[16px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
+              <span className="font-brand font-bold text-[10px] tracking-[0.14em] leading-none px-2 py-1 rounded-[6px] bg-[#5e6ad2]/10 border border-[#5e6ad2]/30 text-[#5e6ad2] dark:text-[#828fff]">B·M·W</span>
             </div>
             <p className="mt-3 text-xs text-[hsl(var(--ink-subtle))] leading-relaxed max-w-[380px]">A reference showcase of 14 free, open-source components — extracted and rendered in this page. Not for sale.</p>
           </div>
@@ -53,6 +54,7 @@ export function Footer() {
         <div className="mt-4 font-brand text-xs text-[hsl(var(--ink-subtle))] leading-relaxed">
           <p>© 2026 ABu. All rights reserved.</p>
           <p className="mt-0.5">Created by <span className="text-[hsl(var(--ink))]"><span className="font-bold">B</span>asith <span className="font-bold">M</span>uthu <span className="font-bold">W</span>asim</span>. Maintained by me.</p>
+          <p className="mt-1.5">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
         </div>
       </div>
     </footer>
