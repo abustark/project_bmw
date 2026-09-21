@@ -6,7 +6,7 @@
         <div class="col-span-2 md:col-span-5">
           <div class="flex items-center gap-2.5">
             <div class="w-8 h-8 rounded-[8px] bg-[#5e6ad2] text-white grid place-items-center font-semibold text-[13px]">N</div>
-            <div class="font-semibold text-[15px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
+            <div class="font-brand font-semibold text-[16px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
           </div>
           <p class="mt-3 text-xs text-[hsl(var(--ink-subtle))] leading-relaxed max-w-[380px]">A reference showcase of 14 free, open-source components — extracted and rendered in this page. Not for sale.</p>
         </div>
@@ -38,16 +38,10 @@
         </p>
       </div>
 
-      <!-- credit row -->
-      <div class="mt-4 flex flex-col sm:flex-row gap-3 sm:items-end justify-between text-[11px] text-[hsl(var(--ink-subtle))]">
-        <div class="leading-relaxed">
-          <p>© 2026 ABu. All rights reserved.</p>
-          <p>Created by <span class="font-medium text-[hsl(var(--ink))]">Basith Muthu Wasim</span>. Maintained by me.</p>
-        </div>
-        <div class="flex flex-col sm:items-end gap-1.5">
-          <p class="text-[hsl(var(--ink-muted))]">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
-          <span class="inline-flex items-center gap-1.5 self-start sm:self-end"><span class="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]"></span> Reference demo · ₹0</span>
-        </div>
+      <!-- credit row — serif brand font, BMW initials bold -->
+      <div class="mt-4 font-brand text-xs text-[hsl(var(--ink-subtle))] leading-relaxed">
+        <p>© 2026 ABu. All rights reserved.</p>
+        <p class="mt-0.5">Created by <span class="text-[hsl(var(--ink))]"><span class="font-bold">B</span>asith <span class="font-bold">M</span>uthu <span class="font-bold">W</span>asim</span>. Maintained by me.</p>
       </div>
     </div>
   </footer>

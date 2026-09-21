@@ -12,7 +12,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-5">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-[8px] bg-[#5e6ad2] text-white grid place-items-center font-semibold text-[13px]">N</div>
-              <div className="font-semibold text-[15px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
+              <div className="font-brand font-semibold text-[16px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
             </div>
             <p className="mt-3 text-xs text-[hsl(var(--ink-subtle))] leading-relaxed max-w-[380px]">A reference showcase of 14 free, open-source components — extracted and rendered in this page. Not for sale.</p>
           </div>
@@ -49,16 +49,10 @@ export function Footer() {
           </p>
         </div>
 
-        {/* credit row */}
-        <div className="mt-4 flex flex-col sm:flex-row gap-3 sm:items-end justify-between text-[11px] text-[hsl(var(--ink-subtle))]">
-          <div className="leading-relaxed">
-            <p>© 2026 ABu. All rights reserved.</p>
-            <p>Created by <span className="font-medium text-[hsl(var(--ink))]">Basith Muthu Wasim</span>. Maintained by me.</p>
-          </div>
-          <div className="flex flex-col sm:items-end gap-1.5">
-            <p className="text-[hsl(var(--ink-muted))]">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
-            <span className="inline-flex items-center gap-1.5 self-start sm:self-end"><span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]" /> Reference demo · ₹0</span>
-          </div>
+        {/* credit row — serif brand font, BMW initials bold */}
+        <div className="mt-4 font-brand text-xs text-[hsl(var(--ink-subtle))] leading-relaxed">
+          <p>© 2026 ABu. All rights reserved.</p>
+          <p className="mt-0.5">Created by <span className="text-[hsl(var(--ink))]"><span className="font-bold">B</span>asith <span className="font-bold">M</span>uthu <span className="font-bold">W</span>asim</span>. Maintained by me.</p>
         </div>
       </div>
     </footer>

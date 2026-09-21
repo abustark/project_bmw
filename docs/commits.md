@@ -5,7 +5,8 @@ Version format: `2.0.x` (ABot convention). Docs to read first: `docs/PROJECT_SPE
 
 | Version | Commit | What it did |
 |---|---|---|
-| 2.0.13 | *(this commit)* | Footer credit block — © 2026 ABu · created by Basith Muthu Wasim · site tagline; builds green |
+| 2.0.14 | *(this commit)* | Footer: tagline+status chip removed, B·M·W initials bold, serif brand font (Playfair Display) |
+| 2.0.13 | `454aeca` | Footer credit block — © 2026 ABu · created by Basith Muthu Wasim · site tagline |
 | 2.0.12 | `a78d34f` | Adopt ABot-style versioned commits + this changelog; package.json versions aligned (2.0.12) |
 | 2.0.11 | `9c73b60` | uiverse + 21st.dev + ui8 layout overhaul — live interactive previews (14 vendored snippets + runtime-CDN lottie/motion), shop sidebar→sticky chip bar, product page Preview/Code/Info tabs, home mosaic + tabbed grid, ⌘K search |
 | 2.0.10 | `666f4b7` | Faithful Linear page structure; price messaging cut to one line (announcement bar, single price row, quiet notices) |
