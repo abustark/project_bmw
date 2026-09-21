@@ -3,7 +3,7 @@
     <!-- header -->
     <div class="flex flex-wrap gap-4 items-end justify-between">
       <div>
-        <h1 class="font-display text-3xl font-bold">Shop</h1>
+        <h1 class="font-display text-3xl font-bold">Shop <span class="text-base font-normal text-amber-700">— reference • ₹0</span></h1>
         <p class="text-sm text-zinc-500 mt-1">{{ filtered.length }} products • {{ activeCategoryLabel }} • sorted by {{ sortBy }}</p>
       </div>
       <div class="flex gap-2 items-center">
@@ -31,12 +31,13 @@
         </div>
 
         <div class="card p-5">
-          <div class="font-semibold text-sm">Price range</div>
+          <div class="font-semibold text-sm">Reference value</div>
+          <div class="text-xs text-zinc-500 mt-1">All items <span class="line-through">estimated</span> → <span class="font-bold text-emerald-700">₹0</span> • demo only</div>
           <div class="mt-3 flex items-center gap-2">
-            <input type="range" min="0" max="100" v-model.number="priceMax" class="flex-1 accent-zinc-900" />
-            <span class="text-sm font-medium">≤ ${{ priceMax }}</span>
+            <input type="range" min="0" max="6000" v-model.number="priceMax" class="flex-1 accent-zinc-900" />
+            <span class="text-sm font-medium tabular-nums">≤ ₹{{ priceMax.toLocaleString('en-IN') }}</span>
           </div>
-          <div class="mt-2 text-xs text-zinc-500">Up to ${{ priceMax }}</div>
+          <div class="mt-2 text-xs text-zinc-500">Filters estimated value (₹0 in cart)</div>
         </div>
 
         <div class="card p-5">
@@ -49,9 +50,9 @@
           </div>
         </div>
 
-        <div class="card p-5">
-          <div class="font-semibold text-sm">Delivery</div>
-          <div class="text-xs text-zinc-500 mt-2">Instant download — code, Figma, tokens.<br/>All dev drops ship digitally. No physical fulfillment.</div>
+        <div class="card p-5 border-amber-200 bg-amber-50">
+          <div class="font-semibold text-sm text-amber-900">Reference • Not for sale</div>
+          <div class="text-xs text-amber-800 mt-2 leading-relaxed">Open-source via original sites. Prices are <span class="line-through">estimates</span> → <span class="font-bold text-emerald-700">₹0</span>.<br/>Tap “View Source” to visit the source — no payment.</div>
         </div>
 
         <button @click="resetFilters" class="w-full btn-ghost">Reset filters</button>
@@ -96,7 +97,7 @@ const router = useRouter()
 
 const category = ref(route.query.cat || 'all')
 const search = ref(route.query.q || '')
-const priceMax = ref(100)
+const priceMax = ref(6000)
 const minRating = ref(0)
 const sortBy = ref('popular')
 const showFilters = ref(false)
@@ -117,7 +118,7 @@ const filtered = computed(()=>{
     const q = search.value.toLowerCase()
     list = list.filter(p=> [p.name,p.author,p.description,p.tags.join(' '),p.category].join(' ').toLowerCase().includes(q))
   }
-  list = list.filter(p=> p.price <= priceMax.value)
+  list = list.filter(p=> (p.originalPrice ?? p.price) <= priceMax.value)
   if(minRating.value) list = list.filter(p=> p.rating >= minRating.value)
   switch(sortBy.value){
     case 'price-asc': list.sort((a,b)=>a.price-b.price); break
@@ -130,6 +131,6 @@ const filtered = computed(()=>{
 })
 
 function resetFilters(){
-  category.value='all'; search.value=''; priceMax.value=100; minRating.value=0; sortBy.value='popular'
+  category.value='all'; search.value=''; priceMax.value=6000; minRating.value=0; sortBy.value='popular'
 }
 </script>

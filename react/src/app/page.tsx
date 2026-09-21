@@ -20,20 +20,20 @@ export default function Home() {
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-medium">
               <span className="w-2 h-2 rounded-full bg-green-500" />
-              NEW — Hues 3D Vol II + Neo Fintech Kit
+              Reference Catalog • 14 open-source → ₹0 — not for sale
               <Badge variant="pill" className="hidden sm:inline-flex ml-2 text-[11px] tracking-widest">LIMITED</Badge>
             </div>
-            <h1 className="mt-4 font-bold text-[42px] sm:text-[56px] leading-[0.9] tracking-tight" style={{ fontFamily: "var(--font-playfair)" }}>
+            <h1 className="mt-4 font-bold text-[42px] sm:text-[52px] leading-[0.95] tracking-[-1.8px] sm:tracking-[-2.4px]" style={{ fontFamily: "var(--font-playfair)", textWrap: "balance" as any }}>
               Digital products <br />
               <span className="font-light italic">that ship</span> faster.
             </h1>
             <p className="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">
-              N-GELO <span className="font-semibold text-zinc-900">React</span> — dev-only marketplace. Sell templates, landing pages, components, loaders, buttons, animations, transitions & icons — instant download, copy-paste code.
+              N-GELO <span className="font-semibold text-zinc-900">React</span> — <span className="font-semibold">reference showcase</span> — 14 free & open-source drops from shadcn/ui, Radix, Tailwind Labs, Vercel. <span className="line-through">₹4,999</span> → <span className="font-bold text-emerald-700">₹0</span> • Not for sale.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/shop"><Button variant="pill" size="pill" className="px-8 py-6 text-base">Shop the drop →</Button></Link>
-              <a href="#how"><Button variant="outline" className="rounded-full px-6 py-6">How sellers earn</Button></a>
+              <Link href="/shop"><Button variant="pill" size="pill" className="px-8 py-6 text-base">Explore references →</Button></Link>
+              <a href="#how"><Button variant="outline" className="rounded-full px-6 py-6">How references work</Button></a>
             </div>
 
             <div className="mt-6 flex items-center gap-6 text-sm">
@@ -55,22 +55,22 @@ export default function Home() {
             </div>
 
             <div className="mt-8 grid grid-cols-3 gap-4 max-w-[520px]">
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">TOTAL SALES</div><div className="font-bold text-xl">€ 286k</div><div className="text-xs text-green-600">+18% this month</div></Card>
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">SELLERS</div><div className="font-bold text-xl">312</div><div className="text-xs text-zinc-500">14th / 21st payouts</div></Card>
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">AVG RATING</div><div className="font-bold text-xl">4.9 ★</div><div className="text-xs text-zinc-500">1.8k reviews</div></Card>
+              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">REFERENCE DROPS</div><div className="font-bold text-xl">14</div><div className="text-xs text-green-600">curated • MIT etc.</div></Card>
+              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">PRICE NOW</div><div className="font-bold text-xl">₹0</div><div className="text-xs text-zinc-500">was ₹4,999</div></Card>
+              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">AVG RATING</div><div className="font-bold text-xl">4.9 ★</div><div className="text-xs text-zinc-500">open-source avg</div></Card>
             </div>
           </div>
 
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-[28px] overflow-hidden bg-zinc-900 p-3 shadow-2xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop" className="rounded-[20px] w-full aspect-[4/3] object-cover" alt="" />
+              <img src="/hero-reference.png" alt="Reference marketplace preview — shadcn components and code" width={900} height={675} className="rounded-[20px] w-full aspect-[4/3] object-cover" />
               <div className="absolute bottom-6 left-6 right-6 bg-white rounded-2xl p-4 flex items-center gap-3 shadow-sm">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="https://i.pravatar.cc/100?img=12" className="w-10 h-10 rounded-full" alt="" />
                 <div className="flex-1">
-                  <div className="text-sm font-semibold">Miranda bought NEO Kit</div>
-                  <div className="text-xs text-zinc-500">2 minutes ago • verified</div>
+                  <div className="text-sm font-semibold">Aarav viewed shadcn/ui</div>
+                  <div className="text-xs text-zinc-500">just now • reference • MIT</div>
                 </div>
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               </div>
@@ -87,6 +87,39 @@ export default function Home() {
                 <div className="text-sm text-zinc-500">€47k earned this term</div>
                 <div className="mt-2 w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div className="h-full w-[72%] bg-zinc-900" /></div>
               </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* reference explainer — Vercel canvas-soft + amber, Taste Skill spacious */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="rounded-[16px] border border-amber-200 bg-amber-50 p-6 lg:p-7 grid lg:grid-cols-12 gap-6 items-center">
+          <div className="lg:col-span-5">
+            <div className="text-xs tracking-[0.2em] text-amber-800 font-semibold">REFERENCE SHOWCASE</div>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight" style={{ textWrap: "balance" as any }}>14 free drops • <span className="line-through decoration-zinc-400">₹4,999</span> → <span className="text-emerald-700">₹0</span> — not for sale.</h2>
+            <p className="mt-2 text-sm text-amber-900 leading-relaxed">Every product is <span className="font-semibold">free & open-source</span> from its original author (MIT / ISC / Free). Estimated prices are shown for reference, strikethrough to <span className="font-bold text-emerald-700">₹0</span>. Nothing is charged. All rights remain with the originals — tap “View Source” to visit them.</p>
+            <div className="mt-3 flex gap-2">
+              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">MIT</span>
+              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">ISC</span>
+              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">Free</span>
+            </div>
+          </div>
+          <div className="lg:col-span-7 grid sm:grid-cols-3 gap-3">
+            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">1</div>
+              <div className="mt-3 font-semibold text-sm leading-tight">View Source → original</div>
+              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Each card links to the official site or GitHub. We mirror nothing paywalled — just reference.</div>
+            </div>
+            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">2</div>
+              <div className="mt-3 font-semibold text-sm leading-tight">₹0 checkout</div>
+              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Add to cart for demo flow — total is always <span className="font-bold text-emerald-700">₹0</span>. No payment collected.</div>
+            </div>
+            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">3</div>
+              <div className="mt-3 font-semibold text-sm leading-tight">Attribution • MIT</div>
+              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">All credit to original authors. License on product page — MIT, ISC, or Free.</div>
             </div>
           </div>
         </div>

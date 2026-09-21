@@ -4,20 +4,20 @@
     <section class="relative overflow-hidden">
       <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-medium">
-            <span class="w-2 h-2 rounded-full bg-green-500"></span>
-            NEW — Hues 3D Vol II + Neo Fintech Kit
-            <span class="hidden sm:inline-flex ml-2 px-2 py-0.5 rounded-full bg-zinc-900 text-white text-[11px] tracking-widest">LIMITED</span>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            Reference Catalog • 14 open-source products → <span class="font-bold text-emerald-700">₹0 — not for sale</span>
+            <span class="hidden sm:inline-flex ml-2 px-2 py-0.5 rounded-full bg-zinc-900 text-white text-[11px] tracking-widest">MIT / ISC / FREE</span>
           </div>
-          <h1 class="mt-4 font-display font-extrabold text-[42px] sm:text-[56px] leading-[0.9] tracking-tight">
+          <h1 class="mt-4 font-display font-bold text-[42px] sm:text-[52px] leading-[0.95] tracking-[-1.8px] sm:tracking-[-2.4px]" style="text-wrap: balance">
             Digital products<br/>
             <span class="font-light italic">that ship</span> faster.
           </h1>
-          <p class="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">N-GELO is a curated marketplace for developers. Sell templates, landing pages, components, loaders, buttons, animations, transitions & icons — instant download, copy-paste code. Built for the BCA project, now production-grade.</p>
+          <p class="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">N-GELO is a <span class="font-semibold text-zinc-900">reference showcase</span> — 14 free & open-source drops curated from shadcn/ui, Radix, Tailwind Labs, Vercel & more. Prices are estimates <span class="line-through">₹4,999</span> → <span class="font-bold text-emerald-700">₹0</span> • Not for sale. Built for the BCA project, now production-grade.</p>
 
           <div class="mt-6 flex flex-wrap gap-3">
-            <router-link to="/shop" class="btn-primary px-8 py-3.5 text-base">Shop the drop →</router-link>
-            <a href="#how" class="btn-ghost">How sellers earn</a>
+            <router-link to="/shop" class="btn-primary px-8 py-3.5 text-base">Explore references →</router-link>
+            <a href="#how" class="btn-ghost">How references work</a>
           </div>
 
           <div class="mt-6 flex items-center gap-6 text-sm">
@@ -36,32 +36,32 @@
           </div>
 
           <div class="mt-8 grid grid-cols-3 gap-4 max-w-[520px]">
-            <div class="card p-4">
-              <div class="text-xs tracking-widest text-zinc-500">TOTAL SALES</div>
-              <div class="font-bold text-xl">€ 286k</div>
-              <div class="text-xs text-green-600">+18% this month</div>
+            <div class="card p-4 rounded-[12px] border-zinc-200 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+              <div class="text-xs tracking-widest text-zinc-500">REFERENCE DROPS</div>
+              <div class="font-bold text-xl tabular-nums">14</div>
+              <div class="text-xs text-zinc-500">curated • MIT etc.</div>
             </div>
-            <div class="card p-4">
-              <div class="text-xs tracking-widest text-zinc-500">SELLERS</div>
-              <div class="font-bold text-xl">312</div>
-              <div class="text-xs text-zinc-500">14th / 21st payouts</div>
+            <div class="card p-4 rounded-[12px] border-zinc-200 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+              <div class="text-xs tracking-widest text-zinc-500">PRICE NOW</div>
+              <div class="font-bold text-xl text-emerald-700 tabular-nums">₹0</div>
+              <div class="text-xs text-zinc-500 line-through">was ₹4,999</div>
             </div>
-            <div class="card p-4">
+            <div class="card p-4 rounded-[12px] border-zinc-200 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
               <div class="text-xs tracking-widest text-zinc-500">AVG RATING</div>
-              <div class="font-bold text-xl">4.9 ★</div>
-              <div class="text-xs text-zinc-500">1.8k reviews</div>
+              <div class="font-bold text-xl tabular-nums">4.9 ★</div>
+              <div class="text-xs text-zinc-500">open-source avg</div>
             </div>
           </div>
         </div>
 
         <div class="lg:col-span-5 relative">
           <div class="relative rounded-[28px] overflow-hidden bg-zinc-900 p-3 shadow-2xl">
-            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop" class="rounded-[20px] w-full aspect-[4/3] object-cover" />
+            <img :src="`${base}hero-reference.png`" alt="Reference marketplace preview — shadcn components and code" width="900" height="675" class="rounded-[20px] w-full aspect-[4/3] object-cover" @error="e=> e.target.src='https://images.unsplash.com/photo-1558655146-d09347e92766?w=900&q=80&auto=format&fit=crop'" />
             <div class="absolute bottom-6 left-6 right-6 bg-white rounded-2xl p-4 flex items-center gap-3 shadow-soft">
               <img src="https://i.pravatar.cc/100?img=12" class="w-10 h-10 rounded-full" />
               <div class="flex-1">
-                <div class="text-sm font-semibold">Miranda bought NEO Kit</div>
-                <div class="text-xs text-zinc-500">2 minutes ago • verified</div>
+                <div class="text-sm font-semibold">Aarav viewed shadcn/ui</div>
+                <div class="text-xs text-zinc-500">just now • reference • MIT</div>
               </div>
               <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             </div>
@@ -77,6 +77,39 @@
               <div class="text-sm text-zinc-500">€47k earned this term</div>
               <div class="mt-2 w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div class="h-full w-[72%] bg-zinc-900"></div></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- reference explainer — Vercel canvas-soft + amber, Taste Skill spacious, not slop -->
+    <section class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div class="rounded-[16px] border border-amber-200 bg-amber-50 p-6 lg:p-7 grid lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-5">
+          <div class="text-xs tracking-[0.2em] text-amber-800 font-semibold">REFERENCE SHOWCASE</div>
+          <h2 class="mt-2 text-2xl font-bold tracking-tight" style="text-wrap: balance">14 free drops • <span class="line-through decoration-zinc-400">₹4,999</span> → <span class="text-emerald-700">₹0</span> — not for sale.</h2>
+          <p class="mt-2 text-sm text-amber-900 leading-relaxed">Every product is <span class="font-semibold">free & open-source</span> from its original author (MIT / ISC / Free). Estimated prices are shown for reference, strikethrough to <span class="font-bold text-emerald-700">₹0</span>. Nothing is charged. All rights remain with the originals — tap “View Source” to visit them.</p>
+          <div class="mt-3 flex gap-2">
+            <span class="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">MIT</span>
+            <span class="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">ISC</span>
+            <span class="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">Free</span>
+          </div>
+        </div>
+        <div class="lg:col-span-7 grid sm:grid-cols-3 gap-3">
+          <div class="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+            <div class="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">1</div>
+            <div class="mt-3 font-semibold text-sm leading-tight">View Source → original</div>
+            <div class="text-xs text-zinc-600 mt-1 leading-relaxed">Each card links to the official site or GitHub. We mirror nothing paywalled — just reference.</div>
+          </div>
+          <div class="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+            <div class="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">2</div>
+            <div class="mt-3 font-semibold text-sm leading-tight">₹0 checkout</div>
+            <div class="text-xs text-zinc-600 mt-1 leading-relaxed">Add to cart for demo flow — total is always <span class="font-bold text-emerald-700">₹0</span>. No payment collected.</div>
+          </div>
+          <div class="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+            <div class="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">3</div>
+            <div class="mt-3 font-semibold text-sm leading-tight">Attribution • MIT</div>
+            <div class="text-xs text-zinc-600 mt-1 leading-relaxed">All credit to original authors. License on product page — MIT, ISC, or Free.</div>
           </div>
         </div>
       </div>
@@ -157,7 +190,7 @@
 
 &lt;Loader variant="skeleton" /&gt;</pre>
           <div class="mt-4 flex gap-2">
-            <router-link to="/shop?cat=components" class="btn-primary !bg-white !text-zinc-900">Browse Components</router-link>
+            <router-link to="/shop?cat=components" class="btn-primary !bg-white !text-zinc-900">Explore References</router-link>
             <span class="text-xs text-zinc-500 self-center">Vue + React • shadcn</span>
           </div>
         </div>

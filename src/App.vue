@@ -1,6 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <Navbar v-model="search" @search="onSearch" />
+    <ReferenceBanner />
     <main class="flex-1">
       <router-view />
     </main>
@@ -21,6 +22,7 @@ import { useRouter } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import CartDrawer from './components/CartDrawer.vue'
+import ReferenceBanner from './components/ReferenceBanner.vue'
 import { useCartStore } from './stores/cart'
 
 const search = ref('')

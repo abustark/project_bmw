@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { CartDrawer } from "@/components/cart-drawer";
+import { ReferenceBanner } from "@/components/reference-banner";
 
 export const metadata: Metadata = {
   title: "N-GELO — Digital Marketplace for Creators (Next.js)",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-full flex flex-col bg-[#fcfcf9] text-zinc-900" style={{ fontFamily: "Poppins, system-ui, sans-serif" }}>
         <Navbar />
+        <ReferenceBanner />
         <main className="flex-1">{children}</main>
         <Footer />
         <CartDrawer />

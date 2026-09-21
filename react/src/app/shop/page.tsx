@@ -11,7 +11,7 @@ import { Search } from "lucide-react"
 export default function ShopPage() {
   const [category, setCategory] = useState("all")
   const [search, setSearch] = useState("")
-  const [priceMax, setPriceMax] = useState(100)
+  const [priceMax, setPriceMax] = useState(6000)
   const [minRating, setMinRating] = useState(0)
   const [sortBy, setSortBy] = useState("popular")
   const [showFilters, setShowFilters] = useState(false)
@@ -23,7 +23,7 @@ export default function ShopPage() {
       const q = search.toLowerCase()
       list = list.filter((p) => [p.name, p.author, p.description, p.tags.join(" "), p.category].join(" ").toLowerCase().includes(q))
     }
-    list = list.filter((p) => p.price <= priceMax)
+    list = list.filter((p) => (p.originalPrice ?? p.price) <= priceMax)
     if (minRating) list = list.filter((p) => p.rating >= minRating)
     switch (sortBy) {
       case "price-asc": list.sort((a, b) => a.price - b.price); break
@@ -36,14 +36,14 @@ export default function ShopPage() {
   }, [category, search, priceMax, minRating, sortBy])
 
   function reset() {
-    setCategory("all"); setSearch(""); setPriceMax(100); setMinRating(0); setSortBy("popular")
+    setCategory("all"); setSearch(""); setPriceMax(6000); setMinRating(0); setSortBy("popular")
   }
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex flex-wrap gap-4 items-end justify-between">
         <div>
-          <h1 className="font-bold text-3xl" style={{ fontFamily: "var(--font-playfair)" }}>Shop</h1>
+          <h1 className="font-bold text-3xl" style={{ fontFamily: "var(--font-playfair)" }}>Shop <span className="text-base font-normal text-amber-700">— reference • ₹0</span></h1>
           <p className="text-sm text-zinc-500 mt-1">{filtered.length} products • {categories.find((c) => c.id === category)?.label} • sorted by {sortBy}</p>
         </div>
         <div className="flex gap-2 items-center">
@@ -72,11 +72,13 @@ export default function ShopPage() {
           </Card>
 
           <Card className="p-5 rounded-[20px]">
-            <div className="font-semibold text-sm">Price range</div>
+            <div className="font-semibold text-sm">Reference value</div>
+            <div className="text-xs text-zinc-500 mt-1">All items <span className="line-through">estimated</span> → <span className="font-bold text-emerald-700">₹0</span> • demo only</div>
             <div className="mt-3 flex items-center gap-2">
-              <input type="range" min={0} max={100} value={priceMax} onChange={(e) => setPriceMax(Number(e.target.value))} className="flex-1 accent-zinc-900" />
-              <span className="text-sm font-medium">≤ ${priceMax}</span>
+              <input type="range" min={0} max={6000} value={priceMax} onChange={(e) => setPriceMax(Number(e.target.value))} className="flex-1 accent-zinc-900" />
+              <span className="text-sm font-medium tabular-nums">≤ ₹{priceMax.toLocaleString('en-IN')}</span>
             </div>
+            <div className="mt-2 text-xs text-zinc-500">Filters estimated value (₹0 in cart)</div>
           </Card>
 
           <Card className="p-5 rounded-[20px]">
@@ -91,9 +93,9 @@ export default function ShopPage() {
             </div>
           </Card>
 
-          <Card className="p-5 rounded-[20px]">
-            <div className="font-semibold text-sm">Delivery</div>
-            <div className="text-xs text-zinc-500 mt-2">Instant download — code, Figma, tokens.<br />All dev drops ship digitally. No physical fulfillment.</div>
+          <Card className="p-5 rounded-[20px] border-amber-200 bg-amber-50">
+            <div className="font-semibold text-sm text-amber-900">Reference • Not for sale</div>
+            <div className="text-xs text-amber-800 mt-2 leading-relaxed">Open-source via original sites. Prices are <span className="line-through">estimates</span> → <span className="font-bold text-emerald-700">₹0</span>.<br />Tap “View Source” to visit the source — no payment.</div>
           </Card>
 
           <Button variant="outline" className="w-full rounded-full" onClick={reset}>Reset filters</Button>
