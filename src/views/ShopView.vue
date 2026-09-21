@@ -3,9 +3,8 @@
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
         <div>
-          <h1 class="font-display text-2xl lg:text-3xl font-semibold tracking-tight text-[hsl(var(--ink))]">Shop <span class="text-sm font-normal text-[hsl(var(--ink-subtle))] ml-2">· free · ₹0</span></h1>
-          <p class="text-sm text-[hsl(var(--ink-subtle))] mt-1">{{ filtered.length }} drops · {{ activeCategoryLabel }} · {{ sortLabel }}</p>
-          <p class="text-xs text-[hsl(var(--ink-subtle))] mt-1 hidden sm:block">14 free · MIT / ISC · extracted here · source on card</p>
+          <h1 class="font-display text-2xl lg:text-3xl font-semibold tracking-tight text-[hsl(var(--ink))]">Shop</h1>
+          <p class="text-sm text-[hsl(var(--ink-subtle))] mt-1">{{ filtered.length }} free drops · {{ activeCategoryLabel }} · {{ sortLabel }}</p>
         </div>
         <div class="flex gap-2 items-center">
           <select v-model="sortBy" class="h-9 px-4 pr-8 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm text-[hsl(var(--ink))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2]" aria-label="Sort products">
@@ -31,13 +30,12 @@
           </div>
 
           <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-5">
-            <div class="font-medium text-sm text-[hsl(var(--ink))]">Reference value</div>
-            <div class="text-xs text-[hsl(var(--ink-subtle))] mt-1">Estimated → <span class="font-medium text-[hsl(var(--ink))]">₹0</span> demo</div>
+            <div class="font-medium text-sm text-[hsl(var(--ink))]">Price</div>
             <div class="mt-3 flex items-center gap-3">
               <input type="range" min="0" max="6000" v-model.number="priceMax" class="flex-1 accent-[#5e6ad2] h-1" aria-label="Filter by reference value" />
               <span class="text-sm font-medium tabular-nums shrink-0 text-[hsl(var(--ink))]">≤ ₹{{ priceMax.toLocaleString('en-IN') }}</span>
             </div>
-            <div class="mt-2 text-xs text-[hsl(var(--ink-subtle))]">Filters estimated · ₹0 in cart</div>
+            <div class="mt-2 text-xs text-[hsl(var(--ink-subtle))]">Estimates — every item is ₹0</div>
           </div>
 
           <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-5">
@@ -45,14 +43,9 @@
             <div class="mt-3 space-y-2">
               <label v-for="r in [4.5, 4, 0]" :key="r" class="flex items-center gap-2 text-sm cursor-pointer text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]">
                 <input type="radio" name="rating" :value="r" v-model="minRating" class="accent-[#5e6ad2]" />
-                <span v-if="r === 0">Any rating</span><span v-else>≥ {{ r }} ·</span>
+                <span v-if="r === 0">Any rating</span><span v-else>{{ r }}+ stars</span>
               </label>
             </div>
-          </div>
-
-          <div class="rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] p-5">
-            <div class="font-medium text-sm text-[hsl(var(--ink))]">Free · Not for sale</div>
-            <div class="text-xs text-[hsl(var(--ink-subtle))] mt-2 leading-relaxed">Extracted components rendered here · source on card · no outbound · <span class="line-through">₹4,999</span> → <span class="font-medium text-[hsl(var(--ink))]">₹0</span>.</div>
           </div>
 
           <button @click="resetFilters" class="w-full h-9 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm font-medium hover:bg-[hsl(var(--surface-1))] text-[hsl(var(--ink))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">Reset filters</button>

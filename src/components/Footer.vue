@@ -7,7 +7,7 @@
             <div class="w-8 h-8 rounded-[8px] bg-[#5e6ad2] text-white grid place-items-center font-semibold text-[13px]">N</div>
             <div class="font-semibold text-[15px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-[hsl(var(--ink-muted))] max-w-[420px]">Reference showcase — 14 free & open-source drops (MIT / ISC / Free) with attribution. Estimated <span class="line-through opacity-60">₹4,999</span> → <span class="font-medium text-[hsl(var(--ink))]">₹0</span> · not for sale. Extracted components rendered here — source name on card, no outbound link.</p>
+          <p class="mt-3 text-sm leading-relaxed text-[hsl(var(--ink-muted))] max-w-[420px]">A reference showcase — 14 free, open-source drops extracted and rendered in this page, with attribution. Not for sale.</p>
         </div>
         <div class="md:col-span-3">
           <div class="text-xs tracking-[0.18em] font-medium text-[hsl(var(--ink-subtle))]">MARKETPLACE</div>
@@ -38,7 +38,7 @@
       </div>
 
       <div class="mt-6 pt-6 border-t border-[hsl(var(--hairline))] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between text-xs text-[hsl(var(--ink-subtle))]">
-        <span>Reference demo · ₹0 · no payment · extracted · shown here</span>
+        <span>Reference demo · ₹0 · not for sale</span>
         <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]" aria-hidden="true"></span> All systems operational</span>
       </div>
     </div>

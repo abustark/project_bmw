@@ -65,7 +65,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               <div className="mt-4 rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] px-4 py-3 flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2] shrink-0" aria-hidden="true" />
                 <p className="text-xs leading-relaxed text-[hsl(var(--ink-subtle))]">
-                  Reference · not for sale · <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> ({product.license}) · estimated <span className="line-through">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span> → <span className="font-medium text-[hsl(var(--ink))]">₹0</span> · rendered here
+                  Reference — not for sale · <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> · {product.license}
                 </p>
               </div>
             )}
@@ -74,7 +74,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           {/* info */}
           <div className="lg:col-span-5">
             <div className="flex gap-2 flex-wrap">
-              {product.isReference && <span className="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[11px] font-medium tracking-widest text-[hsl(var(--ink-subtle))]">REFERENCE · FREE</span>}
+              {product.isReference && <span className="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[11px] font-medium tracking-widest text-[hsl(var(--ink-subtle))]">REFERENCE</span>}
               <span className="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-xs text-[hsl(var(--ink-subtle))]" translate="no">{product.category}</span>
             </div>
             <h1 className="mt-3 text-2xl lg:text-3xl font-semibold leading-tight tracking-tight text-[hsl(var(--ink))]" style={{ fontFamily: "Geist, Inter, sans-serif", textWrap: "balance" as any }}>{product.name}</h1>
@@ -92,7 +92,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <div className="flex items-baseline gap-3 flex-wrap">
                   <span className="text-2xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">₹0</span>
                   <span className="text-sm text-[hsl(var(--ink-subtle))] line-through tabular-nums">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span>
-                  <span className="ml-auto px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))] text-[11px] font-medium tracking-widest">FREE</span>
                 </div>
               ) : (
                 <div className="flex items-baseline gap-3">
@@ -107,7 +106,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 <Button variant="outline" size="icon" onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity" className="w-9 h-9 rounded-[8px] border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))]">−</Button>
                 <span className="w-8 text-center font-medium tabular-nums text-[hsl(var(--ink))]">{qty}</span>
                 <Button variant="outline" size="icon" onClick={() => setQty(qty + 1)} aria-label="Increase quantity" className="w-9 h-9 rounded-[8px] border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))]">+</Button>
-                <span className="ml-auto text-xs text-[hsl(var(--ink-subtle))]">Reference — not shipped</span>
               </div>
 
               <div className="mt-4 grid grid-cols-3 gap-2">
@@ -124,11 +122,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
             </Card>
 
-            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
-              <div className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div className="font-medium text-[hsl(var(--ink))]">✓ Open</div><div className="text-[hsl(var(--ink-subtle))]">MIT / ISC / Free</div></div>
-              <div className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div className="font-medium text-[hsl(var(--ink))]">↻ Extracted</div><div className="text-[hsl(var(--ink-subtle))]">Shown here</div></div>
-              <div className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div className="font-medium text-[hsl(var(--ink))]">₹0 demo</div><div className="text-[hsl(var(--ink-subtle))]">No payment</div></div>
-            </div>
+            <p className="mt-4 text-xs text-[hsl(var(--ink-subtle))]">Open source · extracted &amp; rendered in this page · no outbound links</p>
           </div>
         </div>
 
@@ -167,7 +161,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   </div>
                   <h3 className="mt-6 font-semibold text-[hsl(var(--ink))]">License</h3>
                   <p className="text-[hsl(var(--ink-muted))]">
-                    {product.license} — {product.isReference ? (<span>open-source, free. Estimated <span className="line-through">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span> → <span className="font-medium text-[hsl(var(--ink))]">₹0</span> here. Not for sale.</span>) : (<>use in unlimited projects. Resale not allowed.</>)}
+                    {product.license} — {product.isReference ? (<span>free for unlimited use. All rights remain with the original authors.</span>) : (<>use in unlimited projects. Resale not allowed.</>)}
                   </p>
                 </div>
               )}

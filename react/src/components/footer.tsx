@@ -15,7 +15,7 @@ export function Footer() {
               <div className="font-semibold text-[15px] tracking-tight text-[hsl(var(--ink))] leading-none">N-GELO</div>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-[hsl(var(--ink-muted))] max-w-[420px]">
-              Reference showcase — 14 free & open-source drops (MIT / ISC / Free) with attribution. Estimated <span className="line-through opacity-60">₹4,999</span> → <span className="font-medium text-[hsl(var(--ink))]">₹0</span> · not for sale. Extracted components rendered here — source name on card, no outbound link.
+              A reference showcase — 14 free, open-source drops extracted and rendered in this page, with attribution. Not for sale.
             </p>
           </div>
           <div className="md:col-span-3">
@@ -52,7 +52,7 @@ export function Footer() {
         </div>
 
         <div className="mt-6 pt-6 border-t border-[hsl(var(--hairline))] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between text-xs text-[hsl(var(--ink-subtle))]">
-          <span>Reference demo · ₹0 · no payment · extracted · shown here</span>
+          <span>Reference demo · ₹0 · not for sale</span>
           <span className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2]" aria-hidden="true" /> All systems operational</span>
         </div>
       </div>

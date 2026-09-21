@@ -20,7 +20,7 @@
           <div v-if="product.isReference" class="mt-4 rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] px-4 py-3 flex items-center gap-3">
             <span class="w-1.5 h-1.5 rounded-full bg-[#5e6ad2] shrink-0" aria-hidden="true"></span>
             <p class="text-xs leading-relaxed text-[hsl(var(--ink-subtle))]">
-              Reference · not for sale · <span class="font-medium text-[hsl(var(--ink))]" translate="no">{{ product.referenceName }}</span> ({{ product.license }}) · estimated <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-medium text-[hsl(var(--ink))]">₹0</span> · rendered here
+              Reference — not for sale · <span class="font-medium text-[hsl(var(--ink))]" translate="no">{{ product.referenceName }}</span> · {{ product.license }}
             </p>
           </div>
         </div>
@@ -28,7 +28,7 @@
         <!-- info -->
         <div class="lg:col-span-5">
           <div class="flex gap-2 flex-wrap">
-            <span v-if="product.isReference" class="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[11px] font-medium tracking-widest text-[hsl(var(--ink-subtle))]">REFERENCE · FREE</span>
+            <span v-if="product.isReference" class="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[11px] font-medium tracking-widest text-[hsl(var(--ink-subtle))]">REFERENCE</span>
             <span class="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-xs text-[hsl(var(--ink-subtle))]" translate="no">{{ product.category }}</span>
           </div>
           <h1 class="mt-3 text-2xl lg:text-3xl font-semibold leading-tight tracking-tight text-[hsl(var(--ink))]" style="text-wrap: balance">{{ product.name }}</h1>
@@ -45,7 +45,6 @@
             <div v-if="product.isReference" class="flex items-baseline gap-3 flex-wrap">
               <span class="text-2xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">₹0</span>
               <span class="text-sm text-[hsl(var(--ink-subtle))] line-through tabular-nums">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span>
-              <span class="ml-auto px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))] text-[11px] font-medium tracking-widest">FREE</span>
             </div>
             <div v-else class="flex items-baseline gap-3">
               <span class="text-2xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">₹{{ Number(product.price).toLocaleString('en-IN') }}</span>
@@ -58,7 +57,6 @@
               <button @click="qty = Math.max(1, qty - 1)" aria-label="Decrease quantity" class="w-9 h-9 grid place-items-center rounded-[8px] border border-[hsl(var(--hairline))] hover:bg-[hsl(var(--surface-1))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2] text-[hsl(var(--ink))]">−</button>
               <span class="w-8 text-center font-medium tabular-nums text-[hsl(var(--ink))]">{{ qty }}</span>
               <button @click="qty++" aria-label="Increase quantity" class="w-9 h-9 grid place-items-center rounded-[8px] border border-[hsl(var(--hairline))] hover:bg-[hsl(var(--surface-1))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2] text-[hsl(var(--ink))]">+</button>
-              <span class="ml-auto text-xs text-[hsl(var(--ink-subtle))]">Reference — not shipped</span>
             </div>
 
             <div class="mt-4 grid grid-cols-3 gap-2">
@@ -73,11 +71,7 @@
             </div>
           </div>
 
-          <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div class="font-medium text-[hsl(var(--ink))]">✓ Open</div><div class="text-[hsl(var(--ink-subtle))]">MIT / ISC / Free</div></div>
-            <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div class="font-medium text-[hsl(var(--ink))]">↻ Extracted</div><div class="text-[hsl(var(--ink-subtle))]">Shown here</div></div>
-            <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-3"><div class="font-medium text-[hsl(var(--ink))]">₹0 demo</div><div class="text-[hsl(var(--ink-subtle))]">No payment</div></div>
-          </div>
+          <p class="mt-4 text-xs text-[hsl(var(--ink-subtle))]">Open source · extracted &amp; rendered in this page · no outbound links</p>
         </div>
       </div>
 
@@ -108,7 +102,7 @@
                 <span v-for="s in product.stack" :key="s" class="text-xs px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))]">{{ s }}</span>
               </div>
               <h3 class="mt-6 font-semibold text-[hsl(var(--ink))]">License</h3>
-              <p class="text-[hsl(var(--ink-muted))]">{{ product.license }} — <span v-if="product.isReference">open-source, free. Estimated <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-medium text-[hsl(var(--ink))]">₹0</span> here. Not for sale.</span><span v-else>use in unlimited projects. Resale not allowed.</span></p>
+              <p class="text-[hsl(var(--ink-muted))]">{{ product.license }} — <span v-if="product.isReference">free for unlimited use. All rights remain with the original authors.</span><span v-else>use in unlimited projects. Resale not allowed.</span></p>
             </div>
             <div v-if="activeTab === 'Reviews'">
               <div class="flex items-center gap-4">

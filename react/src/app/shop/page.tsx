@@ -65,9 +65,8 @@ function ShopInner() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-[hsl(var(--ink))]" style={{ fontFamily: "Geist, Inter, sans-serif" }}>Shop <span className="text-sm font-normal text-[hsl(var(--ink-subtle))] ml-2">· free · ₹0</span></h1>
-            <p className="text-sm text-[hsl(var(--ink-subtle))] mt-1">{filtered.length} drops · {categories.find((c) => c.id === category)?.label} · {sortLabel}</p>
-            <p className="text-xs text-[hsl(var(--ink-subtle))] mt-1 hidden sm:block">14 free · MIT / ISC · extracted here · source on card</p>
+            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight text-[hsl(var(--ink))]" style={{ fontFamily: "Geist, Inter, sans-serif" }}>Shop</h1>
+            <p className="text-sm text-[hsl(var(--ink-subtle))] mt-1">{filtered.length} free drops · {categories.find((c) => c.id === category)?.label} · {sortLabel}</p>
           </div>
           <div className="flex gap-2 items-center">
             <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="h-9 px-4 pr-8 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm text-[hsl(var(--ink))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2]" aria-label="Sort products">
@@ -95,13 +94,12 @@ function ShopInner() {
             </Card>
 
             <Card className="p-5 rounded-[12px] bg-[hsl(var(--card))] border-[hsl(var(--hairline))] shadow-none">
-              <div className="font-medium text-sm text-[hsl(var(--ink))]">Reference value</div>
-              <div className="text-xs text-[hsl(var(--ink-subtle))] mt-1">Estimated → <span className="font-medium text-[hsl(var(--ink))]">₹0</span> demo</div>
+              <div className="font-medium text-sm text-[hsl(var(--ink))]">Price</div>
               <div className="mt-3 flex items-center gap-3">
                 <input type="range" min={0} max={6000} value={priceMax} onChange={(e) => setPriceMax(Number(e.target.value))} className="flex-1 accent-[#5e6ad2] h-1" aria-label="Filter by reference value" />
                 <span className="text-sm font-medium tabular-nums shrink-0 text-[hsl(var(--ink))]">≤ ₹{priceMax.toLocaleString('en-IN')}</span>
               </div>
-              <div className="mt-2 text-xs text-[hsl(var(--ink-subtle))]">Filters estimated · ₹0 in cart</div>
+              <div className="mt-2 text-xs text-[hsl(var(--ink-subtle))]">Estimates — every item is ₹0</div>
             </Card>
 
             <Card className="p-5 rounded-[12px] bg-[hsl(var(--card))] border-[hsl(var(--hairline))] shadow-none">
@@ -110,15 +108,10 @@ function ShopInner() {
                 {[4.5, 4, 0].map((r) => (
                   <label key={r} className="flex items-center gap-2 text-sm cursor-pointer text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]">
                     <input type="radio" name="rating" checked={minRating === r} onChange={() => setMinRating(r)} className="accent-[#5e6ad2]" />
-                    <span>{r === 0 ? "Any rating" : `≥ ${r} ·`}</span>
+                    <span>{r === 0 ? "Any rating" : `${r}+ stars`}</span>
                   </label>
                 ))}
               </div>
-            </Card>
-
-            <Card className="p-5 rounded-[12px] border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] shadow-none">
-              <div className="font-medium text-sm text-[hsl(var(--ink))]">Free · Not for sale</div>
-              <div className="text-xs text-[hsl(var(--ink-subtle))] mt-2 leading-relaxed">Extracted components rendered here · source on card · no outbound · <span className="line-through">₹4,999</span> → <span className="font-medium text-[hsl(var(--ink))]">₹0</span>.</div>
             </Card>
 
             <Button variant="outline" className="w-full rounded-[8px] h-9 border-[hsl(var(--hairline))]" onClick={reset}>Reset filters</Button>
