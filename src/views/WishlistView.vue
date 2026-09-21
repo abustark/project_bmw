@@ -10,7 +10,7 @@
     </div>
 
     <div v-else class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <ProductCard v-for="p in items" :key="p.id" :product="p" @add="cart.add($event)" />
+      <ProductCard v-for="p in items" :key="p.id" :product="p" />
     </div>
   </div>
 </template>

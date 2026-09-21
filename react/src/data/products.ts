@@ -26,6 +26,8 @@ export type Product = {
   files?: string[]
   snippet?: string
   previewUrl?: string
+  preview?: string
+  updated?: string
 }
 
 export const categories = [
@@ -43,6 +45,8 @@ export const categories = [
 export const products: Product[] = [
   {
     id: 1,
+    preview: 'shadcn-buttons',
+    updated: '2025-08',
     name: "shadcn/ui — Component Library",
     category: "components",
     price: 0,
@@ -62,7 +66,7 @@ export const products: Product[] = [
       "https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&q=80&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&auto=format&fit=crop",
     ],
-    description: "Beautifully designed components built on Radix + Tailwind. Copy-paste, accessible, dark mode.",
+    description: 'Copy-paste React components built on Radix + Tailwind.',
     tags: ["MIT", "Radix", "Tailwind"],
     delivery: "Copy-paste — TSX + CSS",
     license: "MIT",
@@ -73,6 +77,8 @@ export const products: Product[] = [
   },
   {
     id: 2,
+    preview: 'radix-tabs',
+    updated: '2025-06',
     name: "Radix UI — Primitives",
     category: "components",
     price: 0,
@@ -89,7 +95,7 @@ export const products: Product[] = [
     featured: true,
     image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&q=80&auto=format&fit=crop"],
-    description: "Unstyled, accessible primitives for high-quality design systems. Dialog, Dropdown, Tabs.",
+    description: 'Accessible headless primitives — dialogs, menus, tabs.',
     tags: ["MIT", "A11y", "Headless"],
     delivery: "npm — React",
     license: "MIT",
@@ -100,6 +106,8 @@ export const products: Product[] = [
   },
   {
     id: 3,
+    preview: 'heroicon-grid',
+    updated: '2025-05',
     name: "Heroicons — SVG Icons",
     category: "icons",
     price: 0,
@@ -114,7 +122,7 @@ export const products: Product[] = [
     author: "Tailwind Labs",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80&auto=format&fit=crop"],
-    description: "Hand-crafted SVG icons by Tailwind Labs. 300+ outline & solid, React + Vue.",
+    description: '300+ hand-crafted SVG icons by Tailwind Labs.',
     tags: ["MIT", "SVG", "Tailwind"],
     delivery: "SVG + JSX + Figma",
     license: "MIT",
@@ -125,6 +133,8 @@ export const products: Product[] = [
   },
   {
     id: 4,
+    preview: 'lucide-draw',
+    updated: '2025-09',
     name: "Lucide — 1500+ Icons",
     category: "icons",
     price: 0,
@@ -140,7 +150,7 @@ export const products: Product[] = [
     badge: "FREE",
     image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=1200&q=80&auto=format&fit=crop"],
-    description: "Beautiful & consistent open-source icons. Fork of Feather. 1500+ icons.",
+    description: '1500+ consistent open-source icons for React and Vue.',
     tags: ["ISC", "Icons", "Open Source"],
     delivery: "SVG + npm",
     license: "ISC",
@@ -151,6 +161,8 @@ export const products: Product[] = [
   },
   {
     id: 5,
+    preview: 'flowbite-alert',
+    updated: '2025-07',
     name: "Flowbite — Tailwind Kit",
     category: "components",
     price: 0,
@@ -166,7 +178,7 @@ export const products: Product[] = [
     badge: "REFERENCE",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop"],
-    description: "600+ Tailwind components: modals, tables, charts. MIT, Figma, dark mode.",
+    description: '600+ Tailwind components — modals, tables, charts.',
     tags: ["MIT", "Tailwind", "Figma"],
     delivery: "HTML + React + Vue + Figma",
     license: "MIT",
@@ -177,6 +189,8 @@ export const products: Product[] = [
   },
   {
     id: 6,
+    preview: 'daisy-toggle',
+    updated: '2025-08',
     name: "daisyUI — Tailwind Components",
     category: "components",
     price: 0,
@@ -191,7 +205,7 @@ export const products: Product[] = [
     author: "Pouya Saadeghi",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop"],
-    description: "Tailwind CSS plugin — 50+ component classes, 30 themes. Most loved free UI kit.",
+    description: 'Tailwind plugin with 50+ component classes and 30 themes.',
     tags: ["MIT", "Tailwind", "Themes"],
     delivery: "Tailwind plugin",
     license: "MIT",
@@ -202,6 +216,8 @@ export const products: Product[] = [
   },
   {
     id: 7,
+    preview: 'astrowind-hero',
+    updated: '2025-04',
     name: "AstroWind — Astro Template",
     category: "templates",
     price: 0,
@@ -218,7 +234,7 @@ export const products: Product[] = [
     featured: true,
     image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1200&q=80&auto=format&fit=crop"],
-    description: "Free Astro + Tailwind landing template. Blog, SEO, MDX, dark mode. 10k stars.",
+    description: 'Production Astro + Tailwind landing template.',
     tags: ["MIT", "Astro", "Tailwind"],
     delivery: "Astro + MDX",
     license: "MIT",
@@ -229,6 +245,8 @@ export const products: Product[] = [
   },
   {
     id: 8,
+    preview: 'commerce-card',
+    updated: '2025-03',
     name: "Vercel Commerce — Next.js Shop",
     category: "templates",
     price: 0,
@@ -244,7 +262,7 @@ export const products: Product[] = [
     badge: "VERCEL",
     image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=1200&q=80&auto=format&fit=crop"],
-    description: "Starter kit for high-performance e-commerce. Next.js 14, Shopify, Tailwind, ISR.",
+    description: 'High-performance Next.js commerce starter.',
     tags: ["MIT", "Next.js", "Commerce"],
     delivery: "Next.js 14",
     license: "MIT",
@@ -255,6 +273,8 @@ export const products: Product[] = [
   },
   {
     id: 9,
+    preview: 'cruip-pricing',
+    updated: '2025-02',
     name: "Cruip Tasty — Landing Kit",
     category: "landing-pages",
     price: 0,
@@ -269,7 +289,7 @@ export const products: Product[] = [
     author: "Cruip",
     image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=1200&q=80&auto=format&fit=crop"],
-    description: "Free Tailwind landing page: hero, features, testimonials, pricing, FAQ. MIT.",
+    description: 'Free Tailwind landing kit — hero to pricing.',
     tags: ["Free", "Tailwind", "Landing"],
     delivery: "HTML + Tailwind + Next.js",
     license: "MIT",
@@ -280,6 +300,8 @@ export const products: Product[] = [
   },
   {
     id: 10,
+    preview: 'uiverse-glow',
+    updated: '2025-09',
     name: "Uiverse — Button Collection",
     category: "buttons",
     price: 0,
@@ -296,7 +318,7 @@ export const products: Product[] = [
     featured: true,
     image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=1200&q=80&auto=format&fit=crop"],
-    description: "500+ open-source buttons by community. CSS-only, hover, 3D, glassmorphism.",
+    description: 'Community buttons — CSS-only hover, glow and glass effects.',
     tags: ["MIT", "Buttons", "CSS"],
     delivery: "HTML + CSS",
     license: "MIT",
@@ -307,6 +329,8 @@ export const products: Product[] = [
   },
   {
     id: 11,
+    preview: 'css-loaders',
+    updated: '2025-01',
     name: "CSS Loaders — 600 Spinners",
     category: "loaders",
     price: 0,
@@ -321,7 +345,7 @@ export const products: Product[] = [
     author: "Temani Afif",
     image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80&auto=format&fit=crop"],
-    description: "600+ single-element CSS loaders. No JS, 0.8kB, copy-paste. Free.",
+    description: '600+ single-element CSS spinners, zero JS.',
     tags: ["Free", "CSS", "Loader"],
     delivery: "CSS only",
     license: "Free",
@@ -332,6 +356,8 @@ export const products: Product[] = [
   },
   {
     id: 12,
+    preview: 'lottie-cdn',
+    updated: '2025-09',
     name: "LottieFiles — Free Animations",
     category: "animations",
     price: 0,
@@ -346,7 +372,7 @@ export const products: Product[] = [
     author: "LottieFiles",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80&auto=format&fit=crop"],
-    description: "100k+ free Lottie animations. JSON, dotLottie, React/Vue. Embed or download.",
+    description: 'Free Lottie animations — JSON and dotLottie.',
     tags: ["Free", "Lottie", "JSON"],
     delivery: "JSON + dotLottie",
     license: "Free",
@@ -357,6 +383,8 @@ export const products: Product[] = [
   },
   {
     id: 13,
+    preview: 'motion-spring',
+    updated: '2025-07',
     name: "Motion — Framer Animation",
     category: "animations",
     price: 0,
@@ -372,7 +400,7 @@ export const products: Product[] = [
     badge: "MOTION",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80&auto=format&fit=crop"],
-    description: "Production animation library for React. Layout, gestures, scroll, exit. MIT.",
+    description: 'Spring animation library for React interfaces.',
     tags: ["MIT", "Framer", "Motion"],
     delivery: "npm — React",
     license: "MIT",
@@ -383,6 +411,8 @@ export const products: Product[] = [
   },
   {
     id: 14,
+    preview: 'view-transition',
+    updated: '2025-06',
     name: "View Transitions — Page Effects",
     category: "transitions",
     price: 0,
@@ -397,7 +427,7 @@ export const products: Product[] = [
     author: "Chrome Dev",
     image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&q=80&auto=format&fit=crop",
     gallery: ["https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&q=80&auto=format&fit=crop"],
-    description: "Native page transitions API demos. Slide, morph, shared element. No library.",
+    description: 'Native page-transition effects, no library.',
     tags: ["Free", "Chrome", "API"],
     delivery: "CSS + JS",
     license: "Free",

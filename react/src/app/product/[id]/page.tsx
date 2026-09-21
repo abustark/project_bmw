@@ -1,217 +1,188 @@
 "use client"
-import { use, useState } from "react"
+import { use, useMemo, useState } from "react"
 import Link from "next/link"
-import { products } from "@/data/products"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Heart } from "lucide-react"
+import { products, categories } from "@/data/products"
+import { PREVIEWS, type PreviewKind } from "@/data/previews"
+import { ProductCard } from "@/components/product-card"
+import { LivePreview } from "@/components/live-preview"
 import { useCart, useWishlist } from "@/lib/cart-store"
+
+function formatUses(n: number) {
+  return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(n)
+}
+
+const CODE_FILES = [
+  { id: "html", label: "HTML" },
+  { id: "css", label: "CSS" },
+  { id: "react", label: "React" },
+] as const
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const product = products.find((p) => String(p.id) === String(id))
   const cart = useCart()
   const wishlist = useWishlist()
-  const [qty, setQty] = useState(1)
-  const [activeTab, setActiveTab] = useState("Overview")
-  const [activeImage, setActiveImage] = useState(product?.image ?? "")
+  const [activeTab, setActiveTab] = useState("Preview")
+  const [codeFile, setCodeFile] = useState<(typeof CODE_FILES)[number]["id"]>("html")
+  const [copied, setCopied] = useState(false)
+
+  const def = PREVIEWS[(product?.preview as PreviewKind) || "shadcn-buttons"]
+  const activeCode = codeFile === "html" ? def?.html ?? "" : codeFile === "css" ? def?.css ?? "" : def?.react ?? ""
+  const codeLines = activeCode.split("\n")
+
+  const similar = useMemo(() => {
+    if (!product) return []
+    return products.filter((p) => p.id !== product.id && (p.category === product.category || p.tags.some((t) => product.tags.includes(t)))).slice(0, 4)
+  }, [product])
 
   if (!product) {
     return (
-      <div className="max-w-[1280px] mx-auto px-4 py-20 text-center bg-[hsl(var(--canvas))]">
+      <div className="max-w-[920px] mx-auto px-4 py-20 text-center bg-[hsl(var(--canvas))]">
         <div className="text-lg font-medium text-[hsl(var(--ink))]">Product not found</div>
         <Link href="/shop" className="mt-4 inline-flex h-9 px-5 items-center justify-center rounded-[8px] bg-[#5e6ad2] hover:bg-[#828fff] text-white text-sm font-medium">Back to shop</Link>
       </div>
     )
   }
 
-  const gallery = [product.image, ...(product.gallery || [])].filter(Boolean)
-  const moreFromAuthor = products.filter((p) => p.author === product.author && p.id !== product.id).slice(0, 3)
   const isWished = wishlist.has(product.id)
+  const categoryLabel = categories.find((c) => c.id === product.category)?.label || product.category
 
-  const sampleReviews = [
-    { name: "Aarav S.", time: "2 days ago", rating: 5, text: "Insane quality. Saved me 40 hours on a client fintech app.", avatar: "https://i.pravatar.cc/100?img=15" },
-    { name: "Sofia M.", time: "1 week ago", rating: 5, text: "Docs make sense. Dark mode variables are chef’s kiss.", avatar: "https://i.pravatar.cc/100?img=16" },
-    { name: "Kenji T.", time: "2 weeks ago", rating: 4, text: "Great pack, wish more empty states. Still 5 stars.", avatar: "https://i.pravatar.cc/100?img=17" },
-  ]
+  async function copyCode() {
+    try {
+      await navigator.clipboard.writeText(activeCode)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* clipboard unavailable */
+    }
+  }
 
   return (
     <div className="bg-[hsl(var(--canvas))] min-h-screen">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="max-w-[920px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* breadcrumb */}
         <div className="text-xs text-[hsl(var(--ink-subtle))]">
-          <Link href="/shop" className="hover:text-[hsl(var(--ink))] hover:underline underline-offset-4">Shop</Link>
-          <span className="mx-1 opacity-40" aria-hidden="true">/</span> {product.category}
+          <Link href="/shop" className="hover:text-[hsl(var(--ink))]">Shop</Link>
+          <span className="mx-1 opacity-40">/</span>
+          <Link href={`/shop?cat=${product.category}`} className="hover:text-[hsl(var(--ink))]">{categoryLabel}</Link>
         </div>
 
-        <div className="mt-4 grid lg:grid-cols-12 gap-8">
-          {/* gallery */}
-          <div className="lg:col-span-7">
-            <div className="rounded-[16px] overflow-hidden bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={activeImage} alt={product.name} width={800} height={600} className="w-full aspect-[4/3] object-cover rounded-[12px]" onError={(e) => { const t = e.currentTarget as HTMLImageElement; if (product.fallback) t.src = product.fallback }} />
+        {/* title row (21st.dev) */}
+        <div className="mt-4 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+          <div>
+            <h1 className="text-2xl lg:text-3xl font-semibold leading-tight tracking-tight text-[hsl(var(--ink))]" style={{ fontFamily: "Geist, Inter, sans-serif", textWrap: "balance" as any }}>{product.name}</h1>
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[hsl(var(--ink-subtle))]">
+              <span>by <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.author}</span></span>
+              <span className="w-1 h-1 rounded-full bg-[hsl(var(--hairline))]" />
+              <span className="tabular-nums">★ {product.rating}</span>
+              <span className="w-1 h-1 rounded-full bg-[hsl(var(--hairline))]" />
+              <span className="tabular-nums">{formatUses(product.sales)} uses</span>
+              <span className="w-1 h-1 rounded-full bg-[hsl(var(--hairline))]" />
+              <span>updated {product.updated}</span>
+              <span className="px-2 py-0.5 rounded-full border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] font-medium">{product.license}</span>
             </div>
-            <div className="mt-3 flex gap-2 overflow-auto pb-1">
-              {gallery.map((img, i) => (
-                <button key={i} onClick={() => setActiveImage(img)} aria-label={`View image ${i + 1}`} className={`w-20 h-20 rounded-[12px] overflow-hidden border shrink-0 transition focus-visible:ring-2 focus-visible:ring-[#5e6ad2] ${activeImage === img ? "border-[#5e6ad2]" : "border-[hsl(var(--hairline))] opacity-60 hover:opacity-100"}`}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img} alt={`${product.name} preview ${i + 1}`} width={80} height={80} className="w-full h-full object-cover" loading="lazy" />
-                </button>
-              ))}
-            </div>
-
-            {product.isReference && (
-              <div className="mt-4 rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] px-4 py-3 flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#5e6ad2] shrink-0" aria-hidden="true" />
-                <p className="text-xs leading-relaxed text-[hsl(var(--ink-subtle))]">
-                  Reference — not for sale · <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> · {product.license}
-                </p>
-              </div>
-            )}
           </div>
+          {/* actions */}
+          <div className="flex flex-wrap gap-2">
+            <button onClick={copyCode} className="h-9 px-4 rounded-[8px] bg-[#5e6ad2] hover:bg-[#828fff] text-white text-sm font-medium focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">
+              {copied ? "Copied ✓" : "Copy code"}
+            </button>
+            <button onClick={() => wishlist.toggle(product.id)} aria-pressed={isWished} className="h-9 px-4 rounded-[8px] border border-[hsl(var(--hairline))] text-sm font-medium text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">
+              {isWished ? "♥ Saved" : "♡ Save"}
+            </button>
+            <button onClick={() => cart.add(product, 1)} className="h-9 px-4 rounded-[8px] bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-sm font-medium text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-2))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">
+              Add to cart · <span className="tabular-nums">₹0</span> <span className="line-through opacity-60">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span>
+            </button>
+          </div>
+        </div>
 
-          {/* info */}
-          <div className="lg:col-span-5">
-            <div className="flex gap-2 flex-wrap">
-              {product.isReference && <span className="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[11px] font-medium tracking-widest text-[hsl(var(--ink-subtle))]">REFERENCE</span>}
-              <span className="px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-xs text-[hsl(var(--ink-subtle))]" translate="no">{product.category}</span>
-            </div>
-            <h1 className="mt-3 text-2xl lg:text-3xl font-semibold leading-tight tracking-tight text-[hsl(var(--ink))]" style={{ fontFamily: "Geist, Inter, sans-serif", textWrap: "balance" as any }}>{product.name}</h1>
-            <div className="mt-2 flex items-center gap-3 text-sm flex-wrap text-[hsl(var(--ink-subtle))]">
-              <span className="inline-flex items-center gap-1"><span className="text-[#5e6ad2]" aria-hidden="true">★</span> {product.rating} · {product.reviews} reviews</span>
-              <span className="w-1 h-1 bg-[hsl(var(--hairline))] rounded-full" aria-hidden="true" />
-              <span className="tabular-nums">{product.sales.toLocaleString()} sales</span>
-              <span className="w-1 h-1 bg-[hsl(var(--hairline))] rounded-full" aria-hidden="true" />
-              <span translate="no">by {product.author}</span>
-            </div>
-            <p className="mt-4 text-[15px] leading-relaxed text-[hsl(var(--ink-muted))] text-pretty">{product.description}</p>
+        {/* tabs: Preview / Code / Info (21st.dev) */}
+        <div className="mt-6 flex gap-1 border-b border-[hsl(var(--hairline))]">
+          {["Preview", "Code", "Info"].map((t) => (
+            <button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2.5 text-sm font-medium border-b-2 -mb-px focus-visible:ring-2 focus-visible:ring-[#5e6ad2] ${activeTab === t ? "border-[#5e6ad2] text-[hsl(var(--ink))]" : "border-transparent text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]"}`}>{t}</button>
+          ))}
+        </div>
 
-            <Card className="mt-6 rounded-[12px] bg-[hsl(var(--card))] border-[hsl(var(--hairline))] p-5 shadow-none">
-              {product.isReference ? (
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="text-2xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">₹0</span>
-                  <span className="text-sm text-[hsl(var(--ink-subtle))] line-through tabular-nums">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span>
-                </div>
-              ) : (
-                <div className="flex items-baseline gap-3">
-                  <span className="text-2xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">₹{Number(product.price).toLocaleString("en-IN")}</span>
-                  {product.originalPrice && <span className="text-sm text-[hsl(var(--ink-subtle))] line-through tabular-nums">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span>}
-                </div>
-              )}
-              <div className="mt-1 text-xs text-[hsl(var(--ink-subtle))]">{product.delivery} · <span translate="no">{product.license}</span></div>
-
-              <div className="mt-4 flex items-center gap-2">
-                <span className="text-sm font-medium text-[hsl(var(--ink))]">Qty</span>
-                <Button variant="outline" size="icon" onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity" className="w-9 h-9 rounded-[8px] border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))]">−</Button>
-                <span className="w-8 text-center font-medium tabular-nums text-[hsl(var(--ink))]">{qty}</span>
-                <Button variant="outline" size="icon" onClick={() => setQty(qty + 1)} aria-label="Increase quantity" className="w-9 h-9 rounded-[8px] border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))]">+</Button>
+        {/* PREVIEW */}
+        {activeTab === "Preview" && (
+          <div className="mt-5 rounded-[16px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] p-2">
+            <div className="rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--canvas))] overflow-hidden">
+              <div className="flex items-center gap-1.5 h-9 px-3 border-b border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))]">
+                <span className="w-2 h-2 rounded-full bg-[hsl(var(--hairline))]" />
+                <span className="w-2 h-2 rounded-full bg-[hsl(var(--hairline))]" />
+                <span className="w-2 h-2 rounded-full bg-[hsl(var(--hairline))]" />
+                <span className="mx-auto text-[10px] font-mono text-[hsl(var(--ink-subtle))]">live · rendered in this page</span>
               </div>
-
-              <div className="mt-4 grid grid-cols-3 gap-2">
-                <Button onClick={() => cart.add(product, qty)} className="col-span-2 h-11 rounded-[8px] bg-[#5e6ad2] hover:bg-[#828fff] text-white">Add to cart — ₹{(product.price * qty).toLocaleString("en-IN")}</Button>
-                <Button onClick={() => wishlist.toggle(product.id)} aria-label={isWished ? "Remove from wishlist" : "Save to wishlist"} className={`h-11 rounded-[8px] border font-medium text-sm gap-1 ${isWished ? "bg-[hsl(var(--surface-2))] border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-2))]" : "bg-transparent border-[hsl(var(--hairline))] text-[hsl(var(--ink))] hover:bg-[hsl(var(--surface-1))]"}`}>
-                  <Heart className={`w-4 h-4 ${isWished ? "fill-[#5e6ad2] stroke-[#5e6ad2]" : ""}`} /> {isWished ? "Saved" : "Save"}
-                </Button>
+              <div className="min-h-[360px] grid place-items-center p-6">
+                <LivePreview kind={product.preview || "shadcn-buttons"} size="full" />
               </div>
+            </div>
+          </div>
+        )}
 
-              <div className="mt-3 flex flex-wrap gap-1.5">
+        {/* CODE */}
+        {activeTab === "Code" && (
+          <div className="mt-5">
+            <div className="flex items-center gap-2 mb-3">
+              {CODE_FILES.map((f) => (
+                <button key={f.id} onClick={() => setCodeFile(f.id)} className={`h-8 px-3.5 rounded-[8px] text-xs font-medium border transition ${codeFile === f.id ? "bg-[hsl(var(--ink))] border-transparent text-[hsl(var(--canvas))]" : "border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]"}`}>{f.label}</button>
+              ))}
+              <div className="flex-1" />
+              <button onClick={copyCode} className="h-8 px-3.5 rounded-[8px] bg-[#5e6ad2] hover:bg-[#828fff] text-white text-xs font-medium focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">{copied ? "Copied ✓" : "Copy"}</button>
+            </div>
+            <pre className="rounded-[12px] bg-[#010102] border border-[#23252a] p-0 overflow-auto text-xs font-mono leading-relaxed">
+              <code>
+                {codeLines.map((line, i) => (
+                  <span key={i} className="grid grid-cols-[3ch_1fr]">
+                    <span className="pr-4 text-right select-none text-[#3e3e44]">{i + 1}</span>
+                    <span className="text-[#f7f8f8] whitespace-pre">{line}</span>
+                  </span>
+                ))}
+              </code>
+            </pre>
+            <p className="mt-3 text-xs text-[hsl(var(--ink-subtle))]">
+              Extracted from <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> · {product.license} · rendered live in the Preview tab — the code you copy is the code you see.
+            </p>
+          </div>
+        )}
+
+        {/* INFO */}
+        {activeTab === "Info" && (
+          <div className="mt-5 grid sm:grid-cols-2 gap-4">
+            <div className="rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] p-5">
+              <div className="text-xs tracking-[0.18em] font-medium text-[hsl(var(--ink-subtle))] mb-3">ABOUT</div>
+              <p className="text-sm text-[hsl(var(--ink-muted))] leading-relaxed">{product.description}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
                 {product.tags.map((t) => (
-                  <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))]">{t}</span>
+                  <span key={t} className="text-xs px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))]">#{t}</span>
                 ))}
               </div>
-            </Card>
-
-            <p className="mt-4 text-xs text-[hsl(var(--ink-subtle))]">Open source · extracted &amp; rendered in this page · no outbound links</p>
-          </div>
-        </div>
-
-        {/* details — tabs */}
-        <div className="mt-8 grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8">
-            <div className="flex gap-1 border-b border-[hsl(var(--hairline))]">
-              {["Overview", "Reviews", "FAQ"].map((tab) => (
-                <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-3 text-sm font-medium border-b-2 -mb-px focus-visible:ring-2 focus-visible:ring-[#5e6ad2] ${activeTab === tab ? "border-[#5e6ad2] text-[hsl(var(--ink))]" : "border-transparent text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]"}`}>{tab}</button>
-              ))}
             </div>
-            <div className="py-6">
-              {activeTab === "Overview" && (
-                <div className="space-y-4 text-sm leading-relaxed">
-                  <h3 className="font-semibold text-[hsl(var(--ink))]">What’s inside</h3>
-                  <ul className="list-disc pl-5 space-y-1 text-[hsl(var(--ink-muted))]">
-                    {(product.files || ["Figma", "Tokens", "Icons"]).map((f) => (<li key={f}>{f}</li>))}
-                    <li>Documentation & changelog</li>
-                    <li>Stack: {(product.stack || []).join(", ")}</li>
-                    {product.isReference && (<li>Source: <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> — {product.license} (extracted)</li>)}
-                  </ul>
-                  {product.snippet && (
-                    <div className="mt-4">
-                      <h4 className="font-semibold text-sm text-[hsl(var(--ink))]">Code snippet — copy-paste</h4>
-                      <pre className="mt-2 rounded-[8px] bg-[#010102] text-[#f7f8f8] border border-[#23252a] p-4 text-xs font-mono overflow-auto">{product.snippet}</pre>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        <button onClick={() => product.snippet && navigator.clipboard?.writeText(product.snippet)} className="text-xs px-3 py-1.5 rounded-[8px] bg-[#5e6ad2] hover:bg-[#828fff] text-white focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">Copy snippet</button>
-                        <span className="text-xs px-3 py-1.5 rounded-[8px] bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))]">Source: <span translate="no">{product.referenceName}</span></span>
-                      </div>
-                    </div>
-                  )}
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {(product.stack || []).map((s) => (
-                      <span key={s} className="text-xs px-2.5 py-1 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink-subtle))]">{s}</span>
-                    ))}
-                  </div>
-                  <h3 className="mt-6 font-semibold text-[hsl(var(--ink))]">License</h3>
-                  <p className="text-[hsl(var(--ink-muted))]">
-                    {product.license} — {product.isReference ? (<span>free for unlimited use. All rights remain with the original authors.</span>) : (<>use in unlimited projects. Resale not allowed.</>)}
-                  </p>
-                </div>
-              )}
-              {activeTab === "Reviews" && (
-                <div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-4xl font-semibold tabular-nums tracking-tight text-[hsl(var(--ink))]">{product.rating}</div>
-                    <div><div className="text-[#5e6ad2]">★ ★ ★ ★ ★</div><div className="text-xs text-[hsl(var(--ink-subtle))]">Based on {product.reviews} reviews</div></div>
-                  </div>
-                  <div className="mt-6 space-y-3">
-                    {sampleReviews.map((r) => (
-                      <div key={r.name} className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-4">
-                        <div className="flex items-center gap-3">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={r.avatar} alt={r.name} width={32} height={32} className="w-8 h-8 rounded-full" loading="lazy" />
-                          <div><div className="text-sm font-medium text-[hsl(var(--ink))]">{r.name}</div><div className="text-xs text-[hsl(var(--ink-subtle))]">{r.time}</div></div>
-                          <div className="ml-auto text-[#5e6ad2] text-sm">★ {r.rating}</div>
-                        </div>
-                        <p className="mt-2 text-sm text-[hsl(var(--ink-muted))]">{r.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {activeTab === "FAQ" && (
-                <div className="space-y-3">
-                  <details className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-4"><summary className="font-medium cursor-pointer text-[hsl(var(--ink))]">How do I download?</summary><p className="mt-2 text-sm text-[hsl(var(--ink-muted))]">Reference items are free — Source: <span translate="no">{product.referenceName}</span> (extracted). Cart is demo (₹0).</p></details>
-                  <details className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-4"><summary className="font-medium cursor-pointer text-[hsl(var(--ink))]">Can I use for client work?</summary><p className="mt-2 text-sm text-[hsl(var(--ink-muted))]">Yes — {product.license}. Check product page.</p></details>
-                  <details className="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-4"><summary className="font-medium cursor-pointer text-[hsl(var(--ink))]">Why ₹0?</summary><p className="mt-2 text-sm text-[hsl(var(--ink-muted))]">Reference showcase — estimates shown, strikethrough to ₹0, no payment. All rights with originals.</p></details>
-                </div>
-              )}
+            <div className="rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] p-5">
+              <div className="text-xs tracking-[0.18em] font-medium text-[hsl(var(--ink-subtle))] mb-3">DETAILS</div>
+              <dl className="text-sm space-y-2">
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">License</dt><dd className="font-medium text-[hsl(var(--ink))]">{product.license} — free for unlimited use</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">Delivery</dt><dd className="font-medium text-[hsl(var(--ink))] text-right">{product.delivery}</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">Files</dt><dd className="font-medium text-[hsl(var(--ink))] text-right">{(product.files || []).join(" · ")}</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">Stack</dt><dd className="font-medium text-[hsl(var(--ink))] text-right">{(product.stack || []).join(" · ")}</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">Updated</dt><dd className="font-medium text-[hsl(var(--ink))]">{product.updated}</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[hsl(var(--ink-subtle))]">Price</dt><dd className="font-medium text-[hsl(var(--ink))] tabular-nums">₹0 <span className="line-through opacity-60 font-normal">₹{Number(product.originalPrice).toLocaleString("en-IN")}</span></dd></div>
+              </dl>
+              <p className="mt-4 text-xs text-[hsl(var(--ink-subtle))] leading-relaxed">Reference — not for sale. All rights remain with the original authors.</p>
             </div>
           </div>
-          <div className="lg:col-span-4 space-y-4">
-            <Card className="rounded-[12px] bg-[hsl(var(--card))] border-[hsl(var(--hairline))] p-5 shadow-none">
-              <div className="font-medium text-sm text-[hsl(var(--ink))]">About {product.author}</div>
-              <p className="mt-2 text-sm text-[hsl(var(--ink-muted))]">Creator of <span className="font-medium text-[hsl(var(--ink))]" translate="no">{product.referenceName}</span> · {product.license} · extracted.</p>
-            </Card>
-            <Card className="rounded-[12px] bg-[hsl(var(--card))] border-[hsl(var(--hairline))] p-5 shadow-none">
-              <div className="font-medium text-sm text-[hsl(var(--ink))]">More from reference</div>
-              <div className="mt-3 space-y-3">
-                {moreFromAuthor.map((p) => (
-                  <Link key={p.id} href={`/product/${p.id}`} className="flex gap-3 hover:bg-[hsl(var(--surface-1))] -mx-2 px-2 py-2 rounded-[8px] transition">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.image} alt={p.name} width={56} height={56} className="w-14 h-14 rounded-[8px] object-cover border border-[hsl(var(--hairline))]" loading="lazy" />
-                    <div><div className="text-sm font-medium leading-tight line-clamp-2 text-[hsl(var(--ink))]">{p.name}</div><div className="text-xs text-[hsl(var(--ink-subtle))] mt-1">₹0 <span className="line-through">₹{Number(p.originalPrice).toLocaleString("en-IN")}</span> · ★ {p.rating}</div></div>
-                  </Link>
-                ))}
-              </div>
-            </Card>
+        )}
+
+        {/* similar drops (both sites have this rail) */}
+        <div className="mt-10">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-base font-semibold text-[hsl(var(--ink))]">Similar drops</h2>
+            <Link href="/shop" className="text-xs font-medium text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]">View all →</Link>
+          </div>
+          <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {similar.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         </div>
       </div>

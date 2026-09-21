@@ -21,7 +21,7 @@
         <div class="hidden md:flex flex-1 max-w-[340px] items-center">
           <div class="relative w-full">
             <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--ink-subtle))]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-            <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" @keydown.enter="$emit('search')" placeholder="Search components…" class="w-full pl-9 pr-9 h-9 rounded-[8px] bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-sm text-[hsl(var(--ink))] placeholder:text-[hsl(var(--ink-subtle))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2] transition" aria-label="Search products" />
+            <input ref="searchInput" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" @keydown.enter="$emit('search')" placeholder="Search components…" class="w-full pl-9 pr-9 h-9 rounded-[8px] bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-sm text-[hsl(var(--ink))] placeholder:text-[hsl(var(--ink-subtle))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2] transition" aria-label="Search products" />
             <kbd class="absolute right-2.5 top-1/2 -translate-y-1/2 hidden lg:block text-[10px] text-[hsl(var(--ink-subtle))] border border-[hsl(var(--hairline))] rounded-[4px] px-1.5 py-0.5">↵</kbd>
           </div>
         </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useCartStore } from '../stores/cart'
 import { useWishlistStore } from '../stores/wishlist'
 import { useTheme } from '../composables/useTheme'
@@ -92,4 +92,13 @@ const wishlist = useWishlistStore()
 const wishlistIds = wishlist.ids
 const mobileOpen = ref(false)
 const { theme, setTheme } = useTheme()
+const searchInput = ref(null)
+function onKeydown(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault()
+    searchInput.value?.focus()
+  }
+}
+onMounted(() => window.addEventListener('keydown', onKeydown))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 </script>

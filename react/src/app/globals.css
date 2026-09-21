@@ -130,3 +130,10 @@ body {
 /* Linear: subtle scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background: hsl(var(--hairline)); border-radius: 999px; }
+
+.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar{scrollbar-width:none}
+
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{animation:marquee 30s linear infinite}
+.marquee:hover{animation-play-state:paused}

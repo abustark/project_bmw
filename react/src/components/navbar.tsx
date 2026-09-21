@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Search, Heart, ShoppingBag, Menu, X, Monitor, Sun, Moon } from "lucide-react"
 import { useCart, useWishlist } from "@/lib/cart-store"
 import { useTheme } from "@/lib/theme"
@@ -10,9 +10,21 @@ export function Navbar() {
   const router = useRouter()
   const [q, setQ] = useState("")
   const [mobileOpen, setMobileOpen] = useState(false)
+  const searchInput = useRef<HTMLInputElement>(null)
   const cart = useCart()
   const wishlist = useWishlist()
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    const onKeydown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault()
+        searchInput.current?.focus()
+      }
+    }
+    window.addEventListener("keydown", onKeydown)
+    return () => window.removeEventListener("keydown", onKeydown)
+  }, [])
 
   function submitSearch() {
     router.push(`/shop?q=${encodeURIComponent(q)}`)
@@ -42,6 +54,7 @@ export function Navbar() {
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--ink-subtle))]" />
               <input
+                ref={searchInput}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && submitSearch()}
