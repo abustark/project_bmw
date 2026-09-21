@@ -43,10 +43,10 @@ export default function ProductPage() {
           <span className="shrink-0 w-7 h-7 rounded-full bg-amber-500 text-white grid place-items-center text-xs font-bold">!</span>
           <div className="flex-1 min-w-0">
             <div className="text-sm font-semibold text-amber-900">Reference — not for sale</div>
-            <p className="text-sm text-amber-800 leading-relaxed">Curated from <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline font-medium">{product.referenceName}</a> ({product.license}) — estimated value <span className="line-through">₹{Number(product.originalPrice).toLocaleString('en-IN')}</span> → <span className="font-bold text-emerald-700">₹0</span>. Visit source for original.</p>
+            <p className="text-sm text-amber-800 leading-relaxed">Curated from <span className="font-medium" translate="no">{product.referenceName} — extracted & shown here</span> ({product.license}) — estimated value <span className="line-through">₹{Number(product.originalPrice).toLocaleString('en-IN')}</span> → <span className="font-bold text-emerald-700">₹0</span>. Visit source for original.</p>
             <div className="mt-2 flex gap-2">
-              <a href={product.referenceUrl} target="_blank" rel="noopener" className="px-4 py-2 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800">View Source ↗</a>
-              {product.previewUrl && <a href={product.previewUrl} target="_blank" rel="noopener" className="px-4 py-2 rounded-full bg-white border text-sm font-medium">Live preview</a>}
+              <span className="px-4 py-2 rounded-full bg-zinc-900 text-white text-sm font-medium">Source: <span translate="no">{product.referenceName}</span> — extracted</span>
+              {product.previewUrl && <span className="px-4 py-2 rounded-full bg-white border text-sm font-medium text-zinc-500">Preview: rendered in page</span>}
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function ProductPage() {
                 {product.originalPrice && !product.isReference && <span className="ml-auto px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">{Math.round((1-product.price/product.originalPrice)*100)}% OFF</span>}
               </div>
             )}
-            <div className="mt-2 text-xs text-zinc-500">{product.delivery} • <span translate="no">{product.license}</span> license {product.isReference && <>• <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline">{product.referenceName}</a></>}</div>
+            <div className="mt-2 text-xs text-zinc-500">{product.delivery} • <span translate="no">{product.license}</span> license {product.isReference && <>• <span translate="no">{product.referenceName} — extracted (no outbound link)</span></>}</div>
             {product.isReference && <div className="mt-3 p-3 rounded-xl bg-zinc-50 border text-xs text-zinc-600">Estimated reference price <span className="line-through">₹{Number(product.originalPrice).toLocaleString('en-IN')}</span> → <span className="font-bold text-emerald-700">₹0</span> — this demo does not process payments for reference items. Add to cart for preview.</div>}
             <div className="mt-4 flex items-center gap-2">
               <span className="text-sm font-medium">Qty</span>
@@ -112,7 +112,7 @@ export default function ProductPage() {
               <Button onClick={() => wish.toggle(product.id)} aria-label={wish.has(product.id) ? "Remove from wishlist" : "Save to wishlist"} variant={wish.has(product.id) ? "default" : "outline"} className="rounded-full"><Heart className={`w-4 h-4 ${wish.has(product.id) ? 'fill-white':''}`} aria-hidden="true" /> {wish.has(product.id) ? 'Saved':'Save'}</Button>
             </div>
             {product.isReference ? (
-              <a href={product.referenceUrl} target="_blank" rel="noopener" className="mt-2 w-full inline-flex justify-center px-4 py-2.5 rounded-full border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-900 text-sm font-medium">View Source ↗ — {product.referenceName}</a>
+              <span className="mt-2 w-full inline-flex justify-center px-4 py-2.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-sm font-medium">Source: <span translate="no">{product.referenceName}</span> — extracted & rendered here</span>
             ) : (
               <Button onClick={() => { cart.add(product, qty); router.push("/checkout")}} variant="outline" className="mt-2 w-full rounded-full">Buy now with Stripe</Button>
             )}
@@ -144,7 +144,7 @@ export default function ProductPage() {
                   {(product.files || ["Figma","Tokens","Icons"]).map((f:string)=> <li key={f}>{f}</li>)}
                   <li>Documentation & changelog</li>
                   <li>Stack: {(product.stack || []).join(", ")}</li>
-                  {product.isReference && <li>Source: <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline">{product.referenceName}</a> — {product.license}</li>}
+                  {product.isReference && <li>Source: <span className="font-medium" translate="no">{product.referenceName}</span> — {product.license} (extracted)</li>}
                 </ul>
                 {product.snippet && (
                   <div className="mt-4">
@@ -152,21 +152,21 @@ export default function ProductPage() {
                     <pre className="mt-2 rounded-xl bg-zinc-900 text-zinc-100 p-4 text-xs font-mono overflow-auto">{product.snippet}</pre>
                     <div className="mt-2 flex gap-2">
                       <Button variant="default" className="rounded-full text-xs h-8" onClick={()=> navigator.clipboard?.writeText(product.snippet!)}>Copy snippet</Button>
-                      {product.previewUrl && <a href={product.previewUrl} target="_blank" rel="noopener" className="text-xs px-3 py-1.5 rounded-full border inline-flex items-center">Live preview ↗</a>}
-                      {product.isReference && <a href={product.referenceUrl} target="_blank" rel="noopener" className="text-xs px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 inline-flex items-center">View Source ↗</a>}
+                      {product.previewUrl && <span className="text-zinc-500">Live preview ↗ — shown here</span>}
+                      {product.isReference && <span className="text-xs px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 inline-flex items-center">Source: <span translate="no">{product.referenceName}</span></span>}
                     </div>
                   </div>
                 )}
                 {product.previewUrl && (
                   <div className="mt-4 flex items-center gap-2 text-xs">
                     <span className="font-semibold">Preview:</span>
-                    <a href={product.previewUrl} target="_blank" rel="noopener" className="underline text-zinc-600">{product.previewUrl}</a>
+                    <span className="text-zinc-600" translate="no">{product.previewUrl} — shown here</span>
                   </div>
                 )}
                 {product.isReference && (
                   <div className="mt-4 flex items-center gap-2 text-xs">
                     <span className="font-semibold">Reference:</span>
-                    <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline text-zinc-600">{product.referenceUrl}</a>
+                    <span className="text-zinc-600" translate="no">{product.referenceUrl} — extracted (no outbound link)</span>
                   </div>
                 )}
                 <div className="mt-4 flex flex-wrap gap-1.5">
@@ -199,8 +199,8 @@ export default function ProductPage() {
             )}
             {tab==="FAQ" && (
               <div className="space-y-3">
-                <Card className="p-4 rounded-xl"><div className="font-medium">How do I download after purchase?</div><p className="mt-2 text-sm text-zinc-600">Reference items are free — <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline">View Source</a> to get it from the original. Cart is demo (₹0).</p></Card>
-                <Card className="p-4 rounded-xl"><div className="font-medium">Can I use for client work?</div><p className="mt-2 text-sm text-zinc-600">Yes — {product.license}. Check source: <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline">{product.referenceName}</a></p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">How do I download after purchase?</div><p className="mt-2 text-sm text-zinc-600">Reference items are free — <span className="font-medium" translate="no">{product.referenceName}</span> (extracted) to get it from the original. Cart is demo (₹0).</p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">Can I use for client work?</div><p className="mt-2 text-sm text-zinc-600">Yes — {product.license}. Check source: <span translate="no">{product.referenceName} — extracted (no outbound link)</span></p></Card>
                 <Card className="p-4 rounded-xl"><div className="font-medium">What about refunds?</div><p className="mt-2 text-sm text-zinc-600">Reference catalog is free (₹0) — no payment. Estimated price <span className="line-through">₹{Number(product.originalPrice).toLocaleString('en-IN')}</span> shown for reference only.</p></Card>
                 <Card className="p-4 rounded-xl"><div className="font-medium">Which stack?</div><p className="mt-2 text-sm text-zinc-600">{(product.stack||[]).join(", ")} — Vue SFC & React TSX, Tailwind, shadcn.</p></Card>
                 <Card className="p-4 rounded-xl"><div className="font-medium">Why ₹0?</div><p className="mt-2 text-sm text-zinc-600">This is a reference showcase — to demonstrate curation without selling. All rights belong to original authors. Prices are estimates, strikethrough to ₹0.</p></Card>
@@ -211,8 +211,8 @@ export default function ProductPage() {
         <div className="lg:col-span-4 space-y-4">
           <Card className="p-5 rounded-[20px]">
             <div className="font-semibold">About {product.author}</div>
-            <p className="mt-2 text-sm text-zinc-600">Creator of <a href={product.referenceUrl} target="_blank" rel="noopener" className="underline">{product.referenceName}</a>. Open-source, {product.license}.</p>
-            <a href={product.referenceUrl} target="_blank" rel="noopener" className="mt-4 w-full inline-flex justify-center px-4 py-2 rounded-full border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-900 text-sm font-medium">View Source ↗</a>
+            <p className="mt-2 text-sm text-zinc-600">Creator of <span className="font-medium" translate="no">{product.referenceName}</span> (extracted). Open-source, {product.license}.</p>
+            <span className="mt-4 w-full inline-flex justify-center px-4 py-2 rounded-full border border-amber-200 bg-amber-50 text-amber-900 text-sm font-medium">Source: <span translate="no">{product.referenceName}</span></span>
           </Card>
           <Card className="p-5 rounded-[20px]">
             <div className="font-semibold text-sm">More from reference</div>

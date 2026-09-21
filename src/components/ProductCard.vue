@@ -37,7 +37,7 @@
         <Badge v-if="product.isReference" variant="outline" class="text-[11px] bg-white border-amber-200 text-zinc-600">View Source ↗</Badge>
       </div>
       <div v-if="product.isReference" class="mt-2 text-xs">
-        <a :href="product.referenceUrl" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-zinc-500 hover:text-zinc-900 underline-offset-2 hover:underline line-clamp-1" :title="product.referenceUrl">{{ product.referenceName }}</a>
+        <span class="inline-flex items-center gap-1 text-zinc-500 line-clamp-1" translate="no">{{ product.referenceName }} — extracted</span>
       </div>
       <div class="mt-4 flex gap-2">
         <Button @click="$emit('add', product)" variant="pill" size="pill" class="flex-1 focus-visible:ring-2 focus-visible:ring-zinc-900">Add to cart</Button>

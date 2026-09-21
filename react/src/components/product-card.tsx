@@ -56,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         {product.isReference && (
           <div className="mt-2 text-xs">
-            <a href={product.referenceUrl} target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-zinc-500 hover:text-zinc-900 underline-offset-2 hover:underline line-clamp-1" title={product.referenceUrl}>{product.referenceName}</a>
+            <span className="inline-flex items-center gap-1 text-zinc-500 line-clamp-1" translate="no">{product.referenceName} — extracted</span>
           </div>
         )}
         <div className="mt-4 flex gap-2">

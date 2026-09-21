@@ -11,13 +11,13 @@
             <span class="line-through decoration-zinc-400">₹4,999</span>
             <span class="text-zinc-600"> → </span>
             <span class="font-bold text-emerald-700">₹0</span>
-            <span class="text-zinc-600"> — not for sale. Click </span>
-            <span class="font-medium text-zinc-900">“View Source”</span>
-            <span class="text-zinc-600"> on any product to visit the original.</span>
+            <span class="text-zinc-600"> — not for sale. Source name on card only —</span>
+            <span class="font-medium text-zinc-900"> no outbound link</span>
+            <span class="text-zinc-600">. Extracted components are rendered directly in our pages.</span>
           </p>
-          <p class="sm:hidden text-xs text-zinc-500 mt-1">Tap any product → View Source — sources remain the owners.</p>
+          <p class="sm:hidden text-xs text-zinc-500 mt-1">Source name on card — extracted & shown in our page.</p>
         </div>
-        <a href="https://github.com/abustark/project_bmw" target="_blank" rel="noopener" class="hidden sm:inline-flex shrink-0 px-3 py-1.5 rounded-full bg-white border border-amber-200 text-xs font-medium hover:bg-amber-100 transition">Why this exists?</a>
+        <span class="hidden sm:inline-flex shrink-0 px-3 py-1.5 rounded-full bg-white border border-amber-200 text-xs font-medium text-zinc-600">Extracted • shown here</span>
       </div>
     </div>
   </div>

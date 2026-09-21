@@ -6,10 +6,10 @@
       <span class="shrink-0 w-7 h-7 rounded-full bg-amber-500 text-white grid place-items-center text-xs font-bold">!</span>
       <div class="flex-1 min-w-0">
         <div class="text-sm font-semibold text-amber-900">Reference — not for sale</div>
-        <p class="text-sm text-amber-800 leading-relaxed">Curated from <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline font-medium">{{ product.referenceName }}</a> ({{ product.license }}) — estimated value <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-bold text-emerald-700">₹0</span>. Visit source for original.</p>
+        <p class="text-sm text-amber-800 leading-relaxed">Curated from <span class="font-medium" translate="no">{{ product.referenceName }} — extracted & shown here</span> ({{ product.license }}) — estimated value <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-bold text-emerald-700">₹0</span>. Visit source for original.</p>
         <div class="mt-2 flex gap-2">
-          <a :href="product.referenceUrl" target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800">View Source ↗</a>
-          <a :href="product.previewUrl" v-if="product.previewUrl" target="_blank" rel="noopener" class="px-4 py-2 rounded-full bg-white border text-sm font-medium">Live preview</a>
+          <span class="px-4 py-2 rounded-full bg-zinc-900 text-white text-sm font-medium">Source: <span translate="no">{{ product.referenceName }}</span> — extracted</span>
+          <span v-if="product.previewUrl" class="px-4 py-2 rounded-full bg-white border text-sm font-medium text-zinc-500">Preview: rendered in page</span>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
             <span v-if="product.originalPrice" class="text-zinc-400 line-through tabular-nums">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span>
             <span v-if="product.originalPrice && !product.isReference" class="ml-auto px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs font-bold">{{ Math.round((1-product.price/product.originalPrice)*100) }}% OFF</span>
           </div>
-          <div class="mt-2 text-xs text-zinc-500">{{ product.delivery }} • <span translate="no">{{ product.license }}</span> license <span v-if="product.isReference">• <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline">{{ product.referenceName }}</a></span></div>
+          <div class="mt-2 text-xs text-zinc-500">{{ product.delivery }} • <span translate="no">{{ product.license }}</span> license <span v-if="product.isReference">• <span class="font-medium" translate="no">{{ product.referenceName }}</span></span></div>
           <div v-if="product.isReference" class="mt-3 p-3 rounded-xl bg-zinc-50 border text-xs text-zinc-600">Estimated reference price <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-bold text-emerald-700">₹0</span> — this demo does not process payments for reference items. Add to cart for preview.</div>
           <div class="mt-4">
             <div class="flex items-center gap-2">
@@ -72,7 +72,7 @@
               <span aria-hidden="true">♥</span> {{ wish.has(product.id) ? 'Saved' : 'Save' }}
             </button>
           </div>
-          <a v-if="product.isReference" :href="product.referenceUrl" target="_blank" rel="noopener" class="mt-2 w-full btn-ghost justify-center border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-900 flex">View Source ↗ — {{ product.referenceName }}</a>
+          <span v-if="product.isReference" class="mt-2 w-full btn-ghost justify-center border-amber-200 bg-amber-50 text-amber-900 flex rounded-full py-2.5 text-sm font-medium">Source: <span translate="no">{{ product.referenceName }}</span> — extracted & rendered here</span>
           <button v-else @click="buyNow" class="mt-2 w-full btn-ghost justify-center">Buy now with Stripe</button>
           <div class="mt-3 flex flex-wrap gap-1.5">
             <span v-for="t in product.tags" :key="t" class="text-xs px-2.5 py-1 rounded-full bg-zinc-50 border">{{ t }}</span>
@@ -101,30 +101,30 @@
               <li v-for="f in (product.files || ['Figma','Tokens','Icons'])" :key="f">{{ f }}</li>
               <li>Documentation & changelog</li>
               <li>Stack: {{ (product.stack || []).join(', ') }}</li>
-              <li v-if="product.isReference">Source: <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline">{{ product.referenceName }}</a> — {{ product.license }}</li>
+              <li v-if="product.isReference">Source: <span class="font-medium" translate="no">{{ product.referenceName }}</span> — {{ product.license }} (extracted)</li>
             </ul>
             <div v-if="product.snippet" class="mt-4">
               <h4 class="font-semibold text-sm">Code snippet — copy-paste</h4>
               <pre class="mt-2 rounded-xl bg-zinc-900 text-zinc-100 p-4 text-xs font-mono overflow-auto">{{ product.snippet }}</pre>
               <div class="mt-2 flex gap-2">
                 <button @click="navigator.clipboard?.writeText(product.snippet)" class="text-xs px-3 py-1.5 rounded-full bg-zinc-900 text-white focus-visible:ring-2 focus-visible:ring-zinc-900">Copy snippet</button>
-                <a v-if="product.previewUrl" :href="product.previewUrl" target="_blank" rel="noopener" class="text-xs px-3 py-1.5 rounded-full border focus-visible:ring-2 focus-visible:ring-zinc-900">Live preview ↗</a>
-                <a v-if="product.isReference" :href="product.referenceUrl" target="_blank" rel="noopener" class="text-xs px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900">View Source ↗</a>
+                <span v-if="product.previewUrl" class="text-xs px-3 py-1.5 rounded-full border text-zinc-500">Preview: rendered in page</span>
+                <span v-if="product.isReference" class="text-xs px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900">Source: <span translate="no">{{ product.referenceName }}</span></span>
               </div>
             </div>
             <div v-if="product.previewUrl" class="mt-4 flex items-center gap-2 text-xs">
               <span class="font-semibold">Preview:</span>
-              <a :href="product.previewUrl" target="_blank" rel="noopener" class="underline text-zinc-600">{{ product.previewUrl }}</a>
+              <span class="text-zinc-600" translate="no">{{ product.previewUrl }} — shown here</span>
             </div>
             <div v-if="product.isReference" class="mt-4 flex items-center gap-2 text-xs">
               <span class="font-semibold">Reference:</span>
-              <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline text-zinc-600">{{ product.referenceUrl }}</a>
+              <span class="text-zinc-600" translate="no">{{ product.referenceUrl }} — extracted (no outbound link)</span>
             </div>
             <div class="mt-4 flex flex-wrap gap-1.5">
               <span v-for="s in product.stack" :key="s" class="text-xs px-2.5 py-1 rounded-full bg-zinc-900 text-white">{{ s }}</span>
             </div>
             <h3 class="mt-6 font-semibold">License</h3>
-            <p class="text-zinc-600">{{ product.license }} — <span v-if="product.isReference">open-source, free to use. Estimated value <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-bold text-emerald-700">₹0</span> here. Not for sale — visit source.</span><span v-else>use in unlimited projects. Resale of source not allowed. <a href="#" class="underline">Read full license</a></span></p>
+            <p class="text-zinc-600">{{ product.license }} — <span v-if="product.isReference">open-source, free to use. Estimated value <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> → <span class="font-bold text-emerald-700">₹0</span> here. Not for sale — visit source.</span><span v-else>use in unlimited projects. Resale of source not allowed. <span class="underline">Read license on source site — extracted</span></span></p>
           </div>
           <div v-if="activeTab==='Reviews'">
             <div class="flex items-center gap-4">
@@ -139,8 +139,8 @@
             </div>
           </div>
           <div v-if="activeTab==='FAQ'" class="space-y-3">
-            <details class="card p-4"><summary class="font-medium cursor-pointer">How do I download after purchase?</summary><p class="mt-2 text-sm text-zinc-600">Reference items are free — <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline">View Source</a> to get it from the original. Cart is demo (₹0).</p></details>
-            <details class="card p-4"><summary class="font-medium cursor-pointer">Can I use this for client work?</summary><p class="mt-2 text-sm text-zinc-600">Yes — {{ product.license }}. Check source: <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline">{{ product.referenceName }}</a></p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">How do I download after purchase?</summary><p class="mt-2 text-sm text-zinc-600">Reference items are free — <span class="font-medium" translate="no">{{ product.referenceName }}</span> (extracted) to get it from the original. Cart is demo (₹0).</p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">Can I use this for client work?</summary><p class="mt-2 text-sm text-zinc-600">Yes — {{ product.license }}. Check source: <span class="font-medium" translate="no">{{ product.referenceName }}</span></p></details>
             <details class="card p-4"><summary class="font-medium cursor-pointer">What about refunds?</summary><p class="mt-2 text-sm text-zinc-600">Reference catalog is free (₹0) — no payment. Estimated price <span class="line-through">₹{{ Number(product.originalPrice).toLocaleString('en-IN') }}</span> shown for reference only.</p></details>
             <details class="card p-4"><summary class="font-medium cursor-pointer">Which stack?</summary><p class="mt-2 text-sm text-zinc-600">{{ (product.stack||[]).join(', ') }} — Vue SFC & React TSX, Tailwind, shadcn variants.</p></details>
             <details class="card p-4"><summary class="font-medium cursor-pointer">Why ₹0?</summary><p class="mt-2 text-sm text-zinc-600">This is a reference showcase per your request — to demonstrate curation without selling. All rights belong to original authors. Prices are estimates for display, strikethrough to ₹0.</p></details>
@@ -150,8 +150,8 @@
       <div class="lg:col-span-4">
         <div class="card p-5">
           <div class="font-semibold">About {{ product.author }}</div>
-          <p class="mt-2 text-sm text-zinc-600">Creator of <a :href="product.referenceUrl" target="_blank" rel="noopener" class="underline">{{ product.referenceName }}</a>. Open-source, {{ product.license }}.</p>
-          <a :href="product.referenceUrl" target="_blank" rel="noopener" class="mt-4 w-full btn-ghost justify-center flex border-amber-200">View Source ↗</a>
+          <p class="mt-2 text-sm text-zinc-600">Creator of <span class="font-medium" translate="no">{{ product.referenceName }}</span>. Open-source, {{ product.license }}.</p>
+          <span class="mt-4 w-full btn-ghost justify-center flex border-amber-200 bg-amber-50 text-amber-900 rounded-full py-2.5 text-sm font-medium">Source: <span translate="no">{{ product.referenceName }}</span></span>
         </div>
         <div class="mt-4 card p-5">
           <div class="font-semibold text-sm">More from reference</div>
