@@ -13,141 +13,165 @@ export default function Home() {
   const recent = [...products].sort((a, b) => b.id - a.id).slice(0, 4)
 
   return (
-    <div>
-      {/* hero */}
-      <section className="relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 grid lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-green-500" />
-              Reference Catalog • 14 open-source → ₹0 — not for sale
-              <Badge variant="pill" className="hidden sm:inline-flex ml-2 text-[11px] tracking-widest">LIMITED</Badge>
+    <div className="bg-[#fcfcf9]">
+      {/* HERO — clean 2-col */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-14 lg:pb-16">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div className="lg:col-span-7 flex flex-col gap-5">
+            <div className="inline-flex flex-wrap items-center gap-2 self-start">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-xs font-medium text-amber-900">
+                <span className="w-2 h-2 rounded-full bg-amber-500" />
+                Reference Catalog — 14 drops • <span className="font-bold text-emerald-700">₹0</span>
+              </span>
+              <span className="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-zinc-900 text-white text-[11px] tracking-widest font-semibold">MIT • ISC • FREE</span>
             </div>
-            <h1 className="mt-4 font-bold text-[42px] sm:text-[52px] leading-[0.95] tracking-[-1.8px] sm:tracking-[-2.4px]" style={{ fontFamily: "var(--font-playfair)", textWrap: "balance" as any }}>
-              Digital products <br />
-              <span className="font-light italic">that ship</span> faster.
+
+            <h1 className="font-bold text-[36px] sm:text-[46px] lg:text-[52px] leading-[0.95] tracking-[-1.6px] lg:tracking-[-2.2px] text-zinc-900" style={{ fontFamily: "var(--font-playfair)", textWrap: "balance" as any }}>
+              Digital products<br />
+              <span className="font-light italic text-zinc-800">that ship</span> faster.
             </h1>
-            <p className="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">
-              N-GELO <span className="font-semibold text-zinc-900">React</span> — <span className="font-semibold">reference showcase</span> — 14 free & open-source drops from shadcn/ui, Radix, Tailwind Labs, Vercel. <span className="line-through">₹4,999</span> → <span className="font-bold text-emerald-700">₹0</span> • Not for sale.
+
+            <p className="text-[16px] lg:text-[17px] leading-7 text-zinc-600 max-w-[560px]" style={{ textWrap: "pretty" as any }}>
+              <span className="font-semibold text-zinc-900">N-GELO</span> is a reference showcase — 14 free & open-source drops from{" "}
+              <span translate="no">shadcn/ui, Radix, Tailwind Labs, Vercel</span> & more. Estimated <span className="line-through">₹4,999</span> →{" "}
+              <span className="font-bold text-emerald-700">₹0</span> • Not for sale. Extracted components are rendered here — source name on card, no outbound link.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/shop"><Button variant="pill" size="pill" className="px-8 py-6 text-base">Explore references →</Button></Link>
-              <a href="#how"><Button variant="outline" className="rounded-full px-6 py-6">How references work</Button></a>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <Link href="/shop">
+                <Button variant="pill" size="pill" className="px-7 py-3.5 text-[15px] h-auto">
+                  Explore references →
+                </Button>
+              </Link>
+              <a href="#how">
+                <Button variant="outline" className="rounded-full px-7 py-3.5 text-[15px] h-auto">
+                  How it works
+                </Button>
+              </a>
             </div>
 
-            <div className="mt-6 flex items-center gap-6 text-sm">
-              <div className="flex -space-x-2">
-                {[11, 12, 13, 14].map((i) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img key={i} src={`https://i.pravatar.cc/100?img=${i}`} alt="" className="w-8 h-8 rounded-full border-2 border-white" />
-                ))}
-              </div>
-              <div className="leading-tight">
-                <div className="font-semibold">Trusted by 4,500+ buyers</div>
-                <div className="text-zinc-500 text-xs">4.9/5 average rating • 12k+ sales</div>
-              </div>
-              <div className="hidden sm:flex items-center gap-2 ml-4 pl-6 border-l border-zinc-200">
-                <span className="text-xs tracking-widest font-semibold">PAY WITH</span>
-                <span className="px-2 py-1 rounded bg-white border text-xs font-bold">Stripe</span>
-                <span className="px-2 py-1 rounded bg-white border text-xs font-bold">PayPal</span>
-              </div>
-            </div>
-
-            <div className="mt-8 grid grid-cols-3 gap-4 max-w-[520px]">
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">REFERENCE DROPS</div><div className="font-bold text-xl">14</div><div className="text-xs text-green-600">curated • MIT etc.</div></Card>
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">PRICE NOW</div><div className="font-bold text-xl">₹0</div><div className="text-xs text-zinc-500">was ₹4,999</div></Card>
-              <Card className="p-4 rounded-[20px]"><div className="text-xs tracking-widest text-zinc-500">AVG RATING</div><div className="font-bold text-xl">4.9 ★</div><div className="text-xs text-zinc-500">open-source avg</div></Card>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-[28px] overflow-hidden bg-zinc-900 p-3 shadow-2xl">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/hero-reference.png" alt="Reference marketplace preview — shadcn components and code" width={900} height={675} className="rounded-[20px] w-full aspect-[4/3] object-cover" />
-              <div className="absolute bottom-6 left-6 right-6 bg-white rounded-2xl p-4 flex items-center gap-3 shadow-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://i.pravatar.cc/100?img=12" className="w-10 h-10 rounded-full" alt="" />
-                <div className="flex-1">
-                  <div className="text-sm font-semibold">Aarav viewed shadcn/ui</div>
-                  <div className="text-xs text-zinc-500">just now • reference • MIT</div>
+            <div className="flex flex-wrap gap-6 pt-4 border-t border-zinc-100 mt-2 text-sm">
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2">
+                  {[11, 12, 13].map((i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img key={i} src={`https://i.pravatar.cc/100?img=${i}`} alt="" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-white object-cover" />
+                  ))}
                 </div>
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <div className="leading-tight">
+                  <div className="font-semibold">4.9/5 average</div>
+                  <div className="text-xs text-zinc-500">12k+ sales • 4,500+ buyers</div>
+                </div>
               </div>
-              <div className="absolute top-6 right-6 bg-white rounded-full px-3 py-1.5 text-xs font-bold shadow">⚡ Instant download</div>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <div className="rounded-2xl overflow-hidden border border-zinc-200">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80&auto=format&fit=crop" className="w-full h-32 object-cover" alt="" />
+              <div className="hidden sm:flex items-center gap-3 pl-6 border-l border-zinc-100">
+                <span className="text-xs tracking-widest font-semibold text-zinc-500">PAYOUTS</span>
+                <span className="text-sm font-medium">14th & 21st</span>
+                <span className="text-xs text-zinc-400">• Stripe / PayPal (demo)</span>
               </div>
-              <Card className="p-3 flex flex-col justify-center rounded-2xl">
-                <div className="text-xs tracking-widest">FEATURED SELLER</div>
-                <div className="font-semibold">Studio Forma</div>
-                <div className="text-sm text-zinc-500">€47k earned this term</div>
-                <div className="mt-2 w-full h-1.5 bg-zinc-100 rounded-full overflow-hidden"><div className="h-full w-[72%] bg-zinc-900" /></div>
-              </Card>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* reference explainer — Vercel canvas-soft + amber, Taste Skill spacious */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="rounded-[16px] border border-amber-200 bg-amber-50 p-6 lg:p-7 grid lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-5">
-            <div className="text-xs tracking-[0.2em] text-amber-800 font-semibold">REFERENCE SHOWCASE</div>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight" style={{ textWrap: "balance" as any }}>14 free drops • <span className="line-through decoration-zinc-400">₹4,999</span> → <span className="text-emerald-700">₹0</span> — not for sale.</h2>
-            <p className="mt-2 text-sm text-amber-900 leading-relaxed">Every product is <span className="font-semibold">free & open-source</span> from its original author (MIT / ISC / Free). Estimated prices are shown for reference, strikethrough to <span className="font-bold text-emerald-700">₹0</span>. Nothing is charged. All rights remain with the originals — tap “View Source” to visit them.</p>
-            <div className="mt-3 flex gap-2">
-              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">MIT</span>
-              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">ISC</span>
-              <span className="px-2.5 py-1 rounded-full bg-white border border-amber-200 text-xs font-medium">Free</span>
+            <div className="relative rounded-[20px] overflow-hidden bg-white border border-zinc-100 shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/hero-reference.png" alt="Reference marketplace preview — extracted components shown here" width={900} height={675} className="w-full aspect-[4/3] object-cover" />
+              <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur rounded-2xl border border-zinc-100 p-3 flex items-center gap-3 shadow-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://i.pravatar.cc/100?img=12" alt="" width={36} height={36} className="w-9 h-9 rounded-full object-cover" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-semibold leading-none truncate">Aarav viewed shadcn/ui — extracted</div>
+                  <div className="text-xs text-zinc-500">Source: shadcn/ui (MIT) • just now</div>
+                </div>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" aria-hidden="true" />
+              </div>
             </div>
-          </div>
-          <div className="lg:col-span-7 grid sm:grid-cols-3 gap-3">
-            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
-              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">1</div>
-              <div className="mt-3 font-semibold text-sm leading-tight">View Source → original</div>
-              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Each card links to the official site or GitHub. We mirror nothing paywalled — just reference.</div>
-            </div>
-            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
-              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">2</div>
-              <div className="mt-3 font-semibold text-sm leading-tight">₹0 checkout</div>
-              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Add to cart for demo flow — total is always <span className="font-bold text-emerald-700">₹0</span>. No payment collected.</div>
-            </div>
-            <div className="rounded-[12px] bg-white border border-amber-200 p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
-              <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">3</div>
-              <div className="mt-3 font-semibold text-sm leading-tight">Attribution • MIT</div>
-              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">All credit to original authors. License on product page — MIT, ISC, or Free.</div>
+            <div className="mt-3 flex items-center justify-between text-xs text-zinc-500">
+              <span className="inline-flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-zinc-900" /> 14 reference drops</span>
+              <span className="tabular-nums">₹0 • demo • no payment</span>
+              <span className="hidden sm:inline">Source name on card — no link</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* categories */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <h2 className="font-bold text-2xl" style={{ fontFamily: "var(--font-playfair)" }}>Browse by craft</h2>
-          <Link href="/shop" className="text-sm font-medium underline">View all</Link>
+      {/* TRUST BAR */}
+      <section className="border-y border-zinc-100 bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center justify-between">
+          <div className="flex flex-wrap gap-6 text-sm">
+            <span className="inline-flex items-center gap-2">
+              <span className="w-7 h-7 rounded-full bg-zinc-900 text-white grid place-items-center text-xs font-bold">14</span>
+              <span className="font-medium">Reference drops</span> <span className="text-zinc-400">curated</span>
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="w-7 h-7 rounded-full bg-emerald-600 text-white grid place-items-center text-xs font-bold">₹</span>
+              <span className="font-medium text-emerald-700">₹0 demo</span> <span className="text-zinc-400 line-through">₹4,999</span>
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="w-7 h-7 rounded-full bg-amber-500 text-white grid place-items-center text-xs">★</span>
+              <span className="font-medium">4.9 avg rating</span> <span className="text-zinc-400">open-source</span>
+            </span>
+          </div>
+          <div className="text-xs tracking-widest font-semibold text-zinc-500">EXTRACTED • SHOWN HERE • NO OUTBOUND</div>
         </div>
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
+      </section>
+
+      {/* REFERENCE EXPLAINER */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="rounded-[16px] border border-amber-200 bg-amber-50/70 p-6 lg:p-7">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+            <div className="lg:w-[36%]">
+              <div className="text-xs tracking-[0.18em] font-semibold text-amber-800">REFERENCE SHOWCASE</div>
+              <h2 className="mt-2 text-xl font-bold leading-tight" style={{ textWrap: "balance" as any }}>
+                14 free drops — <span className="line-through decoration-zinc-400">₹4,999</span> → <span className="text-emerald-700">₹0</span>
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-amber-900">
+                Every product is <span className="font-semibold">free & open-source</span> (MIT / ISC / Free). Estimated prices strikethrough to <span className="font-bold text-emerald-700">₹0</span>. Nothing is charged. Extracted UI is rendered directly in our pages — source name on card only.
+              </p>
+            </div>
+            <div className="flex-1 grid sm:grid-cols-3 gap-3 w-full">
+              <div className="rounded-[12px] bg-white border border-amber-200 p-4">
+                <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">1</div>
+                <div className="mt-3 font-semibold text-sm">Source name only</div>
+                <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Card shows <span translate="no">shadcn/ui (MIT)</span> — extracted, no link.</div>
+              </div>
+              <div className="rounded-[12px] bg-white border border-amber-200 p-4">
+                <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">2</div>
+                <div className="mt-3 font-semibold text-sm">Rendered here</div>
+                <div className="text-xs text-zinc-600 mt-1 leading-relaxed">Components, code & animation are embedded in our pages — not outbound.</div>
+              </div>
+              <div className="rounded-[12px] bg-white border border-amber-200 p-4">
+                <div className="w-8 h-8 rounded-lg bg-zinc-900 text-white grid place-items-center text-xs font-bold">3</div>
+                <div className="mt-3 font-semibold text-sm">Attribution • MIT</div>
+                <div className="text-xs text-zinc-600 mt-1 leading-relaxed">License on product page. All rights with original authors.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="font-bold text-xl" style={{ fontFamily: "var(--font-playfair)" }}>Browse by craft</h2>
+          <Link href="/shop" className="text-sm font-medium underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-900">View all →</Link>
+        </div>
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
           {categories.map((c) => (
-            <Link key={c.id} href={`/shop?cat=${c.id}`} className="group">
-              <Card className="p-4 hover:shadow-lg transition flex flex-col gap-2 rounded-[20px]">
-                <div className="w-10 h-10 rounded-xl bg-zinc-900 text-white grid place-items-center text-sm">⧉</div>
-                <div className="font-semibold text-sm">{c.label}</div>
-                <div className="text-xs text-zinc-500">{products.filter((p) => c.id === "all" || p.category === c.id).length} products</div>
-              </Card>
+            <Link key={c.id} href={`/shop?cat=${c.id}`} className="group rounded-[16px] bg-white border border-zinc-200 p-4 hover:border-zinc-300 hover:shadow-sm transition flex flex-col gap-3">
+              <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center text-sm">⧉</div>
+              <div>
+                <div className="font-semibold text-sm leading-none group-hover:underline underline-offset-4">{c.label}</div>
+                <div className="text-xs text-zinc-500 mt-1">{products.filter((p) => c.id === "all" || p.category === c.id).length} drops • ₹0</div>
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* featured */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="font-bold text-2xl leading-none" style={{ fontFamily: "var(--font-playfair)" }}>Featured drops <span className="text-zinc-400 font-normal text-base">— shadcn picks</span></h2>
+      {/* FEATURED */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="font-bold text-xl" style={{ fontFamily: "var(--font-playfair)" }}>Featured drops <span className="text-zinc-400 font-normal text-sm">— staff picks • ₹0</span></h2>
         </div>
         <div className="mt-4 grid md:grid-cols-3 gap-5">
           {featured.map((p) => (
@@ -156,86 +180,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* how */}
-      <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        <div className="rounded-[28px] bg-zinc-900 text-white p-6 sm:p-10 grid lg:grid-cols-3 gap-8">
-          <div>
-            <div className="text-xs tracking-[0.2em] text-zinc-400">HOW IT WORKS • REACT</div>
-            <h3 className="mt-2 text-3xl font-bold leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>Sellers upload.<br />Buyers build faster.</h3>
-            <p className="mt-3 text-zinc-400 text-sm leading-relaxed">Same BCA spec: Admins review reports, answer FAQs, payouts 14th & 21st. Now with Next.js server actions + shadcn.</p>
-            <Link href="/shop" className="mt-6 inline-flex"><Button variant="outline" className="bg-white text-zinc-900 hover:bg-zinc-100 rounded-full">Start selling today</Button></Link>
-          </div>
-          <div className="lg:col-span-2 grid sm:grid-cols-3 gap-4">
-            <Card className="p-5 text-zinc-900">
-              <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">1</div>
-              <div className="mt-3 font-semibold">Buyer discovers</div>
-              <div className="text-sm text-zinc-600 mt-1">Search, filter by category / price / rating. No registration to browse.</div>
-            </Card>
-            <Card className="p-5 text-zinc-900">
-              <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">2</div>
-              <div className="mt-3 font-semibold">Instant checkout</div>
-              <div className="text-sm text-zinc-600 mt-1">Stripe / PayPal, auto-generated account via email, instant download.</div>
-            </Card>
-            <Card className="p-5 text-zinc-900">
-              <div className="w-9 h-9 rounded-xl bg-zinc-900 text-white grid place-items-center">3</div>
-              <div className="mt-3 font-semibold">Seller payout</div>
-              <div className="text-sm text-zinc-600 mt-1">Dashboard analytics, edit/delete, track traffic & sales.</div>
-            </Card>
+      {/* HOW IT WORKS — light */}
+      <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="rounded-[20px] border border-zinc-200 bg-white p-6 lg:p-8">
+          <div className="grid lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4">
+              <div className="text-xs tracking-[0.18em] font-semibold text-zinc-500">HOW IT WORKS • REACT</div>
+              <h3 className="mt-2 text-2xl font-bold leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>Sellers upload.<br />Buyers build faster.</h3>
+              <p className="mt-3 text-sm leading-relaxed text-zinc-600">Same BCA spec: Admins review reports, answer FAQs, payouts 14th & 21st. Now with Next.js + shadcn.</p>
+              <Link href="/shop" className="mt-5 inline-flex">
+                <Button variant="pill" className="rounded-full px-6">Start exploring</Button>
+              </Link>
+            </div>
+            <div className="lg:col-span-8 grid sm:grid-cols-3 gap-4">
+              <Card className="p-5 bg-zinc-50 border-zinc-100 rounded-2xl shadow-none">
+                <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200 grid place-items-center text-sm font-bold">1</div>
+                <div className="mt-3 font-semibold text-sm">Discover</div>
+                <div className="text-sm text-zinc-600 mt-1 leading-relaxed">Filter by category • price (₹0) • rating. No account to browse.</div>
+              </Card>
+              <Card className="p-5 bg-zinc-50 border-zinc-100 rounded-2xl shadow-none">
+                <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200 grid place-items-center text-sm font-bold">2</div>
+                <div className="mt-3 font-semibold text-sm">Add demo • ₹0</div>
+                <div className="text-sm text-zinc-600 mt-1 leading-relaxed">Cart & checkout are demo — total always <span className="font-bold text-emerald-700">₹0</span>.</div>
+              </Card>
+              <Card className="p-5 bg-zinc-50 border-zinc-100 rounded-2xl shadow-none">
+                <div className="w-9 h-9 rounded-xl bg-white border border-zinc-200 grid place-items-center text-sm font-bold">3</div>
+                <div className="mt-3 font-semibold text-sm">Build faster</div>
+                <div className="text-sm text-zinc-600 mt-1 leading-relaxed">Copy extracted code, preview in page, track sales in dashboard.</div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* recent */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <h2 className="font-bold text-2xl" style={{ fontFamily: "var(--font-playfair)" }}>Fresh in the lab</h2>
+      {/* FRESH */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="font-bold text-xl" style={{ fontFamily: "var(--font-playfair)" }}>Fresh in the lab</h2>
+          <Link href="/shop?sort=newest" className="text-sm font-medium underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-900">Newest first</Link>
+        </div>
         <div className="mt-4 grid md:grid-cols-4 gap-5">
           {recent.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>
-        <Card className="mt-10 overflow-hidden grid md:grid-cols-2 p-0 rounded-[24px]">
-          <div className="bg-zinc-900 p-6 sm:p-8 flex flex-col justify-center text-white min-h-[320px]">
-            <Badge variant="pill" className="self-start bg-white text-zinc-900">COMPONENT LAB — CODE</Badge>
-            <h3 className="mt-3 text-3xl font-bold" style={{ fontFamily: "var(--font-playfair)" }}>From Figma to code.</h3>
-            <p className="mt-2 text-zinc-400">Copy-paste production code — Tailwind, shadcn, Framer Motion. Dark mode, a11y, typed.</p>
-            <pre className="mt-4 rounded-xl bg-zinc-800 border border-zinc-700 p-4 text-xs font-mono leading-relaxed overflow-auto text-emerald-300">{`<Button variant="pill" size="lg">
-  Ship faster →
-</Button>
 
-<Loader variant="skeleton" />`}</pre>
-            <div className="mt-4 flex gap-2">
-              <Link href="/shop?cat=components"><Button variant="pill" size="pill" className="bg-white text-zinc-900 hover:bg-zinc-100">Browse Components</Button></Link>
-              <span className="text-xs text-zinc-500 self-center">Vue + React • shadcn</span>
+        <Card className="mt-8 grid lg:grid-cols-12 gap-6 items-center p-6 lg:p-8 rounded-[20px]">
+          <div className="lg:col-span-7">
+            <Badge variant="pill" className="bg-zinc-900 text-white">COMPONENT LAB — CODE</Badge>
+            <h3 className="mt-3 text-2xl font-bold" style={{ fontFamily: "var(--font-playfair)" }}>From Figma to code.</h3>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-600 max-w-[560px]">Copy-paste production code — Tailwind, shadcn, Framer Motion. Dark mode, a11y, typed. Extracted & shown here.</p>
+            <pre className="mt-4 rounded-xl bg-zinc-900 text-zinc-100 p-4 text-xs font-mono leading-relaxed overflow-auto">{`<Button variant=\"pill\" size=\"lg\">\n  Ship faster →\n</Button>`}</pre>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link href="/shop?cat=components">
+                <Button variant="pill" className="bg-zinc-900 text-white">Explore components</Button>
+              </Link>
+              <span className="self-center text-xs text-zinc-500">Vue SFC • React TSX • Tailwind</span>
             </div>
           </div>
-          <CardContent className="p-8 flex flex-col justify-center bg-white">
-            <div className="text-xs tracking-widest text-zinc-500 font-semibold">WHAT YOU GET</div>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-700">
-              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Instant download — Figma, TSX, Vue SFC, tokens</li>
-              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Live preview URL + snippet copy</li>
-              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Stack: Next.js / Vue, Tailwind, Framer Motion</li>
-              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Seller dashboard, admin reports & payouts 14th/21st</li>
-            </ul>
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
-                <div className="font-bold">120</div><div className="text-xs text-zinc-500">Buttons</div>
-              </div>
-              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
-                <div className="font-bold">60</div><div className="text-xs text-zinc-500">Loaders</div>
-              </div>
-              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
-                <div className="font-bold">45</div><div className="text-xs text-zinc-500">Motions</div>
-              </div>
+          <div className="lg:col-span-5 grid grid-cols-3 gap-3">
+            <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4 text-center">
+              <div className="font-bold text-lg">120</div><div className="text-xs text-zinc-500">Buttons</div>
             </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* shadcn proof */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <Card className="p-6 bg-zinc-50 border-dashed">
-          <div className="text-xs tracking-widest font-semibold">A) SHADCN-VUE UPGRADE — DONE</div>
-          <div className="text-sm text-zinc-600 mt-1">Vue now uses <code className="px-1 py-0.5 bg-white border rounded">Button</code>, <code className="px-1 py-0.5 bg-white border rounded">Card</code>, <code className="px-1 py-0.5 bg-white border rounded">Badge</code>, <code className="px-1 py-0.5 bg-white border rounded">Input</code> from shadcn — same look, now copy-paste ready. This React app (B) is the full Next.js + shadcn clone at <code className="px-1 py-0.5 bg-white border rounded">/react</code>.</div>
+            <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4 text-center">
+              <div className="font-bold text-lg">60</div><div className="text-xs text-zinc-500">Loaders</div>
+            </div>
+            <div className="rounded-xl bg-zinc-50 border border-zinc-100 p-4 text-center">
+              <div className="font-bold text-lg">45</div><div className="text-xs text-zinc-500">Motions</div>
+            </div>
+            <div className="col-span-3 rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs leading-relaxed text-amber-800">
+              <span className="font-semibold">Reference only:</span> All are free & open-source (MIT/ISC/Free). Source name on card — no outbound link.
+            </div>
+          </div>
         </Card>
       </section>
     </div>
