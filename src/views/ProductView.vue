@@ -77,11 +77,25 @@
           <div v-if="activeTab==='Overview'" class="prose prose-zinc max-w-none text-sm leading-relaxed">
             <h3 class="font-semibold">What’s inside</h3>
             <ul class="list-disc pl-5 space-y-1 text-zinc-600">
-              <li>Figma file with auto-layout, variables, dark mode</li>
-              <li>Design tokens JSON + Style Dictionary config</li>
+              <li v-for="f in (product.files || ['Figma','Tokens','Icons'])" :key="f">{{ f }}</li>
               <li>Documentation & changelog</li>
-              <li v-if="product.physical">Ships with dust bag, extra laces, and QR for digital twin</li>
+              <li>Stack: {{ (product.stack || []).join(', ') }}</li>
             </ul>
+            <div v-if="product.snippet" class="mt-4">
+              <h4 class="font-semibold text-sm">Code snippet — copy-paste</h4>
+              <pre class="mt-2 rounded-xl bg-zinc-900 text-zinc-100 p-4 text-xs font-mono overflow-auto">{{ product.snippet }}</pre>
+              <div class="mt-2 flex gap-2">
+                <button @click="navigator.clipboard?.writeText(product.snippet)" class="text-xs px-3 py-1.5 rounded-full bg-zinc-900 text-white">Copy snippet</button>
+                <a v-if="product.previewUrl" :href="product.previewUrl" target="_blank" rel="noopener" class="text-xs px-3 py-1.5 rounded-full border">Live preview ↗</a>
+              </div>
+            </div>
+            <div v-if="product.previewUrl" class="mt-4 flex items-center gap-2 text-xs">
+              <span class="font-semibold">Preview:</span>
+              <a :href="product.previewUrl" target="_blank" rel="noopener" class="underline text-zinc-600">{{ product.previewUrl }}</a>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span v-for="s in product.stack" :key="s" class="text-xs px-2.5 py-1 rounded-full bg-zinc-900 text-white">{{ s }}</span>
+            </div>
             <h3 class="mt-6 font-semibold">License</h3>
             <p class="text-zinc-600">{{ product.license }} — use in unlimited projects. Resale of source not allowed. <a href="#" class="underline">Read full license</a></p>
           </div>
@@ -98,9 +112,10 @@
             </div>
           </div>
           <div v-if="activeTab==='FAQ'" class="space-y-3">
-            <details class="card p-4"><summary class="font-medium cursor-pointer">How do I download after purchase?</summary><p class="mt-2 text-sm text-zinc-600">Instant download from your dashboard. Physical items show tracking.</p></details>
-            <details class="card p-4"><summary class="font-medium cursor-pointer">Can I use this for client work?</summary><p class="mt-2 text-sm text-zinc-600">Yes — commercial license included. Check license type on each product.</p></details>
-            <details class="card p-4"><summary class="font-medium cursor-pointer">What about refunds?</summary><p class="mt-2 text-sm text-zinc-600">Digital: 14-day if not downloaded. Physical: 30-day returns.</p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">How do I download after purchase?</summary><p class="mt-2 text-sm text-zinc-600">Instant download from dashboard — files: {{ (product.files||[]).join(', ') }}. No shipping.</p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">Can I use this for client work?</summary><p class="mt-2 text-sm text-zinc-600">Yes — {{ product.license }} license for client projects. Resale of source not allowed.</p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">What about refunds?</summary><p class="mt-2 text-sm text-zinc-600">Digital: 14-day if not downloaded. Instant access — no physical returns.</p></details>
+            <details class="card p-4"><summary class="font-medium cursor-pointer">Which stack?</summary><p class="mt-2 text-sm text-zinc-600">{{ (product.stack||[]).join(', ') }} — Vue SFC & React TSX, Tailwind, shadcn variants.</p></details>
           </div>
         </div>
       </div>

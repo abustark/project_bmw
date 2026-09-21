@@ -14,8 +14,6 @@ export default function ShopPage() {
   const [priceMax, setPriceMax] = useState(100)
   const [minRating, setMinRating] = useState(0)
   const [sortBy, setSortBy] = useState("popular")
-  const [onlyPhysical, setOnlyPhysical] = useState(false)
-  const [onlyDigital, setOnlyDigital] = useState(false)
   const [showFilters, setShowFilters] = useState(false)
 
   const filtered = useMemo(() => {
@@ -27,8 +25,6 @@ export default function ShopPage() {
     }
     list = list.filter((p) => p.price <= priceMax)
     if (minRating) list = list.filter((p) => p.rating >= minRating)
-    if (onlyPhysical) list = list.filter((p) => p.physical)
-    if (onlyDigital) list = list.filter((p) => !p.physical)
     switch (sortBy) {
       case "price-asc": list.sort((a, b) => a.price - b.price); break
       case "price-desc": list.sort((a, b) => b.price - a.price); break
@@ -37,10 +33,10 @@ export default function ShopPage() {
       default: list.sort((a, b) => b.sales - a.sales)
     }
     return list
-  }, [category, search, priceMax, minRating, onlyPhysical, onlyDigital, sortBy])
+  }, [category, search, priceMax, minRating, sortBy])
 
   function reset() {
-    setCategory("all"); setSearch(""); setPriceMax(100); setMinRating(0); setOnlyPhysical(false); setOnlyDigital(false); setSortBy("popular")
+    setCategory("all"); setSearch(""); setPriceMax(100); setMinRating(0); setSortBy("popular")
   }
 
   return (
@@ -96,8 +92,8 @@ export default function ShopPage() {
           </Card>
 
           <Card className="p-5 rounded-[20px]">
-            <label className="flex items-center gap-2 text-sm font-medium"><input type="checkbox" checked={onlyPhysical} onChange={(e) => setOnlyPhysical(e.target.checked)} className="accent-zinc-900" /> Only physical drops</label>
-            <label className="flex items-center gap-2 text-sm font-medium mt-2"><input type="checkbox" checked={onlyDigital} onChange={(e) => setOnlyDigital(e.target.checked)} className="accent-zinc-900" /> Only digital</label>
+            <div className="font-semibold text-sm">Delivery</div>
+            <div className="text-xs text-zinc-500 mt-2">Instant download — code, Figma, tokens.<br />All dev drops ship digitally. No physical fulfillment.</div>
           </Card>
 
           <Button variant="outline" className="w-full rounded-full" onClick={reset}>Reset filters</Button>

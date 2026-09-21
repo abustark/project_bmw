@@ -28,7 +28,7 @@ export default function Home() {
               <span className="font-light italic">that ship</span> faster.
             </h1>
             <p className="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">
-              N-GELO <span className="font-semibold text-zinc-900">React</span> — same spec, shadcn speed. Sell courses, UI kits, templates, icons & 3D. Built for the BCA project, now Next.js 16.
+              N-GELO <span className="font-semibold text-zinc-900">React</span> — dev-only marketplace. Sell templates, landing pages, components, loaders, buttons, animations, transitions & icons — instant download, copy-paste code.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -98,7 +98,7 @@ export default function Home() {
           <h2 className="font-bold text-2xl" style={{ fontFamily: "var(--font-playfair)" }}>Browse by craft</h2>
           <Link href="/shop" className="text-sm font-medium underline">View all</Link>
         </div>
-        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
           {categories.map((c) => (
             <Link key={c.id} href={`/shop?cat=${c.id}`} className="group">
               <Card className="p-4 hover:shadow-lg transition flex flex-col gap-2 rounded-[20px]">
@@ -161,15 +161,38 @@ export default function Home() {
           ))}
         </div>
         <Card className="mt-10 overflow-hidden grid md:grid-cols-2 p-0 rounded-[24px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop" className="w-full h-full object-cover min-h-[320px]" alt="" />
-          <CardContent className="p-8 flex flex-col justify-center">
-            <Badge variant="pill" className="self-start">FOOTWEAR LAB — PHYSICAL</Badge>
-            <h3 className="mt-3 text-3xl font-bold" style={{ fontFamily: "var(--font-playfair)" }}>From Figma to foam.</h3>
-            <p className="mt-2 text-zinc-600">We keep the original shoe assets alive — limited physical drops made in the same spirit as our digital ones.</p>
+          <div className="bg-zinc-900 p-6 sm:p-8 flex flex-col justify-center text-white min-h-[320px]">
+            <Badge variant="pill" className="self-start bg-white text-zinc-900">COMPONENT LAB — CODE</Badge>
+            <h3 className="mt-3 text-3xl font-bold" style={{ fontFamily: "var(--font-playfair)" }}>From Figma to code.</h3>
+            <p className="mt-2 text-zinc-400">Copy-paste production code — Tailwind, shadcn, Framer Motion. Dark mode, a11y, typed.</p>
+            <pre className="mt-4 rounded-xl bg-zinc-800 border border-zinc-700 p-4 text-xs font-mono leading-relaxed overflow-auto text-emerald-300">{`<Button variant="pill" size="lg">
+  Ship faster →
+</Button>
+
+<Loader variant="skeleton" />`}</pre>
             <div className="mt-4 flex gap-2">
-              <Link href="/shop?cat=footwear"><Button variant="pill" size="pill">Shop Footwear</Button></Link>
-              <span className="text-xs text-zinc-500 self-center">Edition of 300 • Ships in 3–5 days</span>
+              <Link href="/shop?cat=components"><Button variant="pill" size="pill" className="bg-white text-zinc-900 hover:bg-zinc-100">Browse Components</Button></Link>
+              <span className="text-xs text-zinc-500 self-center">Vue + React • shadcn</span>
+            </div>
+          </div>
+          <CardContent className="p-8 flex flex-col justify-center bg-white">
+            <div className="text-xs tracking-widest text-zinc-500 font-semibold">WHAT YOU GET</div>
+            <ul className="mt-3 space-y-2 text-sm text-zinc-700">
+              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Instant download — Figma, TSX, Vue SFC, tokens</li>
+              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Live preview URL + snippet copy</li>
+              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Stack: Next.js / Vue, Tailwind, Framer Motion</li>
+              <li className="flex gap-2"><span className="text-zinc-900">↗</span> Seller dashboard, admin reports & payouts 14th/21st</li>
+            </ul>
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+                <div className="font-bold">120</div><div className="text-xs text-zinc-500">Buttons</div>
+              </div>
+              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+                <div className="font-bold">60</div><div className="text-xs text-zinc-500">Loaders</div>
+              </div>
+              <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+                <div className="font-bold">45</div><div className="text-xs text-zinc-500">Motions</div>
+              </div>
             </div>
           </CardContent>
         </Card>

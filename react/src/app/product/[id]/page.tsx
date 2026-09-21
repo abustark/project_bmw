@@ -112,13 +112,31 @@ export default function ProductPage() {
               <div className="prose prose-zinc max-w-none text-sm leading-relaxed">
                 <h3 className="font-semibold">What’s inside</h3>
                 <ul className="list-disc pl-5 space-y-1 text-zinc-600">
-                  <li>Figma file with auto-layout, variables, dark mode</li>
-                  <li>Design tokens JSON + Style Dictionary</li>
+                  {(product.files || ["Figma","Tokens","Icons"]).map((f:string)=> <li key={f}>{f}</li>)}
                   <li>Documentation & changelog</li>
-                  {product.physical && <li>Ships with dust bag, extra laces, QR for digital twin</li>}
+                  <li>Stack: {(product.stack || []).join(", ")}</li>
                 </ul>
+                {product.snippet && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold text-sm">Code snippet — copy-paste</h4>
+                    <pre className="mt-2 rounded-xl bg-zinc-900 text-zinc-100 p-4 text-xs font-mono overflow-auto">{product.snippet}</pre>
+                    <div className="mt-2 flex gap-2">
+                      <Button variant="default" className="rounded-full text-xs h-8" onClick={()=> navigator.clipboard?.writeText(product.snippet!)}>Copy snippet</Button>
+                      {product.previewUrl && <a href={product.previewUrl} target="_blank" rel="noopener" className="text-xs px-3 py-1.5 rounded-full border inline-flex items-center">Live preview ↗</a>}
+                    </div>
+                  </div>
+                )}
+                {product.previewUrl && (
+                  <div className="mt-4 flex items-center gap-2 text-xs">
+                    <span className="font-semibold">Preview:</span>
+                    <a href={product.previewUrl} target="_blank" rel="noopener" className="underline text-zinc-600">{product.previewUrl}</a>
+                  </div>
+                )}
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {(product.stack||[]).map((s:string)=> <Badge key={s} className="bg-zinc-900 text-white">{s}</Badge>)}
+                </div>
                 <h3 className="mt-6 font-semibold">License</h3>
-                <p className="text-zinc-600">{product.license} — unlimited projects. Resale not allowed.</p>
+                <p className="text-zinc-600">{product.license} — use in unlimited projects. Resale of source not allowed.</p>
               </div>
             )}
             {tab==="Reviews" && (
@@ -144,8 +162,10 @@ export default function ProductPage() {
             )}
             {tab==="FAQ" && (
               <div className="space-y-3">
-                <Card className="p-4 rounded-xl"><div className="font-medium">How do I download after purchase?</div><p className="mt-2 text-sm text-zinc-600">Instant download from dashboard.</p></Card>
-                <Card className="p-4 rounded-xl"><div className="font-medium">Can I use for client work?</div><p className="mt-2 text-sm text-zinc-600">Yes — commercial license included.</p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">How do I download after purchase?</div><p className="mt-2 text-sm text-zinc-600">Instant download from dashboard — files: {(product.files||[]).join(", ")}. No shipping.</p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">Can I use for client work?</div><p className="mt-2 text-sm text-zinc-600">Yes — {product.license} license for client projects. Resale not allowed.</p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">What about refunds?</div><p className="mt-2 text-sm text-zinc-600">Digital: 14-day if not downloaded. Instant access.</p></Card>
+                <Card className="p-4 rounded-xl"><div className="font-medium">Which stack?</div><p className="mt-2 text-sm text-zinc-600">{(product.stack||[]).join(", ")} — Vue SFC & React TSX, Tailwind, shadcn.</p></Card>
               </div>
             )}
           </div>

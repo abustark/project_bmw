@@ -50,8 +50,8 @@
         </div>
 
         <div class="card p-5">
-          <label class="flex items-center gap-2 text-sm font-medium"><input type="checkbox" v-model="onlyPhysical" class="accent-zinc-900" /> Only physical drops</label>
-          <label class="flex items-center gap-2 text-sm font-medium mt-2"><input type="checkbox" v-model="onlyDigital" class="accent-zinc-900" /> Only digital</label>
+          <div class="font-semibold text-sm">Delivery</div>
+          <div class="text-xs text-zinc-500 mt-2">Instant download — code, Figma, tokens.<br/>All dev drops ship digitally. No physical fulfillment.</div>
         </div>
 
         <button @click="resetFilters" class="w-full btn-ghost">Reset filters</button>
@@ -99,8 +99,6 @@ const search = ref(route.query.q || '')
 const priceMax = ref(100)
 const minRating = ref(0)
 const sortBy = ref('popular')
-const onlyPhysical = ref(false)
-const onlyDigital = ref(false)
 const showFilters = ref(false)
 
 watch(category, v => router.replace({ query: { ...route.query, cat: v==='all'? undefined : v }}))
@@ -121,8 +119,6 @@ const filtered = computed(()=>{
   }
   list = list.filter(p=> p.price <= priceMax.value)
   if(minRating.value) list = list.filter(p=> p.rating >= minRating.value)
-  if(onlyPhysical.value) list = list.filter(p=> p.physical)
-  if(onlyDigital.value) list = list.filter(p=> !p.physical)
   switch(sortBy.value){
     case 'price-asc': list.sort((a,b)=>a.price-b.price); break
     case 'price-desc': list.sort((a,b)=>b.price-a.price); break
@@ -134,6 +130,6 @@ const filtered = computed(()=>{
 })
 
 function resetFilters(){
-  category.value='all'; search.value=''; priceMax.value=100; minRating.value=0; onlyPhysical.value=false; onlyDigital.value=false; sortBy.value='popular'
+  category.value='all'; search.value=''; priceMax.value=100; minRating.value=0; sortBy.value='popular'
 }
 </script>

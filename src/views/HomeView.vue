@@ -13,7 +13,7 @@
             Digital products<br/>
             <span class="font-light italic">that ship</span> faster.
           </h1>
-          <p class="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">N-GELO is a curated marketplace for designers & developers. Sell courses, UI kits, templates, icons & 3D — or cop a physical lab drop. Built for the BCA major project, now production-grade.</p>
+          <p class="mt-4 text-[17px] leading-relaxed text-zinc-600 max-w-[560px]">N-GELO is a curated marketplace for developers. Sell templates, landing pages, components, loaders, buttons, animations, transitions & icons — instant download, copy-paste code. Built for the BCA project, now production-grade.</p>
 
           <div class="mt-6 flex flex-wrap gap-3">
             <router-link to="/shop" class="btn-primary px-8 py-3.5 text-base">Shop the drop →</router-link>
@@ -88,7 +88,7 @@
         <h2 class="font-display text-2xl font-bold">Browse by craft</h2>
         <router-link to="/shop" class="text-sm font-medium underline">View all</router-link>
       </div>
-      <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-3">
         <router-link v-for="c in categories" :key="c.id" :to="`/shop?cat=${c.id}`" class="group card p-4 hover:shadow-lift transition flex flex-col gap-2">
           <div class="w-10 h-10 rounded-xl bg-zinc-900 text-white grid place-items-center text-sm">⧉</div>
           <div class="font-semibold text-sm">{{ c.label }}</div>
@@ -147,14 +147,38 @@
         <ProductCard v-for="p in recent" :key="p.id" :product="p" @add="cart.add($event)" />
       </div>
       <div class="mt-10 rounded-[24px] overflow-hidden border border-zinc-200 bg-white grid md:grid-cols-2">
-        <img :src="`${base}static/headershoe-bg.jpg`" class="w-full h-full object-cover min-h-[320px]" @error="e=> e.target.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop'" />
-        <div class="p-8 flex flex-col justify-center">
-          <div class="inline-flex self-start px-3 py-1 rounded-full bg-zinc-900 text-white text-xs tracking-widest font-bold">FOOTWEAR LAB — PHYSICAL</div>
-          <h3 class="mt-3 font-display text-3xl font-bold">From Figma to foam.</h3>
-          <p class="mt-2 text-zinc-600">We keep the original shoe assets alive — limited physical drops made in the same spirit as our digital ones: fast, crafted, limited.</p>
+        <div class="bg-zinc-900 p-6 sm:p-8 flex flex-col justify-center text-white min-h-[320px]">
+          <div class="inline-flex self-start px-3 py-1 rounded-full bg-white text-zinc-900 text-xs tracking-widest font-bold">COMPONENT LAB — CODE</div>
+          <h3 class="mt-3 font-display text-3xl font-bold">From Figma to code.</h3>
+          <p class="mt-2 text-zinc-400">Copy-paste production code — Tailwind, shadcn, Framer Motion. Dark mode, a11y, typed.</p>
+          <pre class="mt-4 rounded-xl bg-zinc-800 border border-zinc-700 p-4 text-xs font-mono leading-relaxed overflow-auto text-emerald-300">&lt;Button variant="pill" size="lg"&gt;
+  Ship faster →
+&lt;/Button&gt;
+
+&lt;Loader variant="skeleton" /&gt;</pre>
           <div class="mt-4 flex gap-2">
-            <router-link to="/shop?cat=footwear" class="btn-primary">Shop Footwear</router-link>
-            <span class="text-xs text-zinc-500 self-center">Edition of 300 • Ships in 3–5 days</span>
+            <router-link to="/shop?cat=components" class="btn-primary !bg-white !text-zinc-900">Browse Components</router-link>
+            <span class="text-xs text-zinc-500 self-center">Vue + React • shadcn</span>
+          </div>
+        </div>
+        <div class="p-8 flex flex-col justify-center bg-white">
+          <div class="text-xs tracking-widest text-zinc-500 font-semibold">WHAT YOU GET</div>
+          <ul class="mt-3 space-y-2 text-sm text-zinc-700">
+            <li class="flex gap-2"><span class="text-zinc-900">↗</span> Instant download — Figma, TSX, Vue SFC, tokens</li>
+            <li class="flex gap-2"><span class="text-zinc-900">↗</span> Live preview URL + snippet copy</li>
+            <li class="flex gap-2"><span class="text-zinc-900">↗</span> Stack: Next.js / Vue, Tailwind, Framer Motion</li>
+            <li class="flex gap-2"><span class="text-zinc-900">↗</span> Seller dashboard, admin reports & payouts 14th/21st</li>
+          </ul>
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+              <div class="font-bold">120</div><div class="text-xs text-zinc-500">Buttons</div>
+            </div>
+            <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+              <div class="font-bold">60</div><div class="text-xs text-zinc-500">Loaders</div>
+            </div>
+            <div class="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-center">
+              <div class="font-bold">45</div><div class="text-xs text-zinc-500">Motions</div>
+            </div>
           </div>
         </div>
       </div>
