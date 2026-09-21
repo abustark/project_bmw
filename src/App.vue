@@ -9,8 +9,8 @@
     <CartDrawer />
     <!-- toast -->
     <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
-      <div v-if="toast" class="pointer-events-auto bg-zinc-900 text-white px-5 py-3 rounded-full shadow-xl text-sm font-medium animate-slide-up flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-green-400"></span>{{ toast }}
+      <div v-if="toast" class="pointer-events-auto bg-[hsl(var(--surface-2))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink))] px-5 py-3 rounded-full shadow-xl text-sm font-medium animate-slide-up flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#5e6ad2]"></span>{{ toast }}
       </div>
     </div>
   </div>

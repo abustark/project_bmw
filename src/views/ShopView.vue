@@ -1,83 +1,79 @@
 <template>
-  <div class="bg-[#fcfcf9] min-h-screen">
+  <div class="bg-[hsl(var(--canvas))] min-h-screen">
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-      <!-- header — clear, not crowded -->
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
         <div>
-          <h1 class="font-display text-2xl lg:text-3xl font-bold tracking-tight">Shop <span class="text-sm font-normal text-amber-700 ml-2">— reference • ₹0</span></h1>
-          <p class="text-sm text-zinc-500 mt-1">{{ filtered.length }} drops • {{ activeCategoryLabel }} • {{ sortLabel }}</p>
-          <p class="text-xs text-amber-700 mt-1">All are extracted components • Source name on card • no outbound link • ₹0 demo</p>
+          <h1 class="font-display text-2xl lg:text-3xl font-semibold tracking-tight text-[hsl(var(--ink))]">Shop <span class="text-sm font-normal text-[hsl(var(--ink-subtle))] ml-2">· free · ₹0</span></h1>
+          <p class="text-sm text-[hsl(var(--ink-subtle))] mt-1">{{ filtered.length }} drops · {{ activeCategoryLabel }} · {{ sortLabel }}</p>
+          <p class="text-xs text-[hsl(var(--ink-subtle))] mt-1 hidden sm:block">14 free · MIT / ISC · extracted here · source on card</p>
         </div>
         <div class="flex gap-2 items-center">
-          <select v-model="sortBy" class="h-10 px-4 pr-8 rounded-full border border-zinc-200 bg-white text-sm focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" aria-label="Sort products">
+          <select v-model="sortBy" class="h-9 px-4 pr-8 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm text-[hsl(var(--ink))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2]" aria-label="Sort products">
             <option value="popular">Most popular</option>
             <option value="rating">Highest rated</option>
             <option value="price-asc">Price: low to high</option>
             <option value="price-desc">Price: high to low</option>
             <option value="newest">Newest</option>
           </select>
-          <button @click="showFilters = !showFilters" class="lg:hidden h-10 px-4 rounded-full border border-zinc-200 bg-white text-sm font-medium focus-visible:ring-2 focus-visible:ring-zinc-900" :aria-expanded="showFilters">Filters</button>
+          <button @click="showFilters = !showFilters" class="lg:hidden h-9 px-4 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm font-medium text-[hsl(var(--ink))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2]" :aria-expanded="showFilters">Filters</button>
         </div>
       </div>
 
       <div class="mt-6 grid lg:grid-cols-12 gap-6">
-        <!-- sidebar — clean, consistent cards -->
         <aside :class="['lg:col-span-3 space-y-4', showFilters ? 'block' : 'hidden lg:block']">
-          <div class="rounded-[16px] bg-white border border-zinc-200 p-5">
-            <div class="font-semibold text-sm">Categories</div>
+          <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-5">
+            <div class="font-medium text-sm text-[hsl(var(--ink))]">Categories</div>
             <div class="mt-3 space-y-1">
-              <button v-for="c in categories" :key="c.id" @click="category = c.id" :class="['w-full text-left px-3 py-2.5 rounded-xl text-sm flex justify-between items-center transition', category === c.id ? 'bg-zinc-900 text-white' : 'hover:bg-zinc-50 border border-transparent hover:border-zinc-100']">
+              <button v-for="c in categories" :key="c.id" @click="category = c.id" :class="['w-full text-left px-3 py-2.5 rounded-[8px] text-sm flex justify-between items-center transition', category === c.id ? 'bg-[#5e6ad2] text-white' : 'hover:bg-[hsl(var(--surface-1))] text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))] border border-transparent']">
                 <span>{{ c.label }}</span><span class="text-xs opacity-60">{{ c.id === 'all' ? products.length : products.filter(p => p.category === c.id).length }}</span>
               </button>
             </div>
           </div>
 
-          <div class="rounded-[16px] bg-white border border-zinc-200 p-5">
-            <div class="font-semibold text-sm">Reference value</div>
-            <div class="text-xs text-zinc-500 mt-1">Estimated → <span class="font-bold text-emerald-700">₹0</span> demo</div>
+          <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-5">
+            <div class="font-medium text-sm text-[hsl(var(--ink))]">Reference value</div>
+            <div class="text-xs text-[hsl(var(--ink-subtle))] mt-1">Estimated → <span class="font-medium text-[hsl(var(--ink))]">₹0</span> demo</div>
             <div class="mt-3 flex items-center gap-3">
-              <input type="range" min="0" max="6000" v-model.number="priceMax" class="flex-1 accent-zinc-900 h-1" aria-label="Filter by reference value" />
-              <span class="text-sm font-medium tabular-nums shrink-0">≤ ₹{{ priceMax.toLocaleString('en-IN') }}</span>
+              <input type="range" min="0" max="6000" v-model.number="priceMax" class="flex-1 accent-[#5e6ad2] h-1" aria-label="Filter by reference value" />
+              <span class="text-sm font-medium tabular-nums shrink-0 text-[hsl(var(--ink))]">≤ ₹{{ priceMax.toLocaleString('en-IN') }}</span>
             </div>
-            <div class="mt-2 text-xs text-zinc-400">Filters estimated value (₹0 in cart)</div>
+            <div class="mt-2 text-xs text-[hsl(var(--ink-subtle))]">Filters estimated · ₹0 in cart</div>
           </div>
 
-          <div class="rounded-[16px] bg-white border border-zinc-200 p-5">
-            <div class="font-semibold text-sm">Rating</div>
+          <div class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-5">
+            <div class="font-medium text-sm text-[hsl(var(--ink))]">Rating</div>
             <div class="mt-3 space-y-2">
-              <label v-for="r in [4.5, 4, 0]" :key="r" class="flex items-center gap-2 text-sm cursor-pointer">
-                <input type="radio" name="rating" :value="r" v-model="minRating" class="accent-zinc-900" />
-                <span v-if="r === 0">Any rating</span><span v-else>≥ {{ r }} ★</span>
+              <label v-for="r in [4.5, 4, 0]" :key="r" class="flex items-center gap-2 text-sm cursor-pointer text-[hsl(var(--ink-subtle))] hover:text-[hsl(var(--ink))]">
+                <input type="radio" name="rating" :value="r" v-model="minRating" class="accent-[#5e6ad2]" />
+                <span v-if="r === 0">Any rating</span><span v-else>≥ {{ r }} ·</span>
               </label>
             </div>
           </div>
 
-          <div class="rounded-[16px] border border-amber-200 bg-amber-50 p-5">
-            <div class="font-semibold text-sm text-amber-900">Reference • Not for sale</div>
-            <div class="text-xs text-amber-800 mt-2 leading-relaxed">Extracted components rendered here. Source name on card only — no link, stays on site. Prices <span class="line-through">estimates</span> → <span class="font-bold text-emerald-700">₹0</span>.</div>
+          <div class="rounded-[12px] border border-[hsl(var(--hairline))] bg-[hsl(var(--surface-1))] p-5">
+            <div class="font-medium text-sm text-[hsl(var(--ink))]">Free · Not for sale</div>
+            <div class="text-xs text-[hsl(var(--ink-subtle))] mt-2 leading-relaxed">Extracted components rendered here · source on card · no outbound · <span class="line-through">₹4,999</span> → <span class="font-medium text-[hsl(var(--ink))]">₹0</span>.</div>
           </div>
 
-          <button @click="resetFilters" class="w-full h-10 rounded-full border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50 focus-visible:ring-2 focus-visible:ring-zinc-900">Reset filters</button>
+          <button @click="resetFilters" class="w-full h-9 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm font-medium hover:bg-[hsl(var(--surface-1))] text-[hsl(var(--ink))] focus-visible:ring-2 focus-visible:ring-[#5e6ad2]">Reset filters</button>
         </aside>
 
-        <!-- main grid -->
         <div class="lg:col-span-9">
-          <!-- search + chips — single row, not crowded -->
           <div class="flex flex-col sm:flex-row gap-3 mb-4">
             <div class="relative flex-1">
-              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-              <input v-model="search" placeholder="Search products, tags, authors…" class="w-full pl-10 pr-4 h-11 rounded-full border border-zinc-200 bg-white text-sm focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900" aria-label="Search products" />
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[hsl(var(--ink-subtle))]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+              <input v-model="search" placeholder="Search products, tags, authors…" class="w-full pl-10 pr-4 h-11 rounded-[8px] border border-[hsl(var(--hairline))] bg-[hsl(var(--card))] text-sm text-[hsl(var(--ink))] placeholder:text-[hsl(var(--ink-subtle))] focus:outline-none focus:border-[#5e6ad2] focus:ring-1 focus:ring-[#5e6ad2]" aria-label="Search products" />
             </div>
             <div class="flex gap-2 flex-wrap items-center">
-              <span v-if="category !== 'all'" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-900 text-white text-xs">{{ categories.find(c => c.id === category)?.label }} <button @click="category = 'all'" class="ml-1 w-4 h-4 grid place-items-center rounded-full bg-white/20" aria-label="Clear category">×</button></span>
-              <span v-if="search" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs">“{{ search }}” <button @click="search = ''" class="ml-1" aria-label="Clear search">×</button></span>
+              <span v-if="category !== 'all'" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#5e6ad2] text-white text-xs">{{ categories.find(c => c.id === category)?.label }} <button @click="category = 'all'" class="ml-1 w-4 h-4 grid place-items-center rounded-full bg-white/20" aria-label="Clear category">×</button></span>
+              <span v-if="search" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-[hsl(var(--surface-1))] border border-[hsl(var(--hairline))] text-xs text-[hsl(var(--ink-subtle))]">“{{ search }}” <button @click="search = ''" class="ml-1" aria-label="Clear search">×</button></span>
             </div>
           </div>
 
-          <div v-if="!filtered.length" class="rounded-[16px] bg-white border border-zinc-200 p-10 text-center">
-            <div class="text-lg font-semibold">No drops found</div>
-            <div class="text-sm text-zinc-500 mt-1">Try adjusting filters or search.</div>
-            <button @click="resetFilters" class="mt-4 btn-primary">Clear filters</button>
+          <div v-if="!filtered.length" class="rounded-[12px] bg-[hsl(var(--card))] border border-[hsl(var(--hairline))] p-10 text-center">
+            <div class="text-lg font-medium text-[hsl(var(--ink))]">No drops found</div>
+            <div class="text-sm text-[hsl(var(--ink-subtle))] mt-1">Try adjusting filters or search.</div>
+            <button @click="resetFilters" class="mt-4 inline-flex h-9 px-5 rounded-[8px] bg-[#5e6ad2] text-white text-sm font-medium">Clear filters</button>
           </div>
 
           <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -109,6 +105,10 @@ const showFilters = ref(false)
 
 watch(category, v => router.replace({ query: { ...route.query, cat: v === 'all' ? undefined : v } }))
 watch(search, v => router.replace({ query: { ...route.query, q: v || undefined } }))
+
+// sync from URL (navbar search / category links while already on /shop)
+watch(() => route.query.q, v => { if ((v || '') !== search.value) search.value = v || '' })
+watch(() => route.query.cat, v => { if ((v || 'all') !== category.value) category.value = v || 'all' })
 
 onMounted(() => {
   if (route.query.cat) category.value = route.query.cat

@@ -7,8 +7,28 @@
     <meta name="description" content="Curated digital assets for designers & developers. UI kits, templates, courses, icons and 3D packs." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="/static/cart.svg" />
+    <!-- Dark mode: system default first (Linear) -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var m = window.matchMedia('(prefers-color-scheme: dark)');
+          var sysDark = m.matches;
+          var isDark = stored ? stored === 'dark' : sysDark;
+          if (isDark) document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+          // listen for system changes if no manual override
+          if (!stored) {
+            m.addEventListener('change', function(e) {
+              if (e.matches) document.documentElement.classList.add('dark');
+              else document.documentElement.classList.remove('dark');
+            });
+          }
+        } catch(e) {}
+      })();
+    </script>
     <!-- SPA for GitHub Pages — decode redirect from 404.html -->
     <script type="text/javascript">
       (function(l) {
@@ -27,9 +47,10 @@
     <meta property="og:description" content="Curated UI kits, templates, courses, icons & 3D. Built from a BCA major project, now Vue 3 + Vite." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1558655146-d09347e92766?w=1200&q=80&auto=format&fit=crop" />
-    <meta name="theme-color" content="#18181b" />
+    <meta name="theme-color" content="#010102" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   </head>
-  <body class="bg-[#fcfcf9] text-zinc-900 antialiased">
+  <body class="bg-background text-foreground antialiased">
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

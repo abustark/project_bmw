@@ -10,7 +10,7 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
+    --primary: 239 73% 68%;
     --primary-foreground: 0 0% 98%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
@@ -22,18 +22,25 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
+    --ring: 239 73% 68%;
     --radius: 0.75rem;
+    --canvas: 0 0% 100%;
+    --surface-1: 0 0% 98%;
+    --surface-2: 0 0% 96%;
+    --ink: 240 10% 3.9%;
+    --ink-muted: 240 5% 64%;
+    --ink-subtle: 240 3% 46%;
+    --hairline: 240 5.9% 90%;
   }
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 240 5% 7%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 240 5% 7%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
+    --primary: 239 73% 68%;
+    --primary-foreground: 0 0% 98%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 240 3.7% 15.9%;
@@ -44,29 +51,70 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --ring: 239 73% 68%;
+    --canvas: 240 6% 3%;
+    --surface-1: 240 4% 6%;
+    --surface-2: 240 4% 8%;
+    --ink: 0 0% 98%;
+    --ink-muted: 240 5% 84%;
+    --ink-subtle: 240 5% 64%;
+    --hairline: 240 4% 14%;
   }
   * { @apply border-border antialiased; }
-  body { @apply bg-[#fcfcf9] text-zinc-900 font-sans; }
+  html { color-scheme: light dark; }
+  body { @apply bg-background text-foreground font-sans; background: hsl(var(--canvas)); color: hsl(var(--ink)); }
   h1,h2,h3 { @apply font-display tracking-tight; }
+  ::selection { background: #5e6ad2; color: white; }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-zinc-900 text-white px-6 py-3 rounded-full font-medium text-sm hover:bg-black transition-all hover:shadow-lift active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 bg-[#5e6ad2] text-white px-6 py-3 rounded-[8px] font-medium text-sm hover:bg-[#828fff] transition-all active:scale-[0.98];
   }
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 bg-white border border-zinc-200 px-6 py-3 rounded-full font-medium text-sm hover:border-zinc-300 hover:bg-zinc-50 transition;
+    @apply inline-flex items-center justify-center gap-2 bg-transparent border border-[hsl(var(--hairline))] px-6 py-3 rounded-[8px] font-medium text-sm hover:bg-[hsl(var(--surface-1))] transition;
   }
   .card {
-    @apply bg-white rounded-[20px] border border-zinc-100 shadow-soft;
+    @apply bg-card rounded-[12px] border border-[hsl(var(--hairline))] shadow-none;
   }
   .chip {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-zinc-900 text-white;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#5e6ad2] text-white;
   }
 }
 
-/* custom scrollbar */
+/* custom scrollbar — Linear subtle */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: hsl(var(--hairline)); border-radius: 999px; }
 ::-webkit-scrollbar-track { background: transparent; }
+
+/* Linear: focus ring */
+*:focus-visible { outline: 2px solid #5e6ad2; outline-offset: 2px; }
+
+/* System default dark — if user prefers dark and no class, apply dark */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 5% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 239 73% 68%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --canvas: 240 6% 3%;
+    --surface-1: 240 4% 6%;
+    --surface-2: 240 4% 8%;
+    --ink: 0 0% 98%;
+    --ink-muted: 240 5% 84%;
+    --ink-subtle: 240 5% 64%;
+    --hairline: 240 4% 14%;
+  }
+}

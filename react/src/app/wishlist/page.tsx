@@ -11,13 +11,13 @@ export default function WishlistPage() {
   const items = products.filter((p) => wish.ids.includes(p.id))
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      <h1 className="font-bold text-3xl" style={{fontFamily: "var(--font-playfair)"}}>Wishlist</h1>
-      <p className="text-sm text-zinc-500">{wish.ids.length} saved items • shadcn Badge + Heart</p>
+      <h1 className="font-semibold text-3xl" style={{ fontFamily: "Geist, Inter, sans-serif" }}>Wishlist</h1>
+      <p className="text-sm text-[hsl(var(--ink-subtle))]">{wish.ids.length} saved items • shadcn Badge + Heart</p>
 
       {items.length===0 ? (
-        <Card className="mt-8 p-10 text-center rounded-[20px]">
+        <Card className="mt-8 p-10 text-center rounded-[12px]">
           <div className="text-lg font-semibold">Nothing saved yet</div>
-          <p className="text-sm text-zinc-500">Tap the heart on any product to save it.</p>
+          <p className="text-sm text-[hsl(var(--ink-subtle))]">Tap the heart on any product to save it.</p>
           <Link href="/shop" className="mt-4 inline-flex"><Button variant="pill" size="pill">Explore shop</Button></Link>
         </Card>
       ) : (

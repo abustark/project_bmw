@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
@@ -13,9 +13,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
-        sans: ['Poppins', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Geist', 'Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        sans: ['Geist', 'Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        mono: ['Geist Mono', 'JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -24,8 +24,9 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#5e6ad2",
+          foreground: "#ffffff",
+          hover: "#828fff",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -51,26 +52,36 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // keep brand for legacy
-        brand: {
-          50: '#f8f9ff',
-          100: '#eef0ff',
-          500: '#4f46e5',
-          600: '#4338ca',
-          700: '#3730a3',
-          900: '#1e1b4b',
+        // Linear tokens
+        canvas: "#010102",
+        surface: {
+          1: "#0f1011",
+          2: "#141516",
+          3: "#18191a",
         },
-        ink: '#0a0a0f',
-        paper: '#fcfcf9',
+        ink: {
+          DEFAULT: "#f7f8f8",
+          muted: "#d0d6e0",
+          subtle: "#8a8f98",
+          tertiary: "#62666d",
+        },
+        hairline: "#23252a",
+        linear: {
+          DEFAULT: "#5e6ad2",
+          hover: "#828fff",
+          focus: "#5e69d1",
+        },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "12px",
+        md: "8px",
+        sm: "6px",
+        xl: "16px",
+        pill: "9999px",
       },
       boxShadow: {
-        'soft': '0 2px 20px -2px rgba(0,0,0,0.05), 0 8px 40px -8px rgba(0,0,0,0.08)',
-        'lift': '0 8px 30px -8px rgba(79,70,229,0.3)',
+        'soft': '0 0 0 1px #23252a',
+        'lift': '0 8px 30px -8px rgba(94,106,210,0.3)',
       },
       keyframes: {
         "accordion-down": { from: { height: "0" }, to: { height: "var(--reka-accordion-content-height)" } },

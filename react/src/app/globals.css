@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -7,7 +9,7 @@
   --card-foreground: 240 10% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
+  --primary: 239 73% 68%;
   --primary-foreground: 0 0% 98%;
   --secondary: 240 4.8% 95.9%;
   --secondary-foreground: 240 5.9% 10%;
@@ -19,8 +21,73 @@
   --destructive-foreground: 0 0% 98%;
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
-  --ring: 240 10% 3.9%;
+  --ring: 239 73% 68%;
   --radius: 0.75rem;
+  --canvas: 0 0% 100%;
+  --surface-1: 0 0% 98%;
+  --surface-2: 0 0% 96%;
+  --ink: 240 10% 3.9%;
+  --ink-muted: 240 5% 64%;
+  --ink-subtle: 240 3% 46%;
+  --hairline: 240 5.9% 90%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 5% 7%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 5% 7%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 239 73% 68%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 239 73% 68%;
+  --canvas: 240 6% 3%;
+  --surface-1: 240 4% 6%;
+  --surface-2: 240 4% 8%;
+  --ink: 0 0% 98%;
+  --ink-muted: 240 5% 84%;
+  --ink-subtle: 240 5% 64%;
+  --hairline: 240 4% 14%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 5% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 239 73% 68%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 239 73% 68%;
+    --canvas: 240 6% 3%;
+    --surface-1: 240 4% 6%;
+    --surface-2: 240 4% 8%;
+    --ink: 0 0% 98%;
+    --ink-muted: 240 5% 84%;
+    --ink-subtle: 240 5% 64%;
+    --hairline: 240 4% 14%;
+  }
 }
 
 @theme inline {
@@ -50,12 +117,16 @@
   --radius-lg: var(--radius);
 }
 
+html { color-scheme: light dark; }
 body {
-  background: #fcfcf9;
-  color: hsl(var(--foreground));
-  font-family: var(--font-geist-sans), Poppins, system-ui, sans-serif;
+  background: hsl(var(--canvas));
+  color: hsl(var(--ink));
+  font-family: var(--font-geist-sans), Geist, Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+::selection { background: #5e6ad2; color: white; }
+*:focus-visible { outline: 2px solid #5e6ad2; outline-offset: 2px; }
 
-/* custom scrollbar */
+/* Linear: subtle scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: hsl(var(--hairline)); border-radius: 999px; }
