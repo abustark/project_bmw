@@ -29,7 +29,7 @@ Every confirmed bug gets a row in [`BUGS-AND-FIXES.md`](BUGS-AND-FIXES.md) at th
 - A bug coming back = a **NEW row marked `REGRESSION`** linking the original (root-cause work, not a blind patch).
 - After every major/intermediate update, run the **§Re-verification Checklist** in `BUGS-AND-FIXES.md` and spot-check each entry's fix lines are still present.
 
-Full protocol: [`bug and fixes summary/BUG-FIX-PROTOCOL.md`](bug%20and%20fixes%20summary/BUG-FIX-PROTOCOL.md). Current entries: B-01 (lib-mode build 404), B-02 (SPA rewrites), B-03 (`project-bmw.vercel.app` is NOT this project), B-04 (PowerShell BOM corrupts JSON builds).
+Full protocol: [`bug and fixes summary/BUG-FIX-PROTOCOL.md`](bug%20and%20fixes%20summary/BUG-FIX-PROTOCOL.md). Current entries: B-01 (lib-mode build 404), B-02 (SPA rewrites), B-03 (`project-bmw.vercel.app` is NOT this project), B-04 (PowerShell BOM corrupts JSON builds), B-05 (CLI Vercel project: SSO wall + empty framework = static-only serving).
 
 ## Build
 
