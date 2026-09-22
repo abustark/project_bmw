@@ -1,6 +1,6 @@
 {
   "name": "n-gelo-digital-market",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "N-GELO — Curated digital marketplace for designers & developers. Vue 3 + Vite rebuild of the BCA major project (E-commerce for Digital Products).",
   "type": "module",
   "scripts": {

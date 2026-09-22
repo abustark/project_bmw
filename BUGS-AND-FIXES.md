@@ -27,6 +27,7 @@
 | B-01 | **Production Vercel link returned 404** — `main` still carried the v1 app whose `vite.config.js` used *library mode*, so `vite build` emitted only `dist/build.js` and **no `dist/index.html`**; the N-GELO app existed only on the arena branch. Vercel deployed main's empty output → 404. | `vite.config.js` (~L1–33) | arena branch merged into `main`; config is now a standard Vite app build, so `npm run build` emits `dist/index.html`; Vercel GitHub integration rebuilt production automatically. | post-2.0.15 · `34b61cc` |
 | B-02 | **Deep routes (`/shop`, `/checkout`, …) 404 on refresh/direct visit** — vue-router `createWebHistory` SPA had no rewrite rule on Vercel (arena branch shipped no `vercel.json`). Prevented before it hit production. | `vercel.json` (~L1–5) | Catch-all rewrite `/(.*) → /index.html` (Vercel `rewrites` run after filesystem, so real assets still win). Verified `/shop` → 200 in production. | post-2.0.15 · `fc550ac` |
 | B-03 | **NOT A BUG (owner info — do not re-investigate):** `project-bmw.vercel.app` shows an old unrelated BMW static site. It is **not** this project's deployment (old main's index.html was "Learning Vue", not BMW). | n/a — stale unrelated deployment | The real production URL is `https://ecom-seven-sand.vercel.app/` (Vercel project `ecom`). Recorded in `docs/DEPLOYMENT.md` + `AGENTS.md`; rediscover via `vercel projects ls`. | post-2.0.15 · `a0ea072` |
+| B-04 | **Both builds broke with `Unexpected token '﻿' … is not valid JSON`** — Vite failed loading PostCSS config, Next/Turbopack failed parsing `package.json`. Root cause: Windows PowerShell 5.1 `Set-Content -Encoding UTF8` wrote a **UTF-8 BOM** into `package.json` + `react/package.json`, and the write tool preserved it on rewrite. Caught by the build gate **before shipping** (nothing deployed broken). | `package.json` (~L1), `react/package.json` (~L1) | BOM stripped via Node (`readFileSync('utf8')` → drop `\uFEFF` → `writeFileSync`). Rule: on Windows, edit JSON with Node/`npm version`, **never** PS `Set-Content -Encoding UTF8` (PS5.1 always emits BOM). | 2.0.17 · *(this commit)* |
 
 <!-- New bugs append BELOW. If a fixed bug's symptom returns, add a NEW entry marked
      REGRESSION (link the old one) — never edit history. Guard each fix with an automated
@@ -43,9 +44,11 @@ test -f dist/index.html || echo "FAIL B-01: index.html missing — lib-mode buil
 grep -q 'build:"lib"\|lib:{' vite.config.js && echo "FAIL B-01: vite lib mode present" 
 
 vercel projects ls          # B-03: production URL = ecom-seven-sand.vercel.app (project 'ecom'), NEVER project-bmw.vercel.app
+node -e "for (const f of ['package.json','react/package.json']) { const s=require('fs').readFileSync(f,'utf8'); if (s.charCodeAt(0)===0xFEFF) throw f+' has UTF-8 BOM (B-04)'; JSON.parse(s) }"   # B-04
 curl -sfI https://ecom-seven-sand.vercel.app/         | head -1   # B-01 → HTTP 200
 curl -sfI https://ecom-seven-sand.vercel.app/shop     | head -1   # B-02 → HTTP 200 (SPA rewrite live)
 curl -sfI https://ecom-seven-sand.vercel.app/checkout | head -1   # B-02 → HTTP 200
+curl -sfI https://ecom-react-self.vercel.app/         | head -1   # React twin → HTTP 200 (redeploy: `vercel deploy --prod` from react/)
 test -f vercel.json || echo "FAIL B-02: vercel.json SPA rewrites deleted"
 ```
 
@@ -53,6 +56,7 @@ test -f vercel.json || echo "FAIL B-02: vercel.json SPA rewrites deleted"
 1. Open the production URL → title `N-GELO — Digital Marketplace for Creators` renders (not 404, not the BMW site) — **B-01, B-03**
 2. Hard-refresh `/checkout` directly (and open `/product/9` in a new tab) → app boots on that route, no 404 — **B-02**
 3. In Vercel project settings/`vercel projects ls`, the Latest Production URL still matches `docs/DEPLOYMENT.md` — **B-03**
+4. Footer (bottom of any page): right side shows "Open my portfolio ↗" → abufolio.vercel.app and "See it built with React ↗" → ecom-react-self.vercel.app, both opening in a new tab — **B-04-adjacent smoke (links wired)**
 
 ---
 

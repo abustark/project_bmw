@@ -7,8 +7,10 @@ file (or run the discovery commands below) instead of guessing URLs.
 
 | Item | Value |
 | --- | --- |
-| Production URL (main) | https://ecom-seven-sand.vercel.app/ |
-| Vercel project | `ecom` (team `abustarks-projects`) |
+| Production URL (main, Vue) | https://ecom-seven-sand.vercel.app/ |
+| React twin URL | https://ecom-react-self.vercel.app/ |
+| Vercel project (Vue) | `ecom` (team `abustarks-projects`) |
+| Vercel project (React twin) | `ecom-react` (team `abustarks-projects`, local CLI link in `react/.vercel`, **not** GitHub-connected — redeploy with `vercel deploy --prod` from `react/`) |
 | GitHub repo | https://github.com/abustark/project_bmw |
 | Production branch | `main` |
 | Preview branch | `arena/01a0c0bd-project-bmw` (deploys to `*-git-<branch>-abustarks-projects.vercel.app` URLs) |

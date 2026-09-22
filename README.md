@@ -15,6 +15,7 @@
 ![Deploy](https://img.shields.io/github/actions/workflow/status/abustark/project_bmw/deploy.yml?label=deploy&logo=github)
 
 **Live (Vercel, production — branch `main`):** https://ecom-seven-sand.vercel.app/  
+**React twin (same site, Next.js):** https://ecom-react-self.vercel.app/  
 **Live Demo (GitHub Pages):** `https://abustark.github.io/project_bmw/` *(after push to `main`)*  
 **Deployment details:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)  
 **Local Vue:** `http://localhost:5173` • **Local React:** `http://localhost:3000` — see [Quick Start](#quick-start)
