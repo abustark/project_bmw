@@ -14,7 +14,9 @@
 ![License](https://img.shields.io/badge/License-MIT-zinc?labelColor=18181b&color=52525b)
 ![Deploy](https://img.shields.io/github/actions/workflow/status/abustark/project_bmw/deploy.yml?label=deploy&logo=github)
 
-**Live Demo (Vue):** `https://abustark.github.io/project_bmw/` *(after push to `main`)*  
+**Live (Vercel, production — branch `main`):** https://ecom-seven-sand.vercel.app/  
+**Live Demo (GitHub Pages):** `https://abustark.github.io/project_bmw/` *(after push to `main`)*  
+**Deployment details:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)  
 **Local Vue:** `http://localhost:5173` • **Local React:** `http://localhost:3000` — see [Quick Start](#quick-start)
 
 ---
