@@ -5,6 +5,7 @@ Version format: `2.0.x` (ABot convention). Docs to read first: `docs/PROJECT_SPE
 
 | Version | Commit | What it did |
 |---|---|---|
+| 2.0.16 | *(this commit)* | Adopt Bug & Fix Registry — root `BUGS-AND-FIXES.md` created from `bug and fixes summary/` kit, seeded B-01…B-03 + repo-wired re-verification checklist; AGENTS.md points agents at the protocol |
 | 2.0.15 | *(this commit)* | Footer: lavender serif B·M·W monogram chip by wordmark + tagline restored as final credit line |
 | 2.0.14 | `4eed1cc` | Footer: tagline+status chip removed, B·M·W initials bold, serif brand font (Playfair Display) |
 | 2.0.13 | `454aeca` | Footer credit block — © 2026 ABu · created by Basith Muthu Wasim · site tagline |
