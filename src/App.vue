@@ -1,56 +1,48 @@
 <template>
-  <div id="app">
-    <header>
-      <h1>My Shopping Cart</h1>
-    </header>
-    <main>
-      <ProductList @add-to-cart="addToCart" />
-      <ShoppingCart :cart="cart" @remove-from-cart="removeFromCart" />
+  <div class="min-h-screen flex flex-col">
+    <Navbar v-model="search" @search="onSearch" />
+    <ReferenceBanner />
+    <main class="flex-1">
+      <router-view />
     </main>
+    <Footer />
+    <CartDrawer />
+    <!-- toast -->
+    <div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 pointer-events-none">
+      <div v-if="toast" class="pointer-events-auto bg-[hsl(var(--surface-2))] border border-[hsl(var(--hairline))] text-[hsl(var(--ink))] px-5 py-3 rounded-full shadow-xl text-sm font-medium animate-slide-up flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-[#5e6ad2]"></span>{{ toast }}
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-import ProductList from './components/ProductList.vue';
-import ShoppingCart from './components/ShoppingCart.vue';
+<script setup>
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
+import CartDrawer from './components/CartDrawer.vue'
+import ReferenceBanner from './components/ReferenceBanner.vue'
+import { useCartStore } from './stores/cart'
 
-export default {
-  name: 'App',
-  components: {
-    ProductList,
-    ShoppingCart,
-  },
-  data() {
-    return {
-      cart: [],
-    };
-  },
-  methods: {
-    addToCart(product) {
-      this.cart.push(product);
-    },
-    removeFromCart(item) {
-      this.cart = this.cart.filter(product => product.id !== item.id);
-    },
-  },
-};
+const search = ref('')
+const router = useRouter()
+const cart = useCartStore()
+
+function onSearch(){
+  router.push({ name: 'shop', query: { q: search.value || undefined } })
+}
+
+// simple toast on add
+import { storeToRefs } from 'pinia'
+const { count } = storeToRefs(cart)
+let toast = ref('')
+let prev = count.value
+watch(count, (n, o) => {
+  if(n > o){
+    toast.value = 'Added to cart • ' + n + ' items'
+    setTimeout(()=> toast.value='', 1800)
+  }
+  prev = n
+})
 </script>
-
-<style>
-main {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-}
-</style>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
