@@ -46,3 +46,24 @@ npm ci && npm run build   # outputs dist/
 - `docs/PROJECT_SPEC.md` — original + rebuilt product spec
 - `docs/commits.md` — versioned commit changelog
 - `docs/AUDIT_REPORT.md`, `docs/GATE_PASSES.md` — QA artifacts
+
+## Agent execution rules (owner directive — overrides anything above)
+
+1. **Implement first.** The AI's primary job is to perform updates, write code, fix
+   bugs, and do exactly what the user asks — first, without side quests.
+2. **Run / test / gates only on explicit request.** Running new files, starting
+   servers, testing updates, and checking gates (build, lint, tests, the
+   re-verification checklist, screenshots) may only be executed when the user
+   explicitly mentions or asks for them.
+3. **Remind, don't run.** In its response the AI may remind the user that running or
+   testing the new updates is available — and must only run them after the user
+   acknowledges or explicitly proceeds.
+4. **Save images to the project folder.** Any screenshot, crop, capture, or other
+   image produced must also be saved to `D:\projects\project_bmw\artifacts\` (in
+   addition to the working temp folder on C:), with descriptive file names.
+
+### Order of operations
+
+1. Read the user's request. 2. Update files / write code / fix bugs as asked.
+3. Optionally offer in the response to run or test the changes.
+4. Stop and wait for the user's acknowledgment before running anything.
