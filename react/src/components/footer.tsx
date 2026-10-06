@@ -50,11 +50,35 @@ export function Footer() {
           </p>
         </div>
 
-        {/* credit row — serif brand font, BMW initials bold */}
-        <div className="mt-4 font-brand text-xs text-[hsl(var(--ink-subtle))] leading-relaxed">
-          <p>© 2026 ABu. All rights reserved.</p>
-          <p className="mt-0.5">Created by <span className="text-[hsl(var(--ink))]"><span className="font-bold">B</span>asith <span className="font-bold">M</span>uthu <span className="font-bold">W</span>asim</span>. Maintained by me.</p>
-          <p className="mt-1.5">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
+        {/* credit row — serif brand font, BMW initials bold + portfolio CTA (right) */}
+        <div className="mt-4 font-brand text-xs text-[hsl(var(--ink-subtle))] leading-relaxed flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p>© 2026 ABu. All rights reserved.</p>
+            <p className="mt-0.5">Created by <span className="text-[hsl(var(--ink))]"><span className="font-bold">B</span>asith <span className="font-bold">M</span>uthu <span className="font-bold">W</span>asim</span>. Maintained by me.</p>
+            <p className="mt-1.5">Copy · Paste · Ship — free UI, extracted &amp; rendered live.</p>
+          </div>
+          <div className="flex flex-col gap-2 sm:items-end">
+            <a
+              href="https://abufolio.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open my portfolio at abufolio.vercel.app"
+              className="group sm:text-right inline-flex flex-col sm:items-end focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5e6ad2]"
+            >
+              <span className="text-[10px] tracking-[0.16em] uppercase text-[hsl(var(--ink-subtle))]">Like this build? There&apos;s more of my work</span>
+              <span className="mt-1 text-[hsl(var(--ink))] underline decoration-[#5e6ad2]/40 underline-offset-4 transition-colors group-hover:text-[#5e6ad2] group-hover:decoration-[#5e6ad2] dark:group-hover:text-[#828fff]">Open my portfolio <span aria-hidden="true">↗</span></span>
+            </a>
+            <a
+              href="https://ecom-react-self.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="See this same site rebuilt with React at ecom-react-self.vercel.app"
+              className="group sm:text-right inline-flex flex-col sm:items-end focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5e6ad2]"
+            >
+              <span className="text-[10px] tracking-[0.16em] uppercase text-[hsl(var(--ink-subtle))]">Same site, different stack</span>
+              <span className="mt-1 text-[hsl(var(--ink))] underline decoration-[#5e6ad2]/40 underline-offset-4 transition-colors group-hover:text-[#5e6ad2] group-hover:decoration-[#5e6ad2] dark:group-hover:text-[#828fff]">See it built with React <span aria-hidden="true">↗</span></span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
